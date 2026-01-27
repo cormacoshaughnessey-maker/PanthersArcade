@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca1svep8rjsyl"]
+[gd_scene format=3 uid="uid://ca1svep8rjsyl"]
 
 [ext_resource type="Script" uid="uid://bmuww40b78yu0" path="res://Scripts/player.gd" id="1_v0iea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=103552615]
 script = ExtResource("1_v0iea")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=934160044]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=642745912]
 shape = SubResource("RectangleShape2D_v0iea")
 
-[node name="RewindCooldownTimer" type="Timer" parent="."]
+[node name="RewindCooldownTimer" type="Timer" parent="." unique_id=187326897]
 wait_time = 0.5
 one_shot = true
 
