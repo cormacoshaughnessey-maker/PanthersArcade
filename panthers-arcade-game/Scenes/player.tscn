@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://bmuww40b78yu0" path="res://Scripts/player.gd" id="1_v0iea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
+size = Vector2(100, 100)
 
 [node name="Player" type="CharacterBody2D" unique_id=103552615]
+collision_layer = 2
 script = ExtResource("1_v0iea")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=934160044]
