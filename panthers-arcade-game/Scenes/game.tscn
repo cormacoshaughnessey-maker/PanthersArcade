@@ -7,3 +7,4 @@
 script = ExtResource("1_ebmjs")
 
 [node name="Player" parent="." unique_id=103552615 instance=ExtResource("2_qxrlw")]
+speed = 400.0

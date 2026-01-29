@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed := 100.0
+@export var speed := 300.0
 
 var rewind_data : Dictionary[String, Array] = {"position":[]}
 var max_rewind_length := 100
@@ -64,13 +64,8 @@ func _finish_rewind_cooldown() -> void:
 #region Debug/Testing Functions
  # INFO: Quick functino for moving around, so that rewinding can be tested
 func input_tests(delta: float) -> void:
-	if Input.is_action_pressed("left"):
-		position.x -= speed * delta
-	if Input.is_action_pressed("right"):
-		position.x += speed * delta
-	if Input.is_action_pressed("up"):
-		position.y -= speed * delta
-	if Input.is_action_pressed("down"):
-		position.y += speed * delta
+	var movement_vector = Input.get_vector("left", "right", "up", "down").normalized()
+	velocity = movement_vector * speed
+	move_and_slide()
 	pass
 #endregion
