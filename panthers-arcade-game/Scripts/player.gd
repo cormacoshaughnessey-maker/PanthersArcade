@@ -25,6 +25,7 @@ func inputs(delta: float) -> void:
 		rewind()
 	# TODO: Put conditionals for movement inputs here
 	# Make sure to check that rewinding is false first!
+	# Also, be sure to use a method like move_and_slide() to make sure to account for collisions
 	if not rewinding:
 		input_tests(delta)
 
