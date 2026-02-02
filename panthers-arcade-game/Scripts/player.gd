@@ -28,11 +28,8 @@ func inputs(delta: float) -> void:
 		start_rewind_cooldown()
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		rewind()
-	# TODO: Put conditionals for movement inputs here
-	# Make sure to check that rewinding is false first!
-	# Also, be sure to use a method like move_and_slide() to make sure to account for collisions
 	if not rewinding:
-		input_tests(delta)
+		movement_inputs(delta)
 
 
 #region Rewind Functions
@@ -85,11 +82,10 @@ func _finish_rewind_cooldown() -> void:
 #endregion
 
 
-#region Debug/Testing Functions
- # INFO: Quick function for moving around, so that rewinding can be tested
-func input_tests(delta: float) -> void:
+#region Movement
+ # INFO: Function for left, right, up, and down movement
+func movement_inputs(delta: float) -> void:
 	var movement_vector = Input.get_vector("left", "right", "up", "down").normalized()
 	velocity = movement_vector * speed
 	move_and_slide()
-	pass
 #endregion
