@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ckublskq5hvs" path="res://Scripts/game.gd" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://ca1svep8rjsyl" path="res://Scenes/player.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://clsccskxsea5v" path="res://Scenes/background.tscn" id="2_wrm1d"]
 
 [node name="Game" type="Node2D" unique_id=841809389]
 script = ExtResource("1_ebmjs")
+
+[node name="Background" parent="." unique_id=1810696300 instance=ExtResource("2_wrm1d")]
+z_index = -1
 
 [node name="Player" parent="." unique_id=103552615 instance=ExtResource("2_qxrlw")]
 z_index = 1
