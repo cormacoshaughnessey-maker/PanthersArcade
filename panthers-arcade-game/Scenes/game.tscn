@@ -12,6 +12,8 @@ z_index = -1
 
 [node name="Player" parent="." unique_id=103552615 instance=ExtResource("2_qxrlw")]
 z_index = 1
+position = Vector2(540, 960)
+motion_mode = 1
 
 [node name="PlayerAttacks" type="Node" parent="." unique_id=1452552307]
 
