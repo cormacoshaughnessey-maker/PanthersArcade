@@ -10,10 +10,11 @@ var attack_positions : Array[Vector2]
 
 @onready var game_node := self.get_parent()
 @onready var player_attacks := game_node.get_node("PlayerAttacks")
+@onready var player_projections := game_node.get_node("PlayerProjections")
 @onready var rewind_cooldown_timer := $RewindCooldownTimer
 
 var attack_scene := preload("res://scenes/rewind_attack.tscn")
-
+var projection_scene := preload("res://Scenes/player_projection.tscn")
 
  # INFO: Function run every frame/tick
 func _physics_process(delta: float) -> void:
@@ -27,6 +28,8 @@ func inputs(delta: float) -> void:
 	if Input.is_action_just_released("rewind"):
 		start_rewind_cooldown()
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
+		if Input.is_action_just_pressed("rewind"):
+			spawn_projection_trail()
 		rewind()
 		rewind()
 	if not rewinding:
@@ -69,11 +72,27 @@ func spawn_attack(attack_position:Vector2, _size := 1.0) -> void:
 	player_attacks.call_deferred("add_child", attack_var)
 
 
+# INFO: Spawns a trail of projections from the player along the path of rewinding
+func spawn_projection_trail() -> void:
+	for i in rewind_data["position"].size():
+		if i % 10 == 0:
+			spawn_projection(rewind_data["position"].get(i))
+
+
+
+ # INFO: Spawn a single projection of the player; used for the path of rewinding
+func spawn_projection(projection_position:Vector2) -> void:
+	var projection_var = projection_scene.instantiate()
+	projection_var.global_position = projection_position
+	player_projections.call_deferred("add_child", projection_var)
+
+
  # INFO: Begin the cooldown on rewinding, and set rewind_on_cooldown to true
 func start_rewind_cooldown() -> void:
 	rewinding = false
 	rewind_on_cooldown = true
 	rewind_cooldown_timer.start()
+	get_tree().call_group("player_projections", "queue_free")
 	rewind_attacks()
 
 
