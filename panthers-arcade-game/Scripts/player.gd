@@ -28,6 +28,7 @@ func inputs(delta: float) -> void:
 		start_rewind_cooldown()
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		rewind()
+		rewind()
 	if not rewinding:
 		movement_inputs(delta)
 
@@ -36,7 +37,7 @@ func inputs(delta: float) -> void:
  # INFO: Function that saves data to the rewind_data array
 func save_rewind_data(_delta: float) -> void:
 	if not rewinding:
-		rewind_data["position"].append(position)
+		rewind_data["position"].append(global_position)
 		if rewind_data["position"].size() > max_rewind_length:
 			rewind_data["position"].pop_front()
 	#print(rewind_data)
@@ -45,12 +46,13 @@ func save_rewind_data(_delta: float) -> void:
 
  # INFO: Function which moves the player 1 position back along the rewind_data array
 func rewind() -> void:
-	if rewind_data["position"].size() > 0:
-		rewinding = true
-		position = rewind_data["position"].pop_back()
-		attack_positions.append(position)
-	else:
-		start_rewind_cooldown()
+	if not rewind_on_cooldown:
+		if rewind_data["position"].size() > 0:
+			rewinding = true
+			global_position = rewind_data["position"].pop_back()
+			attack_positions.append(global_position)
+		else:
+			start_rewind_cooldown()
 
 
  # INFO: Function which spawns all the attacks from rewinding, then clears the attack_positions array
@@ -64,7 +66,6 @@ func rewind_attacks() -> void:
 func spawn_attack(attack_position:Vector2, _size := 1.0) -> void:
 	var attack_var = attack_scene.instantiate()
 	attack_var.global_position = attack_position
-	#attack_var.size = size
 	player_attacks.call_deferred("add_child", attack_var)
 
 
@@ -84,7 +85,7 @@ func _finish_rewind_cooldown() -> void:
 
 #region Movement
  # INFO: Function for left, right, up, and down movement
-func movement_inputs(delta: float) -> void:
+func movement_inputs(_delta: float) -> void:
 	var movement_vector = Input.get_vector("left", "right", "up", "down").normalized()
 	velocity = movement_vector * speed
 	move_and_slide()

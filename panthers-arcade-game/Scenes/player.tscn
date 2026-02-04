@@ -18,7 +18,7 @@ texture = ExtResource("2_cvnsp")
 shape = SubResource("RectangleShape2D_v0iea")
 
 [node name="RewindCooldownTimer" type="Timer" parent="." unique_id=187326897]
-wait_time = 0.5
+wait_time = 1.5
 one_shot = true
 
 [connection signal="timeout" from="RewindCooldownTimer" to="." method="_finish_rewind_cooldown"]

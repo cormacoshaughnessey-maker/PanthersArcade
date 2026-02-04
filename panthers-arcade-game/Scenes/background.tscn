@@ -8,7 +8,7 @@
 scroll_scale = Vector2(0, 1)
 scroll_offset = Vector2(540, 0)
 repeat_size = Vector2(0, 1920)
-autoscroll = Vector2(0, 1000)
+autoscroll = Vector2(0, 500)
 repeat_times = 2
 ignore_camera_scroll = true
 screen_offset = Vector2(0, 1920)

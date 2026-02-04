@@ -9,6 +9,7 @@ var hitbox : CollisionShape2D
 func _enter_tree() -> void:
 	hitbox = $CollisionShape2D
 	hitbox.disabled = false
+	self.add_to_group("player_attacks")
 	await get_tree().create_timer(0.1).timeout
 	hitbox.disabled = true
 	await get_tree().create_timer(0.4).timeout
