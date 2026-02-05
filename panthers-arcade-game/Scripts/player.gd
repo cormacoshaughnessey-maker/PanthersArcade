@@ -2,8 +2,9 @@ extends CharacterBody2D
 
 @export var speed := 300.0
 
+@export var max_rewind_length_in_seconds := 1.5
+var max_rewind_length : float
 var rewind_data : Dictionary[String, Array] = {"position":[]}
-var max_rewind_length := 100
 var rewind_on_cooldown := false
 var rewinding := false
 var attack_positions : Array[Vector2]
@@ -21,6 +22,11 @@ func _physics_process(delta: float) -> void:
 	save_rewind_data(delta)
 	inputs(delta)
 	# NOTE: Put any other code that needs to be run every frame/tick in a function and call it here
+
+
+ # INFO: Function run only once when the game starts running
+func _ready() -> void:
+	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second
 
 
  # INFO: Function that registers user input and does actions based on that
