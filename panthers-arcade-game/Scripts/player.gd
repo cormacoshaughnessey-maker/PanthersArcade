@@ -14,7 +14,7 @@ var attack_positions : Array[Vector2]
 @onready var player_projections := game_node.get_node("PlayerProjections")
 @onready var rewind_cooldown_timer := $RewindCooldownTimer
 
-var attack_scene := preload("res://scenes/rewind_attack.tscn")
+var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
 
  # INFO: Function run every frame/tick

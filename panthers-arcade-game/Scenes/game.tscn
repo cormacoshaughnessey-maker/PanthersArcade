@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ckublskq5hvs" path="res://Scripts/game.gd" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://ca1svep8rjsyl" path="res://Scenes/player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://clsccskxsea5v" path="res://Scenes/background.tscn" id="2_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://bojuqgkgr8idp" path="res://Scenes/ui.tscn" id="4_3dryh"]
 
 [node name="Game" type="Node2D" unique_id=841809389]
 script = ExtResource("1_ebmjs")
@@ -19,3 +20,5 @@ max_rewind_length_in_seconds = 2.0
 [node name="PlayerAttacks" type="Node" parent="." unique_id=1452552307]
 
 [node name="PlayerProjections" type="Node2D" parent="." unique_id=60883009]
+
+[node name="UI" parent="." unique_id=143631567 instance=ExtResource("4_3dryh")]

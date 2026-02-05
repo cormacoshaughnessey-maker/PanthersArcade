@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bojuqgkgr8idp"]
+
+[ext_resource type="Script" uid="uid://bb3vg7g3erix0" path="res://Scripts/ui.gd" id="1_fyqef"]
+
+[node name="UI" type="Control" unique_id=143631567]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fyqef")
+
+[node name="Lives" type="HBoxContainer" parent="." unique_id=1382136593]
+layout_mode = 0
+offset_top = 66.0
+offset_right = 40.0
+offset_bottom = 106.0
