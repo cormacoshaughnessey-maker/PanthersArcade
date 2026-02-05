@@ -17,6 +17,7 @@ var attack_positions : Array[Vector2]
 var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
 
+
  # INFO: Function run every frame/tick
 func _physics_process(delta: float) -> void:
 	save_rewind_data(delta)

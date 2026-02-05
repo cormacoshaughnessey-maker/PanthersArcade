@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://clsccskxsea5v"]
 
-[ext_resource type="Texture2D" uid="uid://dwt3c0n8v71ly" path="res://Sprites/Placeholder_Background.png" id="1_sn1xx"]
+[ext_resource type="Texture2D" uid="uid://dwt3c0n8v71ly" path="res://Assets/Placeholder_Background.png" id="1_sn1xx"]
 
 [node name="Background" type="Node2D" unique_id=1810696300]
 

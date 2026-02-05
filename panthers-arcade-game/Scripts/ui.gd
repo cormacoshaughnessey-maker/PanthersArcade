@@ -1,9 +1,11 @@
 extends Control
-		
+
 var uilife_scene = preload("res://Scenes/ui_life.tscn")
 
 @onready var lives = $Lives
 
+
+ # INFO: Sets the number of lives displayed in the UI to be equal to a new amount
 func init_lives(amount):
 	for u in lives.get_children():
 		u.queue_free()

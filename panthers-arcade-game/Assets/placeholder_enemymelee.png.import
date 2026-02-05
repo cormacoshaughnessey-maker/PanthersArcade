@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://yjhcmpuxu7xe"
-path="res://.godot/imported/placeholder_enemymelee.png-c65907a24b8770c66c90b93b1ad4ec43.ctex"
+path="res://.godot/imported/placeholder_enemymelee.png-ffd973a9c1c80bbe7f3e38e4eacef045.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/placeholder_enemymelee.png"
-dest_files=["res://.godot/imported/placeholder_enemymelee.png-c65907a24b8770c66c90b93b1ad4ec43.ctex"]
+source_file="res://Assets/placeholder_enemymelee.png"
+dest_files=["res://.godot/imported/placeholder_enemymelee.png-ffd973a9c1c80bbe7f3e38e4eacef045.ctex"]
 
 [params]
 
