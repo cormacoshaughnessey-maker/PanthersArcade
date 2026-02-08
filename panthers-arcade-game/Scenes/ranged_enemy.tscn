@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ranged_enemy_scene"]
 
 [ext_resource type="Script" path="res://Scripts/ranged_enemy.gd" id="1_ranged"]
-[ext_resource type="Texture2D" path="res://Sprites/placeholder_enemyrang.png" id="2_ranged_sprite"]
+[ext_resource type="Texture2D" path="res://Assets/placeholder_enemyrang.png" id="2_ranged_sprite"]
 [ext_resource type="PackedScene" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ranged"]

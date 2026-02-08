@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://mini_boss_scene"]
 
 [ext_resource type="Script" path="res://Scripts/mini_boss.gd" id="1_boss"]
-[ext_resource type="Texture2D" path="res://Sprites/placeholder_enemymelee.png" id="2_boss_sprite"]
+[ext_resource type="Texture2D" path="res://Assets/placeholder_enemymelee.png" id="2_boss_sprite"]
 [ext_resource type="PackedScene" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]

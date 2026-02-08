@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://clsccskxsea5v"]
+[gd_scene load_steps=0 format=3 uid="uid://clsccskxsea5v"]
 
 [ext_resource type="Texture2D" uid="uid://dwt3c0n8v71ly" path="res://Assets/Placeholder_Background.png" id="1_sn1xx"]
 
@@ -14,4 +14,5 @@ ignore_camera_scroll = true
 screen_offset = Vector2(0, 1920)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=393469770]
+z_index = -10
 texture = ExtResource("1_sn1xx")
