@@ -1,0 +1,64 @@
+extends Area2D
+
+class_name EnemyProjectile
+
+# enemy projectile that flies in a direction and damages the player
+
+@export var damage := 10.0
+@export var lifetime := 5.0  # auto-delete after this many seconds
+
+var velocity : Vector2 = Vector2.ZERO
+var direction : Vector2 = Vector2.ZERO  
+var speed : float = 300.0 
+
+
+func _ready() -> void:
+	# add to enemy attacks group
+	add_to_group("enemy_attack")
+
+	# connect collision signals BEFORE the await or they never get connected lol
+	area_entered.connect(_on_area_entered)
+	body_entered.connect(_on_body_entered)
+
+	# auto-delete after lifetime expires (in case it goes off screen)
+	await get_tree().create_timer(lifetime).timeout
+	queue_free()
+
+func _physics_process(delta: float) -> void:
+	# move the projectile
+	if velocity != Vector2.ZERO:
+		position += velocity * delta
+	elif direction != Vector2.ZERO:
+		position += direction * speed * delta
+
+	# rotate to face direction of travel
+	if velocity != Vector2.ZERO:
+		rotation = velocity.angle() + deg_to_rad(90)
+	elif direction != Vector2.ZERO:
+		rotation = direction.angle() + deg_to_rad(90)
+
+	# clean up projectiles that went way off screen
+	var screen_size = get_viewport_rect().size
+	var canvas_transform = get_canvas_transform()
+	var visible_rect = Rect2(-canvas_transform.origin, screen_size)
+	# add some buffer so projectiles just off screen aren't deleted immediately
+	visible_rect = visible_rect.grow(200)
+	if not visible_rect.has_point(global_position):
+		queue_free()
+
+
+# when projectile hits something
+func _on_area_entered(area: Area2D) -> void:
+	# if enemy hits a player attack, destroy the projectile
+	if area.is_in_group("player_attack"):
+		queue_free()
+
+
+# when projectile hits the player
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		# damage the player
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+		print("projectile hit player for ", damage, " damage!")
+		queue_free()  # destroy projectile after hitting

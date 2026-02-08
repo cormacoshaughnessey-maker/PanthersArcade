@@ -1,6 +1,14 @@
 extends CharacterBody2D
 
 @export var speed := 300.0
+@export var max_health := 100.0
+@export var max_lives := 3
+@export var invincibility_duration := 1.5  # seconds of i-frames after getting hit
+
+# signals for the UI to hook into
+signal health_changed(current_health: float, max_health: float)
+signal lives_changed(current_lives: int)
+signal player_died
 
 var rewind_data : Dictionary[String, Array] = {"position":[]}
 var max_rewind_length := 100
@@ -8,11 +16,22 @@ var rewind_on_cooldown := false
 var rewinding := false
 var attack_positions : Array[Vector2]
 
+var current_health : float
+var current_lives : int
+var is_invincible := false  # i-frames after taking damage
+
 @onready var game_node := self.get_parent()
 @onready var player_attacks := game_node.get_node("PlayerAttacks")
 @onready var rewind_cooldown_timer := $RewindCooldownTimer
 
 var attack_scene := preload("res://scenes/rewind_attack.tscn")
+
+
+func _ready() -> void:
+	add_to_group("player")
+	# initialize health and lives
+	current_health = max_health
+	current_lives = max_lives
 
 
  # INFO: Function run every frame/tick
@@ -82,6 +101,51 @@ func start_rewind_cooldown() -> void:
  # INFO: End of the cooldown on rewinding, sets rewind_on_cooldown to false
 func _finish_rewind_cooldown() -> void:
 	rewind_on_cooldown = false
+#endregion
+
+
+#region Health/Damage Functions
+ # INFO: Called when player takes damage from enemies
+func take_damage(amount: float) -> void:
+	# can't take damage while invincible or rewinding (rewinding gives i-frames too)
+	if is_invincible or rewinding:
+		return
+
+	current_health -= amount
+	health_changed.emit(current_health, max_health)
+	# TODO: play hurt animation/effect, maybe flash the sprite
+
+	if current_health <= 0:
+		lose_life()
+	else:
+		# give player some i-frames so they don't get stunlocked
+		start_invincibility()
+
+
+ # INFO: Player loses a life
+func lose_life() -> void:
+	current_lives -= 1
+	lives_changed.emit(current_lives)
+
+	if current_lives <= 0:
+		# game over man, game over
+		player_died.emit()
+		# TODO: play death animation, show game over screen
+		print("player is dead! game over!")
+	else:
+		# still got lives left, reset health and give i-frames
+		current_health = max_health
+		health_changed.emit(current_health, max_health)
+		start_invincibility()
+		print("lost a life! lives left: ", current_lives)
+
+
+ # INFO: Make player invincible for a bit after getting hit
+func start_invincibility() -> void:
+	is_invincible = true
+	# TODO: make sprite flash or something to show i-frames
+	await get_tree().create_timer(invincibility_duration).timeout
+	is_invincible = false
 #endregion
 
 
