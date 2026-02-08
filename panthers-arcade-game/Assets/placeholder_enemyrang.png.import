@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpfvugo5mdth"
-path="res://.godot/imported/placeholder_player.png-64f3e50b58f57e0a665d775e13e1f7dc.ctex"
+uid="uid://cfi85vnxfgpdm"
+path="res://.godot/imported/placeholder_enemyrang.png-825cf43fa6ced8536afa6f8600c3d04d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/placeholder_player.png"
-dest_files=["res://.godot/imported/placeholder_player.png-64f3e50b58f57e0a665d775e13e1f7dc.ctex"]
+source_file="res://Assets/placeholder_enemyrang.png"
+dest_files=["res://.godot/imported/placeholder_enemyrang.png-825cf43fa6ced8536afa6f8600c3d04d.ctex"]
 
 [params]
 

@@ -1,24 +1,41 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3128wmakougd"]
+[gd_scene load_steps=8 format=3 uid="uid://d3128wmakougd"]
 
 [ext_resource type="Script" uid="uid://ckublskq5hvs" path="res://Scripts/game.gd" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://ca1svep8rjsyl" path="res://Scenes/player.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://clsccskxsea5v" path="res://Scenes/background.tscn" id="2_wrm1d"]
 [ext_resource type="PackedScene" path="res://Scenes/mini_boss.tscn" id="3_wowpa"]
 [ext_resource type="PackedScene" path="res://Scenes/melee_enemy.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" path="res://Scenes/ranged_enemy.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://bojuqgkgr8idp" path="res://Scenes/ui.tscn" id="5_ui"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ebmjs")
 
-[node name="Player" parent="." instance=ExtResource("2_qxrlw")]
-position = Vector2(516, 1820)
+[node name="UI" type="CanvasLayer" parent="." unique_id=1082573101]
+
+[node name="UI" parent="UI" unique_id=143631567 instance=ExtResource("5_ui")]
+
+[node name="Background" parent="." unique_id=1810696300 instance=ExtResource("2_wrm1d")]
+z_index = -1
+
+[node name="Player" parent="." unique_id=103552615 instance=ExtResource("2_qxrlw")]
+z_index = 1
+position = Vector2(540, 960)
+motion_mode = 1
+max_rewind_length_in_seconds = 2.0
+
+[node name="PlayerAttacks" type="Node" parent="." unique_id=1452552307]
+
+[node name="PlayerProjections" type="Node2D" parent="." unique_id=60883009]
 
 [node name="MiniBoss" parent="." instance=ExtResource("3_wowpa")]
-position = Vector2(656, 200)
-
-[node name="PlayerAttacks" type="Node" parent="."]
+z_index = 10
+position = Vector2(540, 700)
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("3_wrm1d")]
-position = Vector2(563, 376)
+z_index = 10
+position = Vector2(400, 800)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("4_3dryh")]
-position = Vector2(295, 174)
+z_index = 10
+position = Vector2(680, 800)

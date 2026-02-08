@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ca1svep8rjsyl"]
 
 [ext_resource type="Script" uid="uid://bmuww40b78yu0" path="res://Scripts/player.gd" id="1_v0iea"]
-[ext_resource type="Texture2D" uid="uid://bpfvugo5mdth" path="res://Sprites/placeholder_player.png" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://bpfvugo5mdth" path="res://Assets/placeholder_player.png" id="2_cvnsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
 size = Vector2(128, 128)
@@ -18,7 +18,7 @@ texture = ExtResource("2_cvnsp")
 shape = SubResource("RectangleShape2D_v0iea")
 
 [node name="RewindCooldownTimer" type="Timer" parent="." unique_id=187326897]
-wait_time = 0.5
+wait_time = 1.5
 one_shot = true
 
 [connection signal="timeout" from="RewindCooldownTimer" to="." method="_finish_rewind_cooldown"]

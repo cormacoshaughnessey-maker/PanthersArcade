@@ -10,8 +10,9 @@ signal health_changed(current_health: float, max_health: float)
 signal lives_changed(current_lives: int)
 signal player_died
 
+@export var max_rewind_length_in_seconds := 1.5
+var max_rewind_length : float
 var rewind_data : Dictionary[String, Array] = {"position":[]}
-var max_rewind_length := 100
 var rewind_on_cooldown := false
 var rewinding := false
 var attack_positions : Array[Vector2]
@@ -22,9 +23,11 @@ var is_invincible := false  # i-frames after taking damage
 
 @onready var game_node := self.get_parent()
 @onready var player_attacks := game_node.get_node("PlayerAttacks")
+@onready var player_projections := game_node.get_node("PlayerProjections")
 @onready var rewind_cooldown_timer := $RewindCooldownTimer
 
-var attack_scene := preload("res://scenes/rewind_attack.tscn")
+var attack_scene := preload("res://Scenes/rewind_attack.tscn")
+var projection_scene := preload("res://Scenes/player_projection.tscn")
 
 
 func _ready() -> void:
@@ -32,6 +35,8 @@ func _ready() -> void:
 	# initialize health and lives
 	current_health = max_health
 	current_lives = max_lives
+	# calculate max rewind length based on physics ticks
+	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second
 
 
  # INFO: Function run every frame/tick
@@ -46,19 +51,19 @@ func inputs(delta: float) -> void:
 	if Input.is_action_just_released("rewind"):
 		start_rewind_cooldown()
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
+		if Input.is_action_just_pressed("rewind"):
+			spawn_projection_trail()
 		rewind()
-	# TODO: Put conditionals for movement inputs here
-	# Make sure to check that rewinding is false first!
-	# Also, be sure to use a method like move_and_slide() to make sure to account for collisions
+		rewind()
 	if not rewinding:
-		input_tests(delta)
+		movement_inputs(delta)
 
 
 #region Rewind Functions
  # INFO: Function that saves data to the rewind_data array
 func save_rewind_data(_delta: float) -> void:
 	if not rewinding:
-		rewind_data["position"].append(position)
+		rewind_data["position"].append(global_position)
 		if rewind_data["position"].size() > max_rewind_length:
 			rewind_data["position"].pop_front()
 	#print(rewind_data)
@@ -67,12 +72,13 @@ func save_rewind_data(_delta: float) -> void:
 
  # INFO: Function which moves the player 1 position back along the rewind_data array
 func rewind() -> void:
-	if rewind_data["position"].size() > 0:
-		rewinding = true
-		position = rewind_data["position"].pop_back()
-		attack_positions.append(position)
-	else:
-		start_rewind_cooldown()
+	if not rewind_on_cooldown:
+		if rewind_data["position"].size() > 0:
+			rewinding = true
+			global_position = rewind_data["position"].pop_back()
+			attack_positions.append(global_position)
+		else:
+			start_rewind_cooldown()
 
 
  # INFO: Function which spawns all the attacks from rewinding, then clears the attack_positions array
@@ -86,8 +92,21 @@ func rewind_attacks() -> void:
 func spawn_attack(attack_position:Vector2, _size := 1.0) -> void:
 	var attack_var = attack_scene.instantiate()
 	attack_var.global_position = attack_position
-	#attack_var.size = size
 	player_attacks.call_deferred("add_child", attack_var)
+
+
+# INFO: Spawns a trail of projections from the player along the path of rewinding
+func spawn_projection_trail() -> void:
+	for i in rewind_data["position"].size():
+		if i % 10 == 0:
+			spawn_projection(rewind_data["position"].get(i))
+
+
+ # INFO: Spawn a single projection of the player; used for the path of rewinding
+func spawn_projection(projection_position:Vector2) -> void:
+	var projection_var = projection_scene.instantiate()
+	projection_var.global_position = projection_position
+	player_projections.call_deferred("add_child", projection_var)
 
 
  # INFO: Begin the cooldown on rewinding, and set rewind_on_cooldown to true
@@ -95,6 +114,7 @@ func start_rewind_cooldown() -> void:
 	rewinding = false
 	rewind_on_cooldown = true
 	rewind_cooldown_timer.start()
+	get_tree().call_group("player_projections", "queue_free")
 	rewind_attacks()
 
 
@@ -149,11 +169,10 @@ func start_invincibility() -> void:
 #endregion
 
 
-#region Debug/Testing Functions
- # INFO: Quick function for moving around, so that rewinding can be tested
-func input_tests(delta: float) -> void:
+#region Movement
+ # INFO: Function for left, right, up, and down movement
+func movement_inputs(_delta: float) -> void:
 	var movement_vector = Input.get_vector("left", "right", "up", "down").normalized()
 	velocity = movement_vector * speed
 	move_and_slide()
-	pass
 #endregion
