@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://clsccskxsea5v" path="res://Scenes/background.tscn" id="2_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://b14fm4l40xmdf" path="res://Scenes/mini_boss.tscn" id="3_wowpa"]
 [ext_resource type="PackedScene" path="res://Scenes/melee_enemy.tscn" id="3_wrm1d"]
-[ext_resource type="PackedScene" path="res://Scenes/ranged_enemy.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://xcg3ukav2yrf" path="res://Scenes/ranged_enemy.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bojuqgkgr8idp" path="res://Scenes/ui.tscn" id="5_ui"]
 
 [node name="Game" type="Node2D" unique_id=1653535691]
@@ -20,7 +20,7 @@ z_index = -1
 
 [node name="Player" parent="." unique_id=103552615 instance=ExtResource("2_qxrlw")]
 z_index = 1
-position = Vector2(540, 960)
+position = Vector2(540, 1440)
 motion_mode = 1
 max_rewind_length_in_seconds = 2.0
 

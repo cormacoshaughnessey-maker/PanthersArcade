@@ -25,6 +25,7 @@ var is_invincible := false  # i-frames after taking damage
 @onready var player_attacks := game_node.get_node("PlayerAttacks")
 @onready var player_projections := game_node.get_node("PlayerProjections")
 @onready var rewind_cooldown_timer := $RewindCooldownTimer
+@onready var hitbox := $CollisionShape2D
 
 var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
@@ -74,6 +75,7 @@ func save_rewind_data(_delta: float) -> void:
 func rewind() -> void:
 	if not rewind_on_cooldown:
 		if rewind_data["position"].size() > 0:
+			hitbox.disabled = true
 			rewinding = true
 			global_position = rewind_data["position"].pop_back()
 			attack_positions.append(global_position)
@@ -111,6 +113,7 @@ func spawn_projection(projection_position:Vector2) -> void:
 
  # INFO: Begin the cooldown on rewinding, and set rewind_on_cooldown to true
 func start_rewind_cooldown() -> void:
+	hitbox.disabled = false
 	rewinding = false
 	rewind_on_cooldown = true
 	rewind_cooldown_timer.start()
