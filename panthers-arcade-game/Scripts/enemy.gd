@@ -33,7 +33,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# each enemy type will override this to do their own movement and attacks
 	move_and_attack(delta)
-	# clean up enemies that fall too far off screen (behind the player in a scrolling game)
+	# clean up enemies that fall too far off screen
 	check_if_off_screen()
 
 

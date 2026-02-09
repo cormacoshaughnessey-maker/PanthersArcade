@@ -16,7 +16,7 @@ func _ready() -> void:
 	# add to enemy attacks group
 	add_to_group("enemy_attack")
 
-	# connect collision signals BEFORE the await or they never get connected lol
+	# connect collision signals
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
 
