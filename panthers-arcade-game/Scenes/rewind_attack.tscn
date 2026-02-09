@@ -1,4 +1,4 @@
-[gd_scene load_steps=0 format=3 uid="uid://danvchce28jln"]
+[gd_scene format=3 uid="uid://danvchce28jln"]
 
 [ext_resource type="Script" uid="uid://cadbcws2let3c" path="res://Scripts/rewind_attack.gd" id="1_s4sno"]
 

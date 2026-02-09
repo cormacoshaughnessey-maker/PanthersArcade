@@ -1,14 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3128wmakougd"]
+[gd_scene format=3 uid="uid://d3128wmakougd"]
 
 [ext_resource type="Script" uid="uid://ckublskq5hvs" path="res://Scripts/game.gd" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://ca1svep8rjsyl" path="res://Scenes/player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://clsccskxsea5v" path="res://Scenes/background.tscn" id="2_wrm1d"]
-[ext_resource type="PackedScene" path="res://Scenes/mini_boss.tscn" id="3_wowpa"]
+[ext_resource type="PackedScene" uid="uid://b14fm4l40xmdf" path="res://Scenes/mini_boss.tscn" id="3_wowpa"]
 [ext_resource type="PackedScene" path="res://Scenes/melee_enemy.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" path="res://Scenes/ranged_enemy.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bojuqgkgr8idp" path="res://Scenes/ui.tscn" id="5_ui"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=1653535691]
 script = ExtResource("1_ebmjs")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1082573101]
@@ -28,14 +28,16 @@ max_rewind_length_in_seconds = 2.0
 
 [node name="PlayerProjections" type="Node2D" parent="." unique_id=60883009]
 
-[node name="MiniBoss" parent="." instance=ExtResource("3_wowpa")]
+[node name="Enemies" type="Node" parent="." unique_id=46251178]
+
+[node name="MiniBoss" parent="Enemies" unique_id=811174440 instance=ExtResource("3_wowpa")]
 z_index = 10
 position = Vector2(540, 700)
 
-[node name="MeleeEnemy" parent="." instance=ExtResource("3_wrm1d")]
+[node name="MeleeEnemy" parent="Enemies" unique_id=1181171772 instance=ExtResource("3_wrm1d")]
 z_index = 10
 position = Vector2(400, 800)
 
-[node name="RangedEnemy" parent="." instance=ExtResource("4_3dryh")]
+[node name="RangedEnemy" parent="Enemies" unique_id=1820449908 instance=ExtResource("4_3dryh")]
 z_index = 10
 position = Vector2(680, 800)

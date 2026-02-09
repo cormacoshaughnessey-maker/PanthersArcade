@@ -13,6 +13,7 @@ signal enemy_killed(score_value: int)
 @export var score_value := 10  # how many points player gets for killing this enemy
 @export var contact_damage_cooldown := 1.0  # how often contact damage can happen
 
+var invulnerable := false
 var current_health : float
 var player : CharacterBody2D  # reference to the player so enemies can chase them
 var attack_cooldown := false
@@ -54,11 +55,17 @@ func move_and_attack(_delta: float) -> void:
 
 # call this when the enemy gets hit
 func take_damage(amount: float) -> void:
-	current_health -= amount
-	# TODO: play hurt animation or effect here
-
+	if not invulnerable:
+		current_health -= amount
+		invulnerable = true
+		await get_tree().create_timer(0.2).timeout
+		invulnerable = false
+		# TODO: play hurt animation or effect here
 	if current_health <= 0:
 		die()
+
+
+	
 
 
 # enemy dies
