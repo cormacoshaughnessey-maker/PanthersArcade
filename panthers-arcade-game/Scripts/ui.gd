@@ -12,3 +12,9 @@ func init_lives(amount):
 	for i in amount:
 		var ul = uilife_scene.instantiate()
 		lives.add_child(ul)
+
+
+func _on_player_lives_changed(current_lives: int) -> void:
+	init_lives(current_lives)
+	print("hi")
+	

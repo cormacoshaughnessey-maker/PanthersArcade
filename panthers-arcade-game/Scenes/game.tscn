@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://clsccskxsea5v" path="res://Scenes/background.tscn" id="2_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://b14fm4l40xmdf" path="res://Scenes/mini_boss.tscn" id="3_wowpa"]
 [ext_resource type="PackedScene" path="res://Scenes/melee_enemy.tscn" id="3_wrm1d"]
-[ext_resource type="PackedScene" path="res://Scenes/ranged_enemy.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://xcg3ukav2yrf" path="res://Scenes/ranged_enemy.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bojuqgkgr8idp" path="res://Scenes/ui.tscn" id="5_ui"]
 
 [node name="Game" type="Node2D" unique_id=1653535691]
@@ -41,3 +41,8 @@ position = Vector2(400, 800)
 [node name="RangedEnemy" parent="Enemies" unique_id=1820449908 instance=ExtResource("4_3dryh")]
 z_index = 10
 position = Vector2(680, 800)
+
+[connection signal="lives_changed" from="Player" to="UI/UI" method="_on_player_lives_changed"]
+[connection signal="body_entered" from="Enemies/MiniBoss" to="." method="_on_mini_boss_body_entered"]
+[connection signal="body_entered" from="Enemies/MeleeEnemy" to="." method="_on_melee_enemy_body_entered"]
+[connection signal="body_entered" from="Enemies/RangedEnemy" to="." method="_on_ranged_enemy_body_entered"]

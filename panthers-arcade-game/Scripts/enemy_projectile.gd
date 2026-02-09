@@ -56,9 +56,6 @@ func _on_area_entered(area: Area2D) -> void:
 
 # when projectile hits the player
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		# damage the player
-		if body.has_method("take_damage"):
-			body.take_damage(damage)
-		print("projectile hit player for ", damage, " damage!")
+	if body.has_method("lose_life"):
+		body.lose_life()
 		queue_free()  # destroy projectile after hitting

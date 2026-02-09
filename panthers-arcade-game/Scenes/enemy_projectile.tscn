@@ -1,19 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://enemy_projectile_scene"]
+[gd_scene format=3 uid="uid://drpircda8rv5b"]
 
-[ext_resource type="Script" path="res://Scripts/enemy_projectile.gd" id="1_projectile"]
-[ext_resource type="Texture2D" uid="uid://bpfvugo5mdth" path="res://Sprites/placeholder_player.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://cst5ngktc8ki5" path="res://Scripts/enemy_projectile.gd" id="1_projectile"]
+[ext_resource type="Texture2D" uid="uid://bpfvugo5mdth" path="res://Assets/placeholder_player.png" id="2_sprite"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_projectile"]
 radius = 4.0
 
-[node name="EnemyProjectile" type="Area2D"]
+[node name="EnemyProjectile" type="Area2D" unique_id=1675078706]
 collision_layer = 16
 collision_mask = 10
 script = ExtResource("1_projectile")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1957256565]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_sprite")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=415012167]
 shape = SubResource("CircleShape2D_projectile")
