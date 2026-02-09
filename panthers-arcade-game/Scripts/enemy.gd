@@ -58,7 +58,7 @@ func take_damage(amount: float) -> void:
 	if not invulnerable:
 		current_health -= amount
 		invulnerable = true
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.5).timeout
 		invulnerable = false
 		# TODO: play hurt animation or effect here
 	if current_health <= 0:

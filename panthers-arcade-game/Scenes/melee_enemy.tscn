@@ -1,23 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://melee_enemy_scene"]
+[gd_scene format=3 uid="uid://d4liq15hqbanc"]
 
-[ext_resource type="Script" path="res://Scripts/melee_enemy.gd" id="1_melee"]
-[ext_resource type="Texture2D" path="res://Assets/placeholder_enemymelee.png" id="2_melee_sprite"]
+[ext_resource type="Script" uid="uid://i8spamjtirbh" path="res://Scripts/melee_enemy.gd" id="1_melee"]
+[ext_resource type="Texture2D" uid="uid://yjhcmpuxu7xe" path="res://Assets/placeholder_enemymelee.png" id="2_melee_sprite"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_melee"]
-size = Vector2(14, 14)
+size = Vector2(128, 96)
 
-[node name="MeleeEnemy" type="Area2D"]
+[node name="MeleeEnemy" type="Area2D" unique_id=821670863]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_melee")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1320726342]
 texture = ExtResource("2_melee_sprite")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1242031307]
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_melee")
 
-[node name="AttackCooldownTimer" type="Timer" parent="."]
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1914923527]
 one_shot = true
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timeout"]
