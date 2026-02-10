@@ -11,6 +11,7 @@ signal lives_changed(current_lives: int)
 signal player_died
 
 @export var max_rewind_length_in_seconds := 1.5
+@export var rewind_speed := 2
 var max_rewind_length : float
 var rewind_data : Dictionary[String, Array] = {"position":[]}
 var rewind_on_cooldown := false
@@ -37,8 +38,7 @@ func _ready() -> void:
 	current_health = max_health
 	current_lives = max_lives
 	# calculate max rewind length based on physics ticks
-	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second
-
+	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second * rewind_speed
 
  # INFO: Function run every frame/tick
 func _physics_process(delta: float) -> void:
@@ -54,8 +54,8 @@ func inputs(delta: float) -> void:
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		if Input.is_action_just_pressed("rewind"):
 			spawn_projection_trail()
-		rewind()
-		rewind()
+		for i in rewind_speed:
+			rewind()
 	if not rewinding:
 		movement_inputs(delta)
 
@@ -118,13 +118,14 @@ func spawn_projection(projection_position:Vector2) -> void:
 
  # INFO: Begin the cooldown on rewinding, and set rewind_on_cooldown to true
 func start_rewind_cooldown() -> void:
-	rewinding = false
-	rewind_on_cooldown = true
-	rewind_cooldown_timer.start()
-	get_tree().call_group("player_projections", "queue_free")
-	rewind_attacks()
-	await get_tree().create_timer(0.5).timeout
-	hitbox.disabled = false
+	if not rewind_on_cooldown:
+		rewinding = false
+		rewind_on_cooldown = true
+		rewind_cooldown_timer.start()
+		get_tree().call_group("player_projections", "queue_free")
+		rewind_attacks()
+		await get_tree().create_timer(0.5).timeout
+		hitbox.disabled = false
 
 
  # INFO: End of the cooldown on rewinding, sets rewind_on_cooldown to false

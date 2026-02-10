@@ -33,7 +33,7 @@ z_index = -1
 z_index = 1
 position = Vector2(540, 1440)
 motion_mode = 1
-max_rewind_length_in_seconds = 2.0
+max_rewind_length_in_seconds = 1.0
 
 [node name="PlayerAttacks" type="Node" parent="." unique_id=1452552307]
 
