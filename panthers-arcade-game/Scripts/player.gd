@@ -25,8 +25,9 @@ var is_invincible := false  # i-frames after taking damage
 @onready var player_attacks := game_node.get_node("PlayerAttacks")
 @onready var player_projections := game_node.get_node("PlayerProjections")
 @onready var rewind_cooldown_timer := $RewindCooldownTimer
-@onready var ui = $UI/UI
+@onready var ui = game_node.get_node("UI/HealthUI")
 @onready var hitbox := $CollisionShape2D
+@onready var invincibility_cooldown_timer := $InvincibilityCooldownTimer
 
 var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
@@ -39,6 +40,8 @@ func _ready() -> void:
 	current_lives = max_lives
 	# calculate max rewind length based on physics ticks
 	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second * rewind_speed
+	invincibility_cooldown_timer.wait_time = invincibility_duration
+
 
  # INFO: Function run every frame/tick
 func _physics_process(delta: float) -> void:
@@ -137,27 +140,32 @@ func _finish_rewind_cooldown() -> void:
 #region Health/Damage Functions
  # INFO: Player loses a life
 func lose_life() -> void:
-	current_lives -= 1
-	print("hi2")
-	lives_changed.emit(current_lives)
+	if not rewinding and not is_invincible:
+		current_lives -= 1
+		print("hi2")
+		lives_changed.emit(current_lives)
 
-	if current_lives <= 0:
-		# game over man, game over
-		player_died.emit()
-		# TODO: play death animation, show game over screen
-		print("player is dead! game over!")
-	else:
-		start_invincibility()
-		print("lost a life! lives left: ", current_lives)
+		if current_lives <= 0:
+			# game over man, game over
+			player_died.emit()
+			# TODO: play death animation, show game over screen
+			print("player is dead! game over!")
+		else:
+			start_invincibility()
+			print("lost a life! lives left: ", current_lives)
 
 
  # INFO: Make player invincible for a bit after getting hit
 func start_invincibility() -> void:
 	is_invincible = true
 	# TODO: make sprite flash or something to show i-frames
-	await get_tree().create_timer(invincibility_duration).timeout
-	is_invincible = false
+	invincibility_cooldown_timer.start()
 
+
+
+ # INFO: Ending of invincibility timers
+func _on_invincibility_cooldown_timer_timeout() -> void:
+	is_invincible = false
 #endregion
 
 

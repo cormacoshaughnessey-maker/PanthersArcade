@@ -53,7 +53,7 @@ position = Vector2(400, 800)
 z_index = 10
 position = Vector2(680, 800)
 
-[connection signal="lives_changed" from="Player" to="UI/UI" method="_on_player_lives_changed"]
+[connection signal="lives_changed" from="Player" to="." method="_on_player_lives_changed"]
 [connection signal="body_entered" from="Enemies/MiniBoss" to="." method="_on_mini_boss_body_entered"]
 [connection signal="body_entered" from="Enemies/MeleeEnemy" to="." method="_on_melee_enemy_body_entered"]
 [connection signal="body_entered" from="Enemies/RangedEnemy" to="." method="_on_ranged_enemy_body_entered"]

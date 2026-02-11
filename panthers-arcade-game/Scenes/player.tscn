@@ -21,4 +21,8 @@ shape = SubResource("RectangleShape2D_v0iea")
 wait_time = 1.5
 one_shot = true
 
+[node name="InvincibilityCooldownTimer" type="Timer" parent="." unique_id=979426115]
+one_shot = true
+
 [connection signal="timeout" from="RewindCooldownTimer" to="." method="_finish_rewind_cooldown"]
+[connection signal="timeout" from="InvincibilityCooldownTimer" to="." method="_on_invincibility_cooldown_timer_timeout"]
