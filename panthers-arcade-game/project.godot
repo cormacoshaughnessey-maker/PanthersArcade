@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Panthers Arcade Game"
 run/main_scene="uid://d3128wmakougd"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Z - Other files/icon.svg"
 
 [display]
 
@@ -29,6 +29,10 @@ window/stretch/mode="canvas_items"
 
 player_attacks=""
 player_projections=""
+
+[gui]
+
+theme/custom_font="uid://qh5fftfnatcb"
 
 [input]
 

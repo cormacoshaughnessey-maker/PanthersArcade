@@ -15,7 +15,7 @@ var lives = 3:
 
  # INFO: Function run only once when the game starts running
 func _ready():
-	lives = 3
+	lives = 5
 
 
  # INFO: functions for taking damage with collision
@@ -41,4 +41,7 @@ func game_over() -> void:
 func _physics_process(delta: float) -> void:
 	rewind_ui.fill_rewind_bar(player.rewind_data_length()/2)
 	rewind_cooldown_percentage = (1 - rewind_cooldown_timer.time_left/rewind_cooldown_timer.wait_time)
-	rewind_ui.modulate = Color(1.0, 1.0, 1.0, rewind_cooldown_percentage)
+	if rewind_cooldown_percentage != 1:
+		rewind_ui.modulate = Color(1.0, 1.0, 1.0, rewind_cooldown_percentage/2)
+	else:
+		rewind_ui.modulate = Color(1.0, 1.0, 1.0, 1.0)

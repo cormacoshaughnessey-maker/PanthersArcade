@@ -55,6 +55,15 @@ position = Vector2(400, 800)
 z_index = 10
 position = Vector2(680, 800)
 
+[node name="RangedEnemy2" parent="Enemies" unique_id=1792074240 instance=ExtResource("4_3dryh")]
+position = Vector2(674, 327)
+
+[node name="RangedEnemy3" parent="Enemies" unique_id=1066199954 instance=ExtResource("4_3dryh")]
+position = Vector2(326, 308)
+
+[node name="MeleeEnemy2" parent="Enemies" unique_id=821670863 instance=ExtResource("3_wrm1d")]
+position = Vector2(533, 267)
+
 [connection signal="body_entered" from="Enemies/MiniBoss" to="." method="_on_mini_boss_body_entered"]
 [connection signal="body_entered" from="Enemies/MeleeEnemy" to="." method="_on_melee_enemy_body_entered"]
 [connection signal="body_entered" from="Enemies/RangedEnemy" to="." method="_on_ranged_enemy_body_entered"]
