@@ -33,6 +33,7 @@ z_index = -1
 z_index = 1
 position = Vector2(540, 1440)
 motion_mode = 1
+invincibility_duration = 2.0
 max_rewind_length_in_seconds = 1.0
 
 [node name="PlayerAttacks" type="Node" parent="." unique_id=1452552307]
@@ -53,7 +54,6 @@ position = Vector2(400, 800)
 z_index = 10
 position = Vector2(680, 800)
 
-[connection signal="lives_changed" from="Player" to="." method="_on_player_lives_changed"]
 [connection signal="body_entered" from="Enemies/MiniBoss" to="." method="_on_mini_boss_body_entered"]
 [connection signal="body_entered" from="Enemies/MeleeEnemy" to="." method="_on_melee_enemy_body_entered"]
 [connection signal="body_entered" from="Enemies/RangedEnemy" to="." method="_on_ranged_enemy_body_entered"]

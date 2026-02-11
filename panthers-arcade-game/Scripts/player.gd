@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export var speed := 300.0
 @export var max_health := 100.0
@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var invincibility_duration := 1.5  # seconds of i-frames after getting hit
 
 # signals for the UI to hook into
-signal lives_changed(current_lives: int)
+#signal lives_changed(current_lives: int)
 signal player_died
 
 @export var max_rewind_length_in_seconds := 1.5
@@ -18,7 +18,7 @@ var rewinding := false
 var attack_positions : Array[Vector2]
 
 var current_health : float
-var current_lives : int
+#var current_lives : int
 var is_invincible := false  # i-frames after taking damage
 
 @onready var game_node := self.get_parent()
@@ -33,11 +33,9 @@ var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
 
 
+ # INFO: Function run when the game starts
 func _ready() -> void:
 	add_to_group("player")
-	# initialize health and lives
-	current_health = max_health
-	current_lives = max_lives
 	# calculate max rewind length based on physics ticks
 	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second * rewind_speed
 	invincibility_cooldown_timer.wait_time = invincibility_duration
@@ -141,18 +139,16 @@ func _finish_rewind_cooldown() -> void:
  # INFO: Player loses a life
 func lose_life() -> void:
 	if not rewinding and not is_invincible:
-		current_lives -= 1
-		print("hi2")
-		lives_changed.emit(current_lives)
-
-		if current_lives <= 0:
+		game_node.lives -= 1
+		if game_node.lives <= 0:
 			# game over man, game over
 			player_died.emit()
 			# TODO: play death animation, show game over screen
 			print("player is dead! game over!")
+			game_node.game_over()
 		else:
 			start_invincibility()
-			print("lost a life! lives left: ", current_lives)
+			print("lost a life! lives left: ", game_node.lives)
 
 
  # INFO: Make player invincible for a bit after getting hit
@@ -160,7 +156,6 @@ func start_invincibility() -> void:
 	is_invincible = true
 	# TODO: make sprite flash or something to show i-frames
 	invincibility_cooldown_timer.start()
-
 
 
  # INFO: Ending of invincibility timers
