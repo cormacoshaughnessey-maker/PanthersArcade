@@ -101,11 +101,13 @@ func _on_area_entered(area: Area2D) -> void:
 
 # when enemy touches player directly
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and can_deal_contact_damage:
+	if body.is_in_group("player") and body is Player:
 		# damage the player on contact
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
+		if body.has_method("lose_life"):
+			body.lose_life()
 		# brief cooldown so we don't spam damage while overlapping
-		can_deal_contact_damage = false
-		await get_tree().create_timer(contact_damage_cooldown).timeout
-		can_deal_contact_damage = true
+		#can_deal_contact_damage = false
+		#await get_tree().create_timer(contact_damage_cooldown).timeout
+		#can_deal_contact_damage = true

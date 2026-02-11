@@ -13,4 +13,8 @@ script = ExtResource("1_s4sno")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=342079411]
 shape = SubResource("CircleShape2D_2e2wj")
 
+[node name="PlaceholderSprite" type="Polygon2D" parent="." unique_id=1407796490]
+color = Color(1, 0, 1, 0.39215687)
+polygon = PackedVector2Array(96, 0, 68, -68, 0, -96, -68, -68, -96, 0, -68, 68, 0, 96, 69, 68)
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

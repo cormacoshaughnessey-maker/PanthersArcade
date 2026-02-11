@@ -50,12 +50,13 @@ func _physics_process(delta: float) -> void:
 # when projectile hits something
 func _on_area_entered(area: Area2D) -> void:
 	# if enemy hits a player attack, destroy the projectile
-	if area.is_in_group("player_attack"):
-		queue_free()
+	#if area.is_in_group("player_attack"):
+		#queue_free()
+	pass
 
 
 # when projectile hits the player
 func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("lose_life"):
+	if body.has_method("lose_life") and body is Player:
 		body.lose_life()
 		queue_free()  # destroy projectile after hitting

@@ -33,7 +33,8 @@ z_index = -1
 z_index = 1
 position = Vector2(540, 1440)
 motion_mode = 1
-invincibility_duration = 2.0
+invincibility_duration = 1.0
+rewind_invincibility_duration = 0.5
 max_rewind_length_in_seconds = 1.0
 
 [node name="PlayerAttacks" type="Node" parent="." unique_id=1452552307]

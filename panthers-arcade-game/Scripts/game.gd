@@ -19,19 +19,19 @@ func _ready():
 
 
  # INFO: functions for taking damage with collision
-func _on_mini_boss_body_entered(body: Node2D) -> void:
-	if body.has_method("lose_life"):
-		body.lose_life()
-
-
-func _on_melee_enemy_body_entered(body: Node2D) -> void:
-	if body.has_method("lose_life"):
-		body.lose_life()
-
-
-func _on_ranged_enemy_body_entered(body: Node2D) -> void:
-	if body.has_method("lose_life"):
-		body.lose_life()
+#func _on_mini_boss_body_entered(body: Node2D) -> void:
+	#if body.has_method("lose_life") and body is Player:
+		#body.lose_life()
+#
+#
+#func _on_melee_enemy_body_entered(body: Node2D) -> void:
+	#if body.has_method("lose_life") and body is Player:
+		#body.lose_life()
+#
+#
+#func _on_ranged_enemy_body_entered(body: Node2D) -> void:
+	#if body.has_method("lose_life") and body is Player:
+		#body.lose_life()
 
 
 func game_over() -> void:
