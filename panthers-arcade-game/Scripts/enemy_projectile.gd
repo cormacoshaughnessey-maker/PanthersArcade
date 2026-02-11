@@ -14,7 +14,8 @@ var paused := false
 
 func _ready() -> void:
 	# add to enemy attacks group
-	add_to_group("enemy_attack")
+	self.add_to_group("enemy_attack")
+	self.add_to_group("pausable")
 
 	# connect collision signals
 	area_entered.connect(_on_area_entered)
@@ -61,3 +62,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("lose_life") and body is Player:
 		body.lose_life()
 		queue_free()  # destroy projectile after hitting
+
+
+func pause(pause:=true) -> void:
+	paused = pause

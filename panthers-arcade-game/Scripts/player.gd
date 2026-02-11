@@ -54,6 +54,7 @@ func inputs(delta: float) -> void:
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		if Input.is_action_just_pressed("rewind"):
 			spawn_projection_trail()
+			_on_invincibility_cooldown_timer_timeout()
 			if pause_on_rewind:
 				game_node.pause_enemies()
 		for i in rewind_speed:

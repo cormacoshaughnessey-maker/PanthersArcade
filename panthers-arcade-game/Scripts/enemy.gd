@@ -31,6 +31,7 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
 	self.add_to_group("enemies")
+	self.add_to_group("pausable")
 
 
 func _physics_process(delta: float) -> void:
@@ -67,8 +68,6 @@ func take_damage(amount: float) -> void:
 	if current_health <= 0:
 		die()
 
-
-	
 
 
 # enemy dies
@@ -114,3 +113,7 @@ func _on_body_entered(body: Node2D) -> void:
 		#can_deal_contact_damage = false
 		#await get_tree().create_timer(contact_damage_cooldown).timeout
 		#can_deal_contact_damage = true
+
+
+func pause(pause:=true) -> void:
+	paused = pause

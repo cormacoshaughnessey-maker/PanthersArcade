@@ -51,12 +51,5 @@ func _physics_process(delta: float) -> void:
 
 
 func pause_enemies(pause:=true) -> void:
-	for i in get_tree().get_nodes_in_group("enemies"):
-		i.paused = pause
-	for i in get_tree().get_nodes_in_group("enemy_attack"):
-		i.paused = pause
-	if pause:
-		background.scroll_speed = 0
-	else:
-		background.reset_scroll_speed()
-	
+	for i in get_tree().get_nodes_in_group("pausable"):
+		i.pause(pause)
