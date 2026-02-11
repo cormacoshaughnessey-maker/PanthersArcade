@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://clsccskxsea5v"]
 
+[ext_resource type="Script" uid="uid://b4qfove8niryo" path="res://Scripts/background.gd" id="1_pojwb"]
 [ext_resource type="Texture2D" uid="uid://dwt3c0n8v71ly" path="res://Assets/Placeholder_Background.png" id="1_sn1xx"]
 
 [node name="Background" type="Node2D" unique_id=1810696300]
+script = ExtResource("1_pojwb")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1446974400]
 scroll_scale = Vector2(0, 1)

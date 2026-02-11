@@ -13,6 +13,7 @@ signal enemy_killed(score_value: int)
 @export var score_value := 10  # how many points player gets for killing this enemy
 @export var contact_damage_cooldown := 1.0  # how often contact damage can happen
 
+var paused := false
 var invulnerable := false
 var current_health : float
 var player : CharacterBody2D  # reference to the player so enemies can chase them
@@ -29,13 +30,15 @@ func _ready() -> void:
 	# connect the area entered signal so enemy can damage the player on collision
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
+	self.add_to_group("enemies")
 
 
 func _physics_process(delta: float) -> void:
-	# each enemy type will override this to do their own movement and attacks
-	move_and_attack(delta)
-	# clean up enemies that fall too far off screen
-	check_if_off_screen()
+	if not paused: # only move if the enemy is not paused
+		# each enemy type will override this to do their own movement and attacks
+		move_and_attack(delta)
+		# clean up enemies that fall too far off screen
+		check_if_off_screen()
 
 
 # remove enemies that are way off screen so we don't waste resources

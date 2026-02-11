@@ -5,6 +5,7 @@ class_name Player extends CharacterBody2D
 @export var max_lives := 3
 @export var invincibility_duration := 1.5  # seconds of i-frames after getting hit
 @export var rewind_invincibility_duration := 1.0 # seconds of i-frames after finishing a rewind
+@export var pause_on_rewind := true # Determines whether or not enemies pause while rewinding
 
 # signals for the UI to hook into
 #signal lives_changed(current_lives: int)
@@ -18,8 +19,6 @@ var rewind_on_cooldown := false
 var rewinding := false
 var attack_positions : Array[Vector2]
 
-var current_health : float
-#var current_lives : int
 var is_invincible := false  # i-frames after taking damage
 
 @onready var game_node := self.get_parent()
@@ -55,6 +54,8 @@ func inputs(delta: float) -> void:
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		if Input.is_action_just_pressed("rewind"):
 			spawn_projection_trail()
+			if pause_on_rewind:
+				game_node.pause_enemies()
 		for i in rewind_speed:
 			rewind()
 	if not rewinding:
@@ -126,6 +127,7 @@ func start_rewind_cooldown() -> void:
 		get_tree().call_group("player_projections", "queue_free")
 		rewind_attacks()
 		start_invincibility(true)
+		game_node.pause_enemies(false)
 
 
  # INFO: End of the cooldown on rewinding, sets rewind_on_cooldown to false

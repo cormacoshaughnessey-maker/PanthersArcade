@@ -29,6 +29,8 @@ window/stretch/mode="canvas_items"
 
 player_attacks=""
 player_projections=""
+enemies="Enemies"
+enemy_attack="All enemy attacks"
 
 [gui]
 
