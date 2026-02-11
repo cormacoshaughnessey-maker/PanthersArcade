@@ -2,7 +2,7 @@ extends Area2D
 
 class_name RewindAttack
 
-@export var damage := 10.0
+@export var damage := 100.0
 
 var hitbox : CollisionShape2D
 
@@ -15,9 +15,9 @@ func _ready() -> void:
 func _enter_tree() -> void:
 	hitbox = $CollisionShape2D
 	hitbox.disabled = false
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.3).timeout
 	hitbox.disabled = true
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.2).timeout
 	self.queue_free()
 
 

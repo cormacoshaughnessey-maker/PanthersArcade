@@ -10,6 +10,7 @@ signal lives_changed(current_lives: int)
 signal player_died
 
 @export var max_rewind_length_in_seconds := 1.5
+@export var rewind_speed := 2
 var max_rewind_length : float
 var rewind_data : Dictionary[String, Array] = {"position":[]}
 var rewind_on_cooldown := false
@@ -25,6 +26,7 @@ var is_invincible := false  # i-frames after taking damage
 @onready var player_projections := game_node.get_node("PlayerProjections")
 @onready var rewind_cooldown_timer := $RewindCooldownTimer
 @onready var ui = $UI/UI
+@onready var hitbox := $CollisionShape2D
 
 var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
@@ -36,8 +38,7 @@ func _ready() -> void:
 	current_health = max_health
 	current_lives = max_lives
 	# calculate max rewind length based on physics ticks
-	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second
-
+	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second * rewind_speed
 
  # INFO: Function run every frame/tick
 func _physics_process(delta: float) -> void:
@@ -53,18 +54,23 @@ func inputs(delta: float) -> void:
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		if Input.is_action_just_pressed("rewind"):
 			spawn_projection_trail()
-		rewind()
-		rewind()
+		for i in rewind_speed:
+			rewind()
 	if not rewinding:
 		movement_inputs(delta)
 
 
 #region Rewind Functions
+ # INFO: Returns the amount of positions saved in the rewind_data array
+func rewind_data_length() -> int:
+	return rewind_data["position"].size()
+
+
  # INFO: Function that saves data to the rewind_data array
 func save_rewind_data(_delta: float) -> void:
 	if not rewinding:
 		rewind_data["position"].append(global_position)
-		if rewind_data["position"].size() > max_rewind_length:
+		if rewind_data_length() > max_rewind_length:
 			rewind_data["position"].pop_front()
 	#print(rewind_data)
 	pass
@@ -73,7 +79,8 @@ func save_rewind_data(_delta: float) -> void:
  # INFO: Function which moves the player 1 position back along the rewind_data array
 func rewind() -> void:
 	if not rewind_on_cooldown:
-		if rewind_data["position"].size() > 0:
+		if rewind_data_length() > 0:
+			hitbox.disabled = true
 			rewinding = true
 			global_position = rewind_data["position"].pop_back()
 			attack_positions.append(global_position)
@@ -97,7 +104,7 @@ func spawn_attack(attack_position:Vector2, _size := 1.0) -> void:
 
 # INFO: Spawns a trail of projections from the player along the path of rewinding
 func spawn_projection_trail() -> void:
-	for i in rewind_data["position"].size():
+	for i in rewind_data_length():
 		if i % 10 == 0:
 			spawn_projection(rewind_data["position"].get(i))
 
@@ -111,11 +118,14 @@ func spawn_projection(projection_position:Vector2) -> void:
 
  # INFO: Begin the cooldown on rewinding, and set rewind_on_cooldown to true
 func start_rewind_cooldown() -> void:
-	rewinding = false
-	rewind_on_cooldown = true
-	rewind_cooldown_timer.start()
-	get_tree().call_group("player_projections", "queue_free")
-	rewind_attacks()
+	if not rewind_on_cooldown:
+		rewinding = false
+		rewind_on_cooldown = true
+		rewind_cooldown_timer.start()
+		get_tree().call_group("player_projections", "queue_free")
+		rewind_attacks()
+		await get_tree().create_timer(0.5).timeout
+		hitbox.disabled = false
 
 
  # INFO: End of the cooldown on rewinding, sets rewind_on_cooldown to false

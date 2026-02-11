@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c0482jq0w4hj8"]
+
+[ext_resource type="Script" uid="uid://ps7vgdponywd" path="res://Scripts/rewind_ui.gd" id="1_jlbts"]
+
+[node name="RewindUI" type="Control" unique_id=143631567]
+modulate = Color(1, 1, 1, 0.19607843)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jlbts")
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1382136593]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 128.0
+scale = Vector2(0.5, 0.5)

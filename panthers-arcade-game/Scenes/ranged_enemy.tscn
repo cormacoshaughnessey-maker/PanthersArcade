@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ranged"]
-size = Vector2(14, 14)
+size = Vector2(128, 88)
 
 [node name="RangedEnemy" type="Area2D" unique_id=1792074240]
 collision_layer = 4
@@ -17,6 +17,7 @@ projectile_scene = ExtResource("3_projectile")
 texture = ExtResource("2_ranged_sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1031176663]
+position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_ranged")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=485404331]

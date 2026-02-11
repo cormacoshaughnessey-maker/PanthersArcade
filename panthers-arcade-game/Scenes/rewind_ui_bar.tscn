@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ig0qgqc5fgsu"]
+
+[ext_resource type="Texture2D" uid="uid://cb73xxvag8fqd" path="res://Assets/Rewind_Bar.png" id="1_h8u8m"]
+
+[node name="RewindUIBar" type="TextureRect" unique_id=928836512]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1064.0
+offset_bottom = -1792.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_h8u8m")

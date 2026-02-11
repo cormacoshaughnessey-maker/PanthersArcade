@@ -1,26 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://b14fm4l40xmdf"]
+[gd_scene format=3 uid="uid://b14fm4l40xmdf"]
 
 [ext_resource type="Script" uid="uid://8juapsflucfb" path="res://Scripts/mini_boss.gd" id="1_boss"]
 [ext_resource type="Texture2D" uid="uid://yjhcmpuxu7xe" path="res://Assets/placeholder_enemymelee.png" id="2_boss_sprite"]
 [ext_resource type="PackedScene" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
-size = Vector2(32, 32)
+size = Vector2(256, 192)
 
-[node name="MiniBoss" type="Area2D"]
+[node name="MiniBoss" type="Area2D" unique_id=1144880074]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_boss")
+screen_top_offset = 200.0
+attack_pattern_cooldown = 4.0
 projectile_scene = ExtResource("3_projectile")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2100710076]
 scale = Vector2(2, 2)
 texture = ExtResource("2_boss_sprite")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1159600075]
+position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_boss")
 
-[node name="AttackCooldownTimer" type="Timer" parent="."]
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=452442178]
 one_shot = true
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timeout"]
