@@ -17,36 +17,27 @@ class_name MiniBoss
 @export var spread_angle := 60.0  # degrees of spread
 @export var aimed_shot_count := 3  # how many shots in the aimed burst
 
-@export var projectile_scene : PackedScene  # assign in editor
+@export var projectile_scene : PackedScene 
 
 var moving_right := true
 var can_attack := true
-var attack_pattern := 0  # cycles through different attack patterns
-var screen_size : Vector2  # will get this from viewport
-var is_diving := false  # track if we're in the middle of a dive attack
+var attack_pattern := 0 
+var screen_size : Vector2  
+var is_diving := false  
 
 
 func _ready() -> void:
 	super._ready()
-	# tougher than regular enemies
 	max_health = 300.0
 	current_health = max_health
 	score_value = 100
-	# grab screen size from viewport
 	screen_size = get_viewport_rect().size
 
-
-# get the top of the visible screen in global coords
-# this accounts for camera movement and viewport transforms
 func get_visible_screen_top() -> float:
 	var canvas_transform = get_canvas_transform()
-	# the canvas transform's origin tells us where the viewport is looking
-	# we invert it to get world coords from screen coords
 	var screen_top_world = -canvas_transform.origin.y
 	return screen_top_world + screen_top_offset
 
-
-# get the left and right edges of visible screen in global coords
 func get_visible_screen_bounds() -> Vector2:
 	var canvas_transform = get_canvas_transform()
 	var left = -canvas_transform.origin.x + 50  # 50 pixel margin
@@ -59,11 +50,9 @@ func move_and_attack(delta: float) -> void:
 	if not player:
 		return
 
-	# don't do normal movement while diving
 	if is_diving:
 		return
 
-	# stay at the top of the VISIBLE screen, not relative to player
 	var target_y = get_visible_screen_top()
 	global_position.y = lerp(global_position.y, target_y, delta * 3.0)
 
@@ -73,12 +62,10 @@ func move_and_attack(delta: float) -> void:
 	# move left and right
 	if moving_right:
 		global_position.x += horizontal_speed * delta
-		# hit right edge, turn around
 		if global_position.x > bounds.y:
 			moving_right = false
 	else:
 		global_position.x -= horizontal_speed * delta
-		# hit left edge, turn around
 		if global_position.x < bounds.x:
 			moving_right = true
 
@@ -119,8 +106,6 @@ func spread_shot_attack() -> void:
 		push_warning("no projectile scene assigned to mini boss!") # temp debug message
 		return
 
-	# TODO: play attack animation/sound
-
 	var direction_to_player = (player.global_position - global_position).normalized()
 	var base_angle = direction_to_player.angle()
 
@@ -135,14 +120,12 @@ func spread_shot_attack() -> void:
 		var shot_angle = base_angle + angle_offset
 		var shot_direction = Vector2.from_angle(shot_angle)
 
-		# set projectile velocity
 		if "velocity" in projectile:
 			projectile.velocity = shot_direction * projectile_speed
 		elif "direction" in projectile:
 			projectile.direction = shot_direction
 			projectile.speed = projectile_speed
 
-		# small delay between each projectile
 		await get_tree().create_timer(0.1).timeout
 
 
@@ -151,15 +134,11 @@ func aimed_burst_attack() -> void:
 	if not projectile_scene:
 		return
 
-	# TODO: play attack animation/sound
-
-	# fire multiple shots aimed at where the player is
 	for i in range(aimed_shot_count):
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position
 
-		# aim at player's current position
 		var direction = (player.global_position - global_position).normalized()
 
 		if "velocity" in projectile:
@@ -187,12 +166,10 @@ func melee_dive_attack() -> void:
 	while elapsed < dive_duration:
 		elapsed += get_physics_process_delta_time()
 		var t = elapsed / dive_duration
-		# use ease out for smooth deceleration
 		t = 1.0 - pow(1.0 - t, 3.0)
 		global_position = start_pos.lerp(target_pos, t)
 		await get_tree().process_frame
 
-	# check if miniboss hits the player for melee damage
 	var distance_to_player = global_position.distance_to(player.global_position)
 	if distance_to_player <= melee_range:
 		if player.has_method("take_damage"):
@@ -217,8 +194,6 @@ func melee_dive_attack() -> void:
 
 	is_diving = false
 
-
-# override cooldown timeout
 func _on_attack_cooldown_timeout() -> void:
 	super._on_attack_cooldown_timeout()
 	can_attack = true

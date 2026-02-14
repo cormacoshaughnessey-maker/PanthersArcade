@@ -22,7 +22,7 @@ var random_timer := 0.0
 
 
 func _ready() -> void:
-	super._ready()  # call parent ready function
+	super._ready() 
 	pick_random_direction()
 
 
@@ -34,7 +34,6 @@ func move_and_attack(delta: float) -> void:
 	var distance_to_player = global_position.distance_to(player.global_position)
 	var direction_to_player = (player.global_position - global_position).normalized()
 
-	# add some randomness to movement
 	random_timer -= delta
 	if random_timer <= 0:
 		pick_random_direction()
@@ -52,14 +51,12 @@ func move_and_attack(delta: float) -> void:
 	position += move_direction * move_speed * delta
 
 	# rotate sprite to face the player
-	rotation = direction_to_player.angle() + deg_to_rad(90)  # add 90 if sprite faces up by default
+	rotation = direction_to_player.angle() + deg_to_rad(90)  
 
-	# try to shoot if we're in range
 	if distance_to_player <= attack_range and can_shoot:
 		shoot_projectile()
 
 
-# pick a random direction for strafing/wandering
 func pick_random_direction() -> void:
 	random_offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 
@@ -98,8 +95,6 @@ func shoot_projectile() -> void:
 		await get_tree().create_timer(time_between_shots).timeout
 		can_shoot = true
 
-
-# override the cooldown timeout to reset shooting ability
 func _on_attack_cooldown_timeout() -> void:
 	super._on_attack_cooldown_timeout()
 	can_shoot = true

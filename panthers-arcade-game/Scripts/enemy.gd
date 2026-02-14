@@ -23,69 +23,119 @@ var can_deal_contact_damage := true  # prevent spamming damage on contact
 @onready var attack_timer : Timer = get_node_or_null("AttackCooldownTimer")
 
 
+#region Wave Spawning System
+
+static var _current_wave := 0
+
+const WAVE_INITIAL_ENEMY_COUNT := 2  # enemies in the first wave
+const WAVE_MAX_ENEMY_COUNT := 7  # cap on enemies per wave
+const WAVE_MINI_BOSS_EVERY := 5  # a mini boss spawns every X waves
+const WAVE_SPAWN_X_MIN := 80.0
+const WAVE_SPAWN_X_MAX := 1000.0
+const WAVE_SPAWN_Y_OFFSET := -80.0  # pixels above the visible screen top
+
+
+static func reset_wave_state() -> void:
+	_current_wave = 0
+
+
+func _spawn_wave() -> void:
+	var spawn_parent = get_parent()
+	if not spawn_parent:
+		return
+
+	# Spawn y: above the visible screen so enemies walk in from the top
+	var canvas_transform = get_canvas_transform()
+	var screen_top_y = -canvas_transform.origin.y
+	var spawn_y = screen_top_y + WAVE_SPAWN_Y_OFFSET
+
+	# Enemy count increases over time, capped at max
+	var enemy_count = mini(WAVE_INITIAL_ENEMY_COUNT + Enemy._current_wave - 1, WAVE_MAX_ENEMY_COUNT)
+
+	var melee_scene = load("res://Scenes/melee_enemy.tscn")
+	var ranged_scene = load("res://Scenes/ranged_enemy.tscn")
+
+	for i in enemy_count:
+		var enemy_scene: PackedScene
+		# Early waves: melee only. Later waves: mix in ranged enemies.
+		if Enemy._current_wave <= 2:
+			enemy_scene = melee_scene
+		else:
+			enemy_scene = melee_scene if randf() > 0.5 else ranged_scene
+
+		var enemy = enemy_scene.instantiate()
+		var spawn_x = randf_range(WAVE_SPAWN_X_MIN, WAVE_SPAWN_X_MAX)
+		enemy.position = Vector2(spawn_x, spawn_y + randf_range(-30.0, 30.0))
+		spawn_parent.call_deferred("add_child", enemy)
+
+	# Mini boss every X waves
+	if Enemy._current_wave % WAVE_MINI_BOSS_EVERY == 0:
+		var boss_scene = load("res://Scenes/mini_boss.tscn")
+		var boss = boss_scene.instantiate()
+		boss.position = Vector2((WAVE_SPAWN_X_MIN + WAVE_SPAWN_X_MAX) / 2.0, spawn_y - 50.0)
+		spawn_parent.call_deferred("add_child", boss)
+#endregion
+
+
 func _ready() -> void:
 	current_health = max_health
-	# find the player in the scene
 	player = get_tree().get_first_node_in_group("player")
-	# connect the area entered signal so enemy can damage the player on collision
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
 	self.add_to_group("enemies")
 	self.add_to_group("pausable")
 
 
+func _exit_tree() -> void:
+	if is_inside_tree():
+		var others_alive := false
+		for e in get_tree().get_nodes_in_group("enemies"):
+			if e != self and e is Enemy and e.is_inside_tree():
+				others_alive = true
+				break
+		if not others_alive:
+			Enemy._current_wave += 1
+			_spawn_wave()
+
+
 func _physics_process(delta: float) -> void:
-	if not paused: # only move if the enemy is not paused
-		# each enemy type will override this to do their own movement and attacks
+	if not paused: 
 		move_and_attack(delta)
-		# clean up enemies that fall too far off screen
 		check_if_off_screen()
 
 
-# remove enemies that are way off screen so we don't waste resources
 func check_if_off_screen() -> void:
 	if not player:
 		return
-	# if enemy is way behind the player (below them in a top-down scroll), delete it
-	# using 800 pixels as the buffer since that's about a screen height
 	if global_position.y > player.global_position.y + 800:
-		queue_free()  # bye bye, you missed your chance
+		queue_free() 
 
-
-# override this in child classes to make enemies have their own movements and attacks
 func move_and_attack(_delta: float) -> void:
 	pass
 
 
-# call this when the enemy gets hit
 func take_damage(amount: float) -> void:
 	if not invulnerable:
 		current_health -= amount
 		invulnerable = true
 		await get_tree().create_timer(0.5).timeout
 		invulnerable = false
-		# TODO: play hurt animation or effect here
 	if current_health <= 0:
 		die()
 
 
 
-# enemy dies
 func die() -> void:
 	# TODO: play death animation/particle effect
-	# emit signal so game can add score
 	enemy_killed.emit(score_value)
-	queue_free()  # remove from game
+	queue_free()  
 
-
-# start the attack cooldown timer
 func start_attack_cooldown(cooldown_time: float) -> void:
 	attack_cooldown = true
 	if attack_timer:
 		attack_timer.wait_time = cooldown_time
 		attack_timer.start()
 	else:
-		# fallback if no timer node exists
 		await get_tree().create_timer(cooldown_time).timeout
 		_on_attack_cooldown_timeout()
 
@@ -94,17 +144,13 @@ func _on_attack_cooldown_timeout() -> void:
 	attack_cooldown = false
 
 
-# when enemy touches something
 func _on_area_entered(area: Area2D) -> void:
-	# check if enemy hit a player attack
 	if area.is_in_group("player_attack"):
 		take_damage(area.damage if "damage" in area else 10)
 
 
-# when enemy touches player directly
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and body is Player:
-		# damage the player on contact
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 		if body.has_method("lose_life"):

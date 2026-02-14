@@ -11,14 +11,21 @@ var rewind_cooldown_percentage := 1.0
 var lives := 3:
 	set(value):
 		lives = value
-		health_ui.init_lives(lives)
+		if health_ui:
+			health_ui.init_lives(lives)
 @export var default_lives := 3
 
 
  # INFO: Function run only once when the game starts running
 func _ready():
 	lives = default_lives
-	pass
+	# Spawn wave 1
+	Enemy._current_wave = 1
+	var melee_scene = load("res://Scenes/melee_enemy.tscn")
+	for i in Enemy.WAVE_INITIAL_ENEMY_COUNT:
+		var enemy = melee_scene.instantiate()
+		enemy.position = Vector2(randf_range(Enemy.WAVE_SPAWN_X_MIN, Enemy.WAVE_SPAWN_X_MAX), -80.0)
+		$Enemies.add_child(enemy)
 
 
  # INFO: functions for taking damage with collision (now unused)

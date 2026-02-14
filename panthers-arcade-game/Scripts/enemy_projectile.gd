@@ -13,15 +13,12 @@ var speed : float = 300.0
 var paused := false
 
 func _ready() -> void:
-	# add to enemy attacks group
 	self.add_to_group("enemy_attack")
 	self.add_to_group("pausable")
 
-	# connect collision signals
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
 
-	# auto-delete after lifetime expires (in case it goes off screen)
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 
