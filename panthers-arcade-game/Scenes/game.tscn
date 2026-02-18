@@ -6,6 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://c0482jq0w4hj8" path="res://Scenes/rewind_ui.tscn" id="3_v158k"]
 [ext_resource type="PackedScene" uid="uid://bojuqgkgr8idp" path="res://Scenes/health_ui.tscn" id="5_ui"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wowpa"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1l0tm"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v158k"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wowpa"]
+
 [node name="Game" type="Node2D" unique_id=1653535691]
 script = ExtResource("1_ebmjs")
 default_lives = 5
@@ -40,3 +53,23 @@ max_rewind_length_in_seconds = 1.0
 [node name="PlayerProjections" type="Node2D" parent="." unique_id=60883009]
 
 [node name="Enemies" type="Node" parent="." unique_id=46251178]
+
+[node name="WorldBorder" type="StaticBody2D" parent="." unique_id=1530420820]
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_wowpa")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldBorder" unique_id=1392375400]
+position = Vector2(0, 1920)
+shape = SubResource("WorldBoundaryShape2D_i6g32")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="WorldBorder" unique_id=2117651590]
+position = Vector2(1080, 0)
+shape = SubResource("WorldBoundaryShape2D_1l0tm")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="WorldBorder" unique_id=289797144]
+position = Vector2(1080, 0)
+shape = SubResource("WorldBoundaryShape2D_v158k")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBorder" unique_id=1764427700]
+position = Vector2(0, 1920)
+shape = SubResource("WorldBoundaryShape2D_wowpa")
