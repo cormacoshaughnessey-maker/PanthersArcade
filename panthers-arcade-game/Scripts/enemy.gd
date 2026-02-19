@@ -163,3 +163,4 @@ func _on_body_entered(body: Node2D) -> void:
 
 func pause(pause:=true) -> void:
 	paused = pause
+	attack_timer.paused = pause

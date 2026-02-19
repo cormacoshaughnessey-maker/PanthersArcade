@@ -50,15 +50,18 @@ func _physics_process(delta: float) -> void:
  # INFO: Function that registers user input and does actions based on that
 func inputs(delta: float) -> void:
 	if Input.is_action_just_released("rewind"):
-		start_rewind_cooldown()
+		if rewinding:
+			start_rewind_cooldown()
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		if Input.is_action_just_pressed("rewind"):
 			spawn_projection_trail()
 			_on_invincibility_cooldown_timer_timeout()
 			if pause_on_rewind:
 				game_node.pause_enemies()
+			rewinding = true
 		for i in rewind_speed:
-			rewind()
+			if rewinding:
+				rewind()
 	if not rewinding:
 		movement_inputs(delta)
 
