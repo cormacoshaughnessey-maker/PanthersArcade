@@ -180,4 +180,6 @@ func movement_inputs(_delta: float) -> void:
 	var movement_vector = Input.get_vector("left", "right", "up", "down").normalized()
 	velocity = movement_vector * speed
 	move_and_slide()
+	if velocity.length() > 0:
+		rotation = velocity.angle() + PI/2
 #endregion
