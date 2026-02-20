@@ -5,56 +5,61 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_cvnsp")
-region = Rect2(0, 0, 16.08743, 16.235851)
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3wgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t5aa")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvnsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvnsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkybt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
 size = Vector2(128, 128)
 
-[sub_resource type="Animation" id="Animation_cvnsp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_6t5aa"]
-resource_name = "walk"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgqql"]
-_data = {
-&"RESET": SubResource("Animation_cvnsp"),
-&"walk": SubResource("Animation_6t5aa")
-}
-
 [node name="Player" type="CharacterBody2D" unique_id=103552615]
 collision_layer = 2
+motion_mode = 1
 script = ExtResource("1_v0iea")
 speed = 400.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=934160044]
-texture_filter = 1
-scale = Vector2(8, 8)
-texture = SubResource("AtlasTexture_6t5aa")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2073562979]
+sprite_frames = SubResource("SpriteFrames_x3wgy")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=642745912]
 shape = SubResource("RectangleShape2D_v0iea")
@@ -65,9 +70,6 @@ one_shot = true
 
 [node name="InvincibilityCooldownTimer" type="Timer" parent="." unique_id=979426115]
 one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1556231470]
-libraries/ = SubResource("AnimationLibrary_vgqql")
 
 [connection signal="timeout" from="RewindCooldownTimer" to="." method="_finish_rewind_cooldown"]
 [connection signal="timeout" from="InvincibilityCooldownTimer" to="." method="_on_invincibility_cooldown_timer_timeout"]

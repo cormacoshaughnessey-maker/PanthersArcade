@@ -14,7 +14,7 @@ signal player_died
 @export var max_rewind_length_in_seconds := 1.5
 @export var rewind_speed := 2
 var max_rewind_length : float
-var rewind_data : Dictionary[String, Array] = {"position":[]}
+var rewind_data : Dictionary[String, Array] = {"position":[],"animation":[],"animation_frame":[],"animation_frame_progress":[],"rotation":[]}
 var rewind_on_cooldown := false
 var rewinding := false
 var attack_positions : Array[Vector2]
@@ -28,6 +28,7 @@ var is_invincible := false  # i-frames after taking damage
 @onready var ui = game_node.get_node("UI/HealthUI")
 @onready var hitbox := $CollisionShape2D
 @onready var invincibility_cooldown_timer := $InvincibilityCooldownTimer
+@onready var player_sprite := $AnimatedSprite2D
 
 var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
@@ -76,8 +77,16 @@ func rewind_data_length() -> int:
 func save_rewind_data(_delta: float) -> void:
 	if not rewinding:
 		rewind_data["position"].append(global_position)
+		rewind_data["animation"].append(player_sprite.animation)
+		rewind_data["animation_frame"].append(player_sprite.frame)
+		rewind_data["animation_frame_progress"].append(player_sprite.frame_progress)
+		rewind_data["rotation"].append(global_rotation)
 		if rewind_data_length() > max_rewind_length:
 			rewind_data["position"].pop_front()
+			rewind_data["animation"].pop_front()
+			rewind_data["animation_frame"].pop_front()
+			rewind_data["animation_frame_progress"].pop_front()
+			rewind_data["rotation"].pop_front()
 	#print(rewind_data)
 	pass
 
@@ -90,6 +99,9 @@ func rewind() -> void:
 			rewinding = true
 			global_position = rewind_data["position"].pop_back()
 			attack_positions.append(global_position)
+			player_sprite.play(rewind_data["animation"].pop_back())
+			player_sprite.set_frame_and_progress(rewind_data["animation_frame"].pop_back(), rewind_data["animation_frame_progress"].pop_back())
+			global_rotation = rewind_data["rotation"].pop_back()
 		else:
 			start_rewind_cooldown()
 
@@ -112,13 +124,15 @@ func spawn_attack(attack_position:Vector2, _size := 1.0) -> void:
 func spawn_projection_trail() -> void:
 	for i in rewind_data_length():
 		if i % 10 == 0:
-			spawn_projection(rewind_data["position"].get(i))
+			spawn_projection(i)
 
 
  # INFO: Spawn a single projection of the player; used for the path of rewinding
-func spawn_projection(projection_position:Vector2) -> void:
+func spawn_projection(rewind_index:int) -> void:
 	var projection_var = projection_scene.instantiate()
-	projection_var.global_position = projection_position
+	projection_var.global_position = rewind_data["position"].get(rewind_index)
+	projection_var.global_rotation = rewind_data["rotation"].get(rewind_index)
+	#projection_var.frame = rewind_data["animation_frame"].get(rewind_index)
 	player_projections.call_deferred("add_child", projection_var)
 
 
@@ -182,4 +196,7 @@ func movement_inputs(_delta: float) -> void:
 	move_and_slide()
 	if velocity.length() > 0:
 		rotation = velocity.angle() + PI/2
+		player_sprite.animation = "walk"
+	else:
+		player_sprite.animation = "idle"
 #endregion
