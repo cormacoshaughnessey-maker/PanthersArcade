@@ -1,7 +1,9 @@
 extends Node2D
 
 @onready var parallax_2d := $Parallax2D
-var default_autoscroll_speed : float
+@export var default_repeat_size := Vector2(0.0,3840.0)
+@export var default_screen_offset := Vector2(0.0,1920.0)
+@export var default_autoscroll_speed := 500.0
 
 var scroll_speed : float:
 	set(value):
@@ -12,6 +14,7 @@ var scroll_speed : float:
 func _ready() -> void:
 	default_autoscroll_speed = parallax_2d.autoscroll.y
 	self.add_to_group("pausable")
+	reset_parallax_values()
 
 
 func reset_scroll_speed() -> void:
@@ -23,3 +26,10 @@ func pause(pause:=true) -> void:
 		scroll_speed = 0
 	else:
 		reset_scroll_speed()
+
+
+func reset_parallax_values() -> void:
+	parallax_2d.repeat_size = default_repeat_size
+	parallax_2d.autoscroll.y = default_autoscroll_speed
+	parallax_2d.screen_offset = default_screen_offset
+	pass
