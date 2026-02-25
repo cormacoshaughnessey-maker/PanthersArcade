@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c0482jq0w4hj8"]
 
 [ext_resource type="Script" uid="uid://ps7vgdponywd" path="res://Scripts/rewind_ui.gd" id="1_jlbts"]
+[ext_resource type="PackedScene" uid="uid://ig0qgqc5fgsu" path="res://Scenes/rewind_ui_bar.tscn" id="2_0nutj"]
 
 [node name="RewindUI" type="Control" unique_id=143631567]
 modulate = Color(1, 1, 1, 0.19607843)
@@ -18,3 +19,15 @@ layout_mode = 0
 offset_right = 16.0
 offset_bottom = 128.0
 scale = Vector2(0.5, 0.5)
+
+[node name="RewindUIBar" parent="HBoxContainer" unique_id=928836512 instance=ExtResource("2_0nutj")]
+layout_mode = 2
+
+[node name="RewindUIBar2" parent="HBoxContainer" unique_id=755594465 instance=ExtResource("2_0nutj")]
+layout_mode = 2
+
+[node name="RewindUIBar3" parent="HBoxContainer" unique_id=370744284 instance=ExtResource("2_0nutj")]
+layout_mode = 2
+
+[node name="RewindUIBar4" parent="HBoxContainer" unique_id=850156411 instance=ExtResource("2_0nutj")]
+layout_mode = 2

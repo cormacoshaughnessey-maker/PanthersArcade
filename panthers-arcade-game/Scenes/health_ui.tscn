@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bojuqgkgr8idp"]
 
 [ext_resource type="Script" uid="uid://bb3vg7g3erix0" path="res://Scripts/health_ui.gd" id="1_fyqef"]
+[ext_resource type="PackedScene" uid="uid://c3xk7dvnrlfqv" path="res://Scenes/ui_life.tscn" id="2_mxkyl"]
 
 [node name="HealthUI" type="Control" unique_id=143631567]
 layout_mode = 3
@@ -17,3 +18,18 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
+
+[node name="ui_life" parent="Lives" unique_id=928836512 instance=ExtResource("2_mxkyl")]
+layout_mode = 2
+
+[node name="ui_life2" parent="Lives" unique_id=1855155693 instance=ExtResource("2_mxkyl")]
+layout_mode = 2
+
+[node name="ui_life3" parent="Lives" unique_id=1858782953 instance=ExtResource("2_mxkyl")]
+layout_mode = 2
+
+[node name="ui_life4" parent="Lives" unique_id=657073845 instance=ExtResource("2_mxkyl")]
+layout_mode = 2
+
+[node name="ui_life5" parent="Lives" unique_id=2041563785 instance=ExtResource("2_mxkyl")]
+layout_mode = 2
