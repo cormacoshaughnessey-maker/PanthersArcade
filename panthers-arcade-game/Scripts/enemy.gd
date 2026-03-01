@@ -4,21 +4,20 @@ class_name Enemy
 
 # base class for all enemies in the game
 
-# emitted when enemy dies so game can track score
 signal enemy_killed(score_value: int)
 
 @export var max_health := 100.0
 @export var move_speed := 150.0
 @export var damage := 10.0
-@export var score_value := 10  # how many points player gets for killing this enemy
-@export var contact_damage_cooldown := 1.0  # how often contact damage can happen
+@export var score_value := 10  
+@export var contact_damage_cooldown := 1.0  
 
 var paused := false
 var invulnerable := false
 var current_health : float
-var player : CharacterBody2D  # reference to the player so enemies can chase them
+var player : CharacterBody2D  
 var attack_cooldown := false
-var can_deal_contact_damage := true  # prevent spamming damage on contact
+var can_deal_contact_damage := true 
 
 @onready var attack_timer : Timer = get_node_or_null("AttackCooldownTimer")
 
@@ -155,7 +154,6 @@ func _on_body_entered(body: Node2D) -> void:
 			body.take_damage(damage)
 		if body.has_method("lose_life"):
 			body.lose_life()
-		# brief cooldown so we don't spam damage while overlapping
 		#can_deal_contact_damage = false
 		#await get_tree().create_timer(contact_damage_cooldown).timeout
 		#can_deal_contact_damage = true

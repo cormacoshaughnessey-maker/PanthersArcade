@@ -32,9 +32,9 @@ func _physics_process(delta: float) -> void:
 
 		# rotate to face direction of travel
 		if velocity != Vector2.ZERO:
-			rotation = velocity.angle() + deg_to_rad(90)
+			rotation = velocity.angle() + deg_to_rad(-90)
 		elif direction != Vector2.ZERO:
-			rotation = direction.angle() + deg_to_rad(90)
+			rotation = direction.angle() + deg_to_rad(-90)
 
 		# clean up projectiles that went way off screen
 		var screen_size = get_viewport_rect().size

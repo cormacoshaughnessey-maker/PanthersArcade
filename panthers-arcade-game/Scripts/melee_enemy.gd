@@ -20,7 +20,7 @@ var random_timer := 0.0
 func _ready() -> void:
 	super._ready()  
 	pick_random_direction()
-	print("melee enemy ready! player found: ", player != null)
+	#print("melee enemy ready! player found: ", player != null)
 
 
 # main loop: move toward player and attack when close enough
@@ -56,7 +56,7 @@ func attack() -> void:
 	var distance_to_player = global_position.distance_to(player.global_position)
 	if distance_to_player <= attack_range and player.has_method("take_damage"):
 		player.take_damage(damage)
-		print("melee enemy hit player!")  
+		#print("melee enemy hit player!")  
 
 	# check if done enough attacks to go on cooldown
 	if attacks_done >= attacks_per_cooldown:
