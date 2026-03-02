@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfi85vnxfgpdm"
-path="res://.godot/imported/placeholder_enemyrang.png-825cf43fa6ced8536afa6f8600c3d04d.ctex"
+uid="uid://dth23lrxwmwgh"
+path="res://.godot/imported/boss-2.png.png-6d09417bfe5fd8d1aa7f79360573bf00.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/placeholder_enemyrang.png"
-dest_files=["res://.godot/imported/placeholder_enemyrang.png-825cf43fa6ced8536afa6f8600c3d04d.ctex"]
+source_file="res://Assets/boss-2.png.png"
+dest_files=["res://.godot/imported/boss-2.png.png-6d09417bfe5fd8d1aa7f79360573bf00.ctex"]
 
 [params]
 

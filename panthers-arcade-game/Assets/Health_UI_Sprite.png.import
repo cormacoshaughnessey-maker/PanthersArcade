@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwt3c0n8v71ly"
-path="res://.godot/imported/Placeholder_Background.png-e9de0c1809184a2a2f1cc2a9c94700bc.ctex"
+uid="uid://6fltgqkukpaa"
+path="res://.godot/imported/Health_UI_Sprite.png-5587606207fd3817f06594b52079f180.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Placeholder_Background.png"
-dest_files=["res://.godot/imported/Placeholder_Background.png-e9de0c1809184a2a2f1cc2a9c94700bc.ctex"]
+source_file="res://Assets/Health_UI_Sprite.png"
+dest_files=["res://.godot/imported/Health_UI_Sprite.png-5587606207fd3817f06594b52079f180.ctex"]
 
 [params]
 

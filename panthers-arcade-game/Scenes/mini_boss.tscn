@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://b14fm4l40xmdf"]
 
 [ext_resource type="Script" uid="uid://8juapsflucfb" path="res://Scripts/mini_boss.gd" id="1_boss"]
-[ext_resource type="Texture2D" uid="uid://cyf7ekax7yi8" path="res://Assets/boss.png" id="2_boss_sprite"]
+[ext_resource type="Texture2D" uid="uid://dth23lrxwmwgh" path="res://Assets/boss-2.png.png" id="3_7j2xi"]
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
-size = Vector2(360, 384)
+size = Vector2(240, 256)
 
 [node name="MiniBoss" type="Area2D" unique_id=1144880074]
 collision_layer = 4
@@ -16,12 +16,11 @@ attack_pattern_cooldown = 4.0
 projectile_scene = ExtResource("3_projectile")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2100710076]
-scale = Vector2(3, 3)
-texture = ExtResource("2_boss_sprite")
+texture = ExtResource("3_7j2xi")
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1159600075]
-position = Vector2(-12, 0)
+position = Vector2(-8, 0)
 shape = SubResource("RectangleShape2D_boss")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=452442178]

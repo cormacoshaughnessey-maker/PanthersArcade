@@ -11,16 +11,19 @@ var scroll_speed : float:
 		parallax_2d.autoscroll.y = value
 
 
+ # INFO: Set everything to its default value
 func _ready() -> void:
 	default_autoscroll_speed = parallax_2d.autoscroll.y
 	self.add_to_group("pausable")
 	reset_parallax_values()
 
 
+# INFO: Reset the scrolling speed to its default
 func reset_scroll_speed() -> void:
 	scroll_speed = default_autoscroll_speed
 
 
+ # INFO: Pause the background if pause is true, unpause it if false
 func pause(pause:=true) -> void:
 	if pause:
 		scroll_speed = 0
@@ -28,6 +31,7 @@ func pause(pause:=true) -> void:
 		reset_scroll_speed()
 
 
+ # Set everything back to its default value
 func reset_parallax_values() -> void:
 	parallax_2d.repeat_size = default_repeat_size
 	parallax_2d.autoscroll.y = default_autoscroll_speed

@@ -28,26 +28,12 @@ func _ready():
 		$Enemies.add_child(enemy)
 
 
- # INFO: functions for taking damage with collision (now unused)
-#func _on_mini_boss_body_entered(body: Node2D) -> void:
-	#if body.has_method("lose_life") and body is Player:
-		#body.lose_life()
-#
-#
-#func _on_melee_enemy_body_entered(body: Node2D) -> void:
-	#if body.has_method("lose_life") and body is Player:
-		#body.lose_life()
-#
-#
-#func _on_ranged_enemy_body_entered(body: Node2D) -> void:
-	#if body.has_method("lose_life") and body is Player:
-		#body.lose_life()
-
-
+ # TODO: Add a gameover
 func game_over() -> void:
 	pass
 
 
+ # Fill the rewind bar, and set its transparency
 func _physics_process(delta: float) -> void:
 	rewind_ui.fill_rewind_bar(player.rewind_data_length()/2)
 	rewind_cooldown_percentage = (1 - rewind_cooldown_timer.time_left/rewind_cooldown_timer.wait_time)
