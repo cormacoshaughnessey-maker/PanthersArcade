@@ -17,11 +17,11 @@ normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v158k"]
 normal = Vector2(0, 1)
-distance = 200.0
+distance = 180.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wowpa"]
 
-[node name="Game" type="Node2D" unique_id=1653535691]
+[node name="Game" type="Node2D" unique_id=1653535691 groups=["game"]]
 script = ExtResource("1_ebmjs")
 default_lives = 5
 
@@ -29,7 +29,7 @@ default_lives = 5
 
 [node name="ColorRect" type="ColorRect" parent="UI" unique_id=226352673]
 offset_right = 1080.0
-offset_bottom = 200.0
+offset_bottom = 180.0
 color = Color(0, 0, 0, 1)
 
 [node name="HealthUI" parent="UI" unique_id=143631567 instance=ExtResource("5_ui")]
@@ -51,6 +51,7 @@ position = Vector2(540, 1440)
 invincibility_duration = 1.0
 rewind_invincibility_duration = 0.5
 pause_on_rewind = false
+require_movement_to_rewind = true
 max_rewind_length_in_seconds = 1.0
 
 [node name="PlayerAttacks" type="Node" parent="." unique_id=1452552307]

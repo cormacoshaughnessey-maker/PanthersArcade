@@ -32,6 +32,8 @@ player_projections=""
 enemies="Enemies"
 enemy_attack="All enemy attacks"
 pausable="Nodes that have pause functions"
+game="Game node"
+player="Player"
 
 [gui]
 

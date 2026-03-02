@@ -6,6 +6,7 @@ class_name Player extends CharacterBody2D
 @export var invincibility_duration := 1.5  # seconds of i-frames after getting hit
 @export var rewind_invincibility_duration := 1.0 # seconds of i-frames after finishing a rewind
 @export var pause_on_rewind := true # Determines whether or not enemies pause while rewinding
+@export var require_movement_to_rewind := false
 
 # signals for the UI to hook into
 #signal lives_changed(current_lives: int)
@@ -76,19 +77,18 @@ func rewind_data_length() -> int:
  # INFO: Function that saves data to the rewind_data array
 func save_rewind_data(_delta: float) -> void:
 	if not rewinding:
-		rewind_data["position"].append(global_position)
-		rewind_data["animation"].append(player_sprite.animation)
-		rewind_data["animation_frame"].append(player_sprite.frame)
-		rewind_data["animation_frame_progress"].append(player_sprite.frame_progress)
-		rewind_data["rotation"].append(global_rotation)
+		if (not require_movement_to_rewind) or (not rewind_data["position"].back() == global_position):
+			rewind_data["position"].append(global_position)
+			rewind_data["animation"].append(player_sprite.animation)
+			rewind_data["animation_frame"].append(player_sprite.frame)
+			rewind_data["animation_frame_progress"].append(player_sprite.frame_progress)
+			rewind_data["rotation"].append(global_rotation)
 		if rewind_data_length() > max_rewind_length:
 			rewind_data["position"].pop_front()
 			rewind_data["animation"].pop_front()
 			rewind_data["animation_frame"].pop_front()
 			rewind_data["animation_frame_progress"].pop_front()
 			rewind_data["rotation"].pop_front()
-	#print(rewind_data)
-	pass
 
 
  # INFO: Function which moves the player 1 position back along the rewind_data array
@@ -108,15 +108,19 @@ func rewind() -> void:
 
  # INFO: Function which spawns all the attacks from rewinding, then clears the attack_positions array
 func rewind_attacks() -> void:
-	for i in range(0, attack_positions.size(), 15):
-		spawn_attack(attack_positions[i])
+	for i in range(0, attack_positions.size(),15):
+		if i % 15 == 0:
+			spawn_attack(attack_positions[i])
+		else:
+			spawn_attack(attack_positions[i], true)
 	attack_positions.clear()
 
 
  # INFO: Function which spawns an individual rewind_attack
-func spawn_attack(attack_position:Vector2, _size := 1.0) -> void:
+func spawn_attack(attack_position:Vector2, hide:=false, _size := 1.0) -> void:
 	var attack_var = attack_scene.instantiate()
 	attack_var.global_position = attack_position
+	attack_var.hide_sprite(hide)
 	player_attacks.call_deferred("add_child", attack_var)
 
 
@@ -133,6 +137,7 @@ func spawn_projection(rewind_index:int) -> void:
 	projection_var.global_position = rewind_data["position"].get(rewind_index)
 	projection_var.global_rotation = rewind_data["rotation"].get(rewind_index)
 	#projection_var.frame = rewind_data["animation_frame"].get(rewind_index)
+	projection_var.add_to_group("player_projections")
 	player_projections.call_deferred("add_child", projection_var)
 
 
@@ -142,7 +147,7 @@ func start_rewind_cooldown() -> void:
 		rewinding = false
 		rewind_on_cooldown = true
 		rewind_cooldown_timer.start()
-		get_tree().call_group("player_projections", "queue_free")
+		get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFERRED, "player_projections", "queue_free")
 		rewind_attacks()
 		start_invincibility(true)
 		game_node.pause_enemies(false)
