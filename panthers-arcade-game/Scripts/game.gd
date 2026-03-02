@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var health_ui := $UI/HealthUI
+@onready var score_ui := $UI/ScoreUI
 @onready var rewind_ui := $UI/RewindUI
 @onready var player := $Player
 @onready var rewind_cooldown_timer := $Player/RewindCooldownTimer
@@ -15,10 +16,17 @@ var lives := 3:
 			health_ui.init_lives(lives)
 @export var default_lives := 3
 
+ # INFO: Variable for score
+
+var score := 0:
+	set(value):
+		score = value
+		score_ui.score = score
 
  # INFO: Function run only once when the game starts running
 func _ready():
 	lives = default_lives
+	score = 0
 	# Spawn wave 1
 	Enemy._current_wave = 1
 	var melee_scene = load("res://Scenes/melee_enemy.tscn")
