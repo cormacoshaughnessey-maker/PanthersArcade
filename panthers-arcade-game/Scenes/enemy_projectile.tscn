@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bn6rny7o53e5k" path="res://Assets/arrow.png" id="2_sprite"]
 
 [sub_resource type="RectangleShape2D" id="RectShape2D_projectile"]
-size = Vector2(22, 77)
+size = Vector2(32, 128)
 
 [node name="EnemyProjectile" type="Area2D" unique_id=1675078706]
 collision_layer = 16
@@ -12,9 +12,7 @@ collision_mask = 10
 script = ExtResource("1_projectile")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1957256565]
-scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=415012167]
-position = Vector2(0, -0.5)
 shape = SubResource("RectShape2D_projectile")

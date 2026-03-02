@@ -25,3 +25,7 @@ func _enter_tree() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Enemy:
 		area.take_damage(damage)
+
+
+func hide_sprite(hide := true) -> void:
+	$Sprite2D.visible = not hide
