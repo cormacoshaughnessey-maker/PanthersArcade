@@ -22,7 +22,8 @@ var random_timer := 0.0
 
 
 func _ready() -> void:
-	super._ready() 
+	super._ready()
+	score_value = 25
 	pick_random_direction()
 
 

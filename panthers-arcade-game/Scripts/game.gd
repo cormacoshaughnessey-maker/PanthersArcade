@@ -34,7 +34,12 @@ func _ready():
 		var enemy = melee_scene.instantiate()
 		enemy.position = Vector2(randf_range(Enemy.WAVE_SPAWN_X_MIN, Enemy.WAVE_SPAWN_X_MAX), -80.0)
 		$Enemies.add_child(enemy)
+		enemy.enemy_killed.connect(_on_enemy_killed)
 
+ # Adding score when an enemy is killed
+
+func _on_enemy_killed(score_value):
+	score = score + score_value
 
  # TODO: Add a gameover
 func game_over() -> void:
