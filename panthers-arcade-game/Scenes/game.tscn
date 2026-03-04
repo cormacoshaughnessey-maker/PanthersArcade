@@ -50,7 +50,7 @@ z_index = 1
 position = Vector2(540, 1440)
 invincibility_duration = 1.0
 rewind_invincibility_duration = 0.5
-pause_on_rewind = false
+pause_on_rewind = true
 require_movement_to_rewind = true
 max_rewind_length_in_seconds = 1.0
 

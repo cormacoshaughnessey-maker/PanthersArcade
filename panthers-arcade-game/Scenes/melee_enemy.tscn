@@ -1,7 +1,55 @@
 [gd_scene format=3 uid="uid://d4liq15hqbanc"]
 
 [ext_resource type="Script" uid="uid://i8spamjtirbh" path="res://Scripts/melee_enemy.gd" id="1_melee"]
-[ext_resource type="Texture2D" uid="uid://bfbrajyuw45ud" path="res://Assets/melee.png" id="2_melee_sprite"]
+[ext_resource type="Texture2D" uid="uid://cuwhxl02oxxky" path="res://Assets/melee_spritesheet.png" id="2_melee_sprite"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move1"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move2"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move3"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(480, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move4"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(640, 0, 160, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_melee"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_move1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_move2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_move3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_move4")
+}],
+"loop": true,
+"name": &"move",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_melee"]
 size = Vector2(128, 128)
@@ -11,8 +59,10 @@ collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_melee")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1320726342]
-texture = ExtResource("2_melee_sprite")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_melee")
+animation = &"move"
+autoplay = "move"
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1242031307]

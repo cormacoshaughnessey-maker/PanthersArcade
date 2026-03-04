@@ -1,8 +1,44 @@
 [gd_scene format=3 uid="uid://b14fm4l40xmdf"]
 
 [ext_resource type="Script" uid="uid://8juapsflucfb" path="res://Scripts/mini_boss.gd" id="1_boss"]
-[ext_resource type="Texture2D" uid="uid://dth23lrxwmwgh" path="res://Assets/boss-2.png.png" id="3_7j2xi"]
+[ext_resource type="Texture2D" uid="uid://d0rp0x3ghtw2d" path="res://Assets/boss_spritesheet.png" id="2_boss_sprite"]
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow1"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(0, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow2"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(288, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow3"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(576, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow4"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(864, 0, 288, 288)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_boss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glow1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glow2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glow3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glow4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
 size = Vector2(240, 256)
@@ -15,8 +51,10 @@ screen_top_offset = 200.0
 attack_pattern_cooldown = 4.0
 projectile_scene = ExtResource("3_projectile")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2100710076]
-texture = ExtResource("3_7j2xi")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_boss")
+animation = &"default"
+autoplay = "default"
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1159600075]

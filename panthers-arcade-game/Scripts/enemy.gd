@@ -10,7 +10,7 @@ signal enemy_killed(score_value: int)
 @export var move_speed := 150.0
 @export var damage := 10.0
 @export var score_value := 10  
-@export var contact_damage_cooldown := 1.0  
+@export var contact_damage_cooldown := 1.0
 
 var paused := false
 var invulnerable := false
@@ -20,6 +20,7 @@ var attack_cooldown := false
 var can_deal_contact_damage := true 
 
 @onready var attack_timer : Timer = get_node_or_null("AttackCooldownTimer")
+@onready var anim_sprite : AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 
 
 #region Wave Spawning System
@@ -38,41 +39,6 @@ static func reset_wave_state() -> void:
 	_current_wave = 0
 
 
-func _spawn_wave() -> void:
-	var spawn_parent = get_parent()
-	if not spawn_parent:
-		return
-
-	# Spawn y: above the visible screen so enemies walk in from the top
-	var canvas_transform = get_canvas_transform()
-	var screen_top_y = -canvas_transform.origin.y
-	var spawn_y = screen_top_y + WAVE_SPAWN_Y_OFFSET
-
-	# Enemy count increases over time, capped at max
-	var enemy_count = mini(WAVE_INITIAL_ENEMY_COUNT + Enemy._current_wave - 1, WAVE_MAX_ENEMY_COUNT)
-
-	var melee_scene = load("res://Scenes/melee_enemy.tscn")
-	var ranged_scene = load("res://Scenes/ranged_enemy.tscn")
-
-	for i in enemy_count:
-		var enemy_scene: PackedScene
-		# Early waves: melee only. Later waves: mix in ranged enemies.
-		if Enemy._current_wave <= 2:
-			enemy_scene = melee_scene
-		else:
-			enemy_scene = melee_scene if randf() > 0.5 else ranged_scene
-
-		var enemy = enemy_scene.instantiate()
-		var spawn_x = randf_range(WAVE_SPAWN_X_MIN, WAVE_SPAWN_X_MAX)
-		enemy.position = Vector2(spawn_x, spawn_y + randf_range(-30.0, 30.0))
-		spawn_parent.call_deferred("add_child", enemy)
-
-	# Mini boss every X waves
-	if Enemy._current_wave % WAVE_MINI_BOSS_EVERY == 0:
-		var boss_scene = load("res://Scenes/mini_boss.tscn")
-		var boss = boss_scene.instantiate()
-		boss.position = Vector2((WAVE_SPAWN_X_MIN + WAVE_SPAWN_X_MAX) / 2.0, spawn_y - 50.0)
-		spawn_parent.call_deferred("add_child", boss)
 #endregion
 
 
@@ -85,22 +51,16 @@ func _ready() -> void:
 	self.add_to_group("pausable")
 
 
-func _exit_tree() -> void:
-	if is_inside_tree():
-		var others_alive := false
-		for e in get_tree().get_nodes_in_group("enemies"):
-			if e != self and e is Enemy and e.is_inside_tree():
-				others_alive = true
-				break
-		if not others_alive:
-			Enemy._current_wave += 1
-			_spawn_wave()
-
 
 func _physics_process(delta: float) -> void:
-	if not paused: 
+	if not paused:
 		move_and_attack(delta)
 		check_if_off_screen()
+		if anim_sprite and anim_sprite.sprite_frames.has_animation("move"):
+			anim_sprite.play("move")
+	else:
+		if anim_sprite and anim_sprite.sprite_frames.has_animation("idle"):
+			anim_sprite.play("idle")
 
 
 func check_if_off_screen() -> void:

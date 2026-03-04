@@ -2,32 +2,30 @@ extends Enemy
 
 class_name RangedEnemy
 
-# basic ranged enemy that shoots projectiles at the player
-# fires 1-2 shots then goes on cooldown
-
-@export var attack_range := 400.0  # how far away we can shoot from
-@export var min_distance := 150.0  #  try to keep this much distance from player
-@export var projectiles_per_cooldown := 2  # how many shots before cooldown
-@export var projectile_cooldown_duration := 3.0  # seconds between shooting bursts
-@export var time_between_shots := 0.7  # seconds between each shot in a burst
+@export var attack_range := 400.0
+@export var min_distance := 150.0
+@export var projectiles_per_cooldown := 2
+@export var projectile_cooldown_duration := 3.0
+@export var time_between_shots := 0.7
 @export var projectile_speed := 300.0
-@export var movement_randomness := 100.0  # how much random movement to add
+@export var movement_randomness := 100.0
 
-var projectiles_fired := 0  # track how many shots we've done in this burst
+var projectiles_fired := 0
 var can_shoot := true
-var random_offset : Vector2  # random movement direction
+var random_offset : Vector2
+var target_random_offset : Vector2
 var random_timer := 0.0
 
-@export var projectile_scene : PackedScene  # assign this in the editor
+@export var projectile_scene : PackedScene
 
 
 func _ready() -> void:
 	super._ready()
 	score_value = 25
 	pick_random_direction()
+	random_offset = target_random_offset
 
 
-# main loop - keep distance from player and shoot projectiles
 func move_and_attack(delta: float) -> void:
 	if not player:
 		return
@@ -38,31 +36,34 @@ func move_and_attack(delta: float) -> void:
 	random_timer -= delta
 	if random_timer <= 0:
 		pick_random_direction()
-		random_timer = randf_range(1.5, 3.0)  # pick new direction every 1.5-3 seconds
+		random_timer = randf_range(1.5, 3.0)
 
-	# move away if too close, toward if too far, random movement otherwise
+	random_offset = random_offset.lerp(target_random_offset, delta * 3.0)
+
 	var move_direction : Vector2
 	if distance_to_player < min_distance:
 		move_direction = (-direction_to_player * 0.8 + random_offset * 0.2).normalized()
 	elif distance_to_player > attack_range:
 		move_direction = (direction_to_player * 0.7 + random_offset * 0.3).normalized()
 	else:
-		move_direction = random_offset
+		var strafe_direction = Vector2(-direction_to_player.y, direction_to_player.x)
+		if random_offset.dot(strafe_direction) < 0:
+			strafe_direction = -strafe_direction
+		move_direction = (strafe_direction * 0.7 + random_offset * 0.3).normalized()
 
 	position += move_direction * move_speed * delta
 
-	# rotate sprite to face the player
-	rotation = direction_to_player.angle() + deg_to_rad(90)  
+	var target_rotation = direction_to_player.angle() + deg_to_rad(90)
+	rotation = lerp_angle(rotation, target_rotation, delta * 5.0)
 
 	if distance_to_player <= attack_range and can_shoot:
 		shoot_projectile()
 
 
 func pick_random_direction() -> void:
-	random_offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	target_random_offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 
 
-# fire a projectile at the player
 func shoot_projectile() -> void:
 	if not projectile_scene:
 		push_warning("no projectile scene assigned to ranged enemy!")
@@ -70,12 +71,10 @@ func shoot_projectile() -> void:
 
 	projectiles_fired += 1
 
-	# spawn the projectile
 	var projectile = projectile_scene.instantiate()
-	get_parent().add_child(projectile)  # add to game scene
+	get_parent().add_child(projectile)
 	projectile.global_position = global_position
 
-	# make it fly toward the player
 	var direction = (player.global_position - global_position).normalized()
 	if "velocity" in projectile:
 		projectile.velocity = direction * projectile_speed
@@ -83,15 +82,11 @@ func shoot_projectile() -> void:
 		projectile.direction = direction
 		projectile.speed = projectile_speed
 
-	# TODO: play shooting sound/animation
-
-	# check if shot enough to go on cooldown
 	if projectiles_fired >= projectiles_per_cooldown:
 		can_shoot = false
 		projectiles_fired = 0
 		start_attack_cooldown(projectile_cooldown_duration)
 	else:
-		# short delay between shots in the same burst
 		can_shoot = false
 		await get_tree().create_timer(time_between_shots).timeout
 		can_shoot = true

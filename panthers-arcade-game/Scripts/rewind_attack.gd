@@ -28,4 +28,4 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func hide_sprite(hide := true) -> void:
-	$Sprite2D.visible = not hide
+	$AnimatedSprite2D.visible = not hide

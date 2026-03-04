@@ -1,7 +1,71 @@
 [gd_scene format=3 uid="uid://danvchce28jln"]
 
 [ext_resource type="Script" uid="uid://cadbcws2let3c" path="res://Scripts/rewind_attack.gd" id="1_s4sno"]
-[ext_resource type="Texture2D" uid="uid://ccqxbfc6v34mb" path="res://Assets/rewindbubble.png" id="2_rewind_sprite"]
+[ext_resource type="Texture2D" uid="uid://dplosqqo82k3f" path="res://Assets/rewindbubble_spritesheet.png" id="2_rewind_sprite"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw1"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw2"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw3"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw4"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw5"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw6"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw7"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw8"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rewind"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2e2wj"]
 radius = 72.06247
@@ -14,7 +78,9 @@ script = ExtResource("1_s4sno")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=342079411]
 shape = SubResource("CircleShape2D_2e2wj")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=120360257]
-texture = ExtResource("2_rewind_sprite")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rewind")
+animation = &"default"
+autoplay = "default"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

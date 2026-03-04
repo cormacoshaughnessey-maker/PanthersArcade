@@ -1,18 +1,70 @@
 [gd_scene format=3 uid="uid://drpircda8rv5b"]
 
 [ext_resource type="Script" uid="uid://cst5ngktc8ki5" path="res://Scripts/enemy_projectile.gd" id="1_projectile"]
-[ext_resource type="Texture2D" uid="uid://bn6rny7o53e5k" path="res://Assets/arrow.png" id="2_sprite"]
+[ext_resource type="Texture2D" uid="uid://dccn3jpm5dyk7" path="res://Assets/energyorb_spritesheet.png" id="2_sprite"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orb1"]
+atlas = ExtResource("2_sprite")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orb2"]
+atlas = ExtResource("2_sprite")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orb3"]
+atlas = ExtResource("2_sprite")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orb4"]
+atlas = ExtResource("2_sprite")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orb5"]
+atlas = ExtResource("2_sprite")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orb6"]
+atlas = ExtResource("2_sprite")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_orb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orb2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orb6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectShape2D_projectile"]
-size = Vector2(32, 128)
+size = Vector2(24, 24)
 
 [node name="EnemyProjectile" type="Area2D" unique_id=1675078706]
 collision_layer = 16
 collision_mask = 10
 script = ExtResource("1_projectile")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1957256565]
-texture = ExtResource("2_sprite")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_orb")
+animation = &"default"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=415012167]
 shape = SubResource("RectShape2D_projectile")

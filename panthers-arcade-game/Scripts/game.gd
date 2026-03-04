@@ -33,13 +33,61 @@ func _ready():
 	for i in Enemy.WAVE_INITIAL_ENEMY_COUNT:
 		var enemy = melee_scene.instantiate()
 		enemy.position = Vector2(randf_range(Enemy.WAVE_SPAWN_X_MIN, Enemy.WAVE_SPAWN_X_MAX), -80.0)
+		_connect_enemy_signals(enemy)
 		$Enemies.add_child(enemy)
-		enemy.enemy_killed.connect(_on_enemy_killed)
 
- # Adding score when an enemy is killed
+
+func _connect_enemy_signals(enemy: Enemy) -> void:
+	enemy.enemy_killed.connect(_on_enemy_killed)
+	enemy.tree_exited.connect(_on_enemy_removed)
+
+
+func _spawn_wave() -> void:
+	# Spawn y: above the visible screen so enemies walk in from the top
+	var canvas_transform = get_canvas_transform()
+	var screen_top_y = -canvas_transform.origin.y
+	var spawn_y = screen_top_y + Enemy.WAVE_SPAWN_Y_OFFSET
+
+	# Enemy count increases over time, capped at max
+	var enemy_count = mini(Enemy.WAVE_INITIAL_ENEMY_COUNT + Enemy._current_wave - 1, Enemy.WAVE_MAX_ENEMY_COUNT)
+
+	var melee_scene = load("res://Scenes/melee_enemy.tscn")
+	var ranged_scene = load("res://Scenes/ranged_enemy.tscn")
+
+	for i in enemy_count:
+		var enemy_scene: PackedScene
+		# Early waves: melee only. Later waves: mix in ranged enemies.
+		if Enemy._current_wave <= 2:
+			enemy_scene = melee_scene
+		else:
+			enemy_scene = melee_scene if randf() > 0.5 else ranged_scene
+
+		var enemy = enemy_scene.instantiate()
+		var spawn_x = randf_range(Enemy.WAVE_SPAWN_X_MIN, Enemy.WAVE_SPAWN_X_MAX)
+		enemy.position = Vector2(spawn_x, spawn_y + randf_range(-30.0, 30.0))
+		_connect_enemy_signals(enemy)
+		$Enemies.call_deferred("add_child", enemy)
+
+	# Mini boss every X waves
+	if Enemy._current_wave % Enemy.WAVE_MINI_BOSS_EVERY == 0:
+		var boss_scene = load("res://Scenes/mini_boss.tscn")
+		var boss = boss_scene.instantiate()
+		boss.position = Vector2((Enemy.WAVE_SPAWN_X_MIN + Enemy.WAVE_SPAWN_X_MAX) / 2.0, spawn_y - 50.0)
+		_connect_enemy_signals(boss)
+		$Enemies.call_deferred("add_child", boss)
+
 
 func _on_enemy_killed(score_value):
 	score = score + score_value
+
+
+func _on_enemy_removed() -> void:
+	# tree_exited fires after the enemy is fully removed, so the check is accurate
+	for e in get_tree().get_nodes_in_group("enemies"):
+		if e is Enemy and e.is_inside_tree():
+			return
+	Enemy._current_wave += 1
+	_spawn_wave()
 
  # TODO: Add a gameover
 func game_over() -> void:
