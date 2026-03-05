@@ -84,14 +84,12 @@ func _on_enemy_killed(score_value):
 
 
 func _on_enemy_removed() -> void:
-	# tree_exited fires after the enemy is fully removed, so the check is accurate
 	for e in get_tree().get_nodes_in_group("enemies"):
 		if e is Enemy and e.is_inside_tree():
 			return
 	Enemy._current_wave += 1
 	_spawn_wave()
 
- # TODO: Add a gameover
 func game_over() -> void:
 	high_score_game_over.visible = true
 

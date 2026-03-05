@@ -36,11 +36,9 @@ func _physics_process(delta: float) -> void:
 		elif direction != Vector2.ZERO:
 			rotation = direction.angle() + deg_to_rad(-90)
 
-		# clean up projectiles that went way off screen
 		var screen_size = get_viewport_rect().size
 		var canvas_transform = get_canvas_transform()
 		var visible_rect = Rect2(-canvas_transform.origin, screen_size)
-		# add some buffer so projectiles just off screen aren't deleted immediately
 		visible_rect = visible_rect.grow(200)
 		if not visible_rect.has_point(global_position):
 			queue_free()
@@ -48,9 +46,6 @@ func _physics_process(delta: float) -> void:
 
 # when projectile hits something
 func _on_area_entered(area: Area2D) -> void:
-	# if enemy hits a player attack, destroy the projectile
-	#if area.is_in_group("player_attack"):
-		#queue_free()
 	pass
 
 
@@ -63,3 +58,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 func pause(pause:=true) -> void:
 	paused = pause
+	var sprite = get_node_or_null("AnimatedSprite2D")
+	if sprite:
+		if pause:
+			sprite.pause()
+		else:
+			sprite.play(sprite.animation)

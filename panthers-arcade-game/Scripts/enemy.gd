@@ -17,7 +17,8 @@ var invulnerable := false
 var current_health : float
 var player : CharacterBody2D  
 var attack_cooldown := false
-var can_deal_contact_damage := true 
+var can_deal_contact_damage := true
+var is_dead := false
 
 @onready var attack_timer : Timer = get_node_or_null("AttackCooldownTimer")
 @onready var anim_sprite : AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
@@ -55,13 +56,21 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not paused:
 		move_and_attack(delta)
+		clamp_to_screen()
 		check_if_off_screen()
-		#if anim_sprite and anim_sprite.sprite_frames.has_animation("move"):
-			#anim_sprite.play("move")
-	#else:
-		#if anim_sprite and anim_sprite.sprite_frames.has_animation("idle"):
-			#anim_sprite.play("idle")
-	pass
+
+
+func clamp_to_screen() -> void:
+	var canvas_transform = get_canvas_transform()
+	var screen_size = get_viewport_rect().size
+	var left = -canvas_transform.origin.x
+	var right = -canvas_transform.origin.x + screen_size.x
+	var top = -canvas_transform.origin.y
+	var bottom = -canvas_transform.origin.y + screen_size.y
+	global_position.x = clampf(global_position.x, left, right)
+	# Only clamp Y if already on screen (let enemies spawn/enter from above)
+	if global_position.y >= top:
+		global_position.y = clampf(global_position.y, top, bottom)
 
 
 func check_if_off_screen() -> void:
@@ -86,9 +95,35 @@ func take_damage(amount: float) -> void:
 
 
 func die() -> void:
-	# TODO: play death animation/particle effect
+	if is_dead:
+		return
+	is_dead = true
 	enemy_killed.emit(score_value)
-	queue_free()  
+	queue_free()
+
+var _pre_attack_animation : String = ""
+
+func play_attack_animation(anim_name: String = "attack") -> void:
+	if anim_sprite and anim_sprite.sprite_frames.has_animation(anim_name):
+		var current := anim_sprite.animation as String
+		if current == anim_name:
+			anim_sprite.frame = 0
+			anim_sprite.play(anim_name)
+			if paused:
+				anim_sprite.pause()
+			return
+		if not current.begins_with("attack"):
+			_pre_attack_animation = current
+		anim_sprite.play(anim_name)
+		if paused:
+			anim_sprite.pause()
+		anim_sprite.animation_finished.connect(
+			func():
+				if is_instance_valid(self) and anim_sprite and _pre_attack_animation != "":
+					anim_sprite.play(_pre_attack_animation),
+			CONNECT_ONE_SHOT
+		)
+
 
 func start_attack_cooldown(cooldown_time: float) -> void:
 	attack_cooldown = true
@@ -109,21 +144,16 @@ func _on_area_entered(area: Area2D) -> void:
 		take_damage(area.damage if "damage" in area else 10)
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and body is Player:
-		if body.has_method("take_damage"):
-			body.take_damage(damage)
-		if body.has_method("lose_life"):
-			body.lose_life()
-		#can_deal_contact_damage = false
-		#await get_tree().create_timer(contact_damage_cooldown).timeout
-		#can_deal_contact_damage = true
+func _on_body_entered(_body: Node2D) -> void:
+	pass
 
 
 func pause(pause:=true) -> void:
 	paused = pause
-	attack_timer.paused = pause
-	if pause:
-		anim_sprite.pause()
-	else:
-		anim_sprite.play()
+	if attack_timer:
+		attack_timer.paused = pause
+	if anim_sprite:
+		if pause:
+			anim_sprite.pause()
+		else:
+			anim_sprite.play(anim_sprite.animation)

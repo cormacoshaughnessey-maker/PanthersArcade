@@ -82,3 +82,7 @@ func _process(delta: float) -> void:
 				else:
 					current3 = current3 + 1
 				letters[letter_selected].text = alph[current3]
+		if(Input.is_action_just_pressed("rewind")):
+			var player_name = alph[current1] + alph[current2] + alph[current3]
+			print("High score confirmed: ", player_name)
+			get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")

@@ -69,6 +69,7 @@ func shoot_projectile() -> void:
 		push_warning("no projectile scene assigned to ranged enemy!")
 		return
 
+	play_attack_animation()
 	projectiles_fired += 1
 
 	var projectile = projectile_scene.instantiate()

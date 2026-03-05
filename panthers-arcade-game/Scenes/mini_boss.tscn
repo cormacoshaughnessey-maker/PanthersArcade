@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://8juapsflucfb" path="res://Scripts/mini_boss.gd" id="1_boss"]
 [ext_resource type="Texture2D" uid="uid://d0rp0x3ghtw2d" path="res://Assets/boss_spritesheet.png" id="2_boss_sprite"]
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
+[ext_resource type="Texture2D" path="res://Assets/boss_attack_ranged_spritesheet.png" id="4_boss_attack"]
+[ext_resource type="Texture2D" path="res://Assets/boss_attack_melee_spritesheet.png" id="5_boss_melee"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glow1"]
 atlas = ExtResource("2_boss_sprite")
@@ -19,6 +21,46 @@ region = Rect2(576, 0, 288, 288)
 [sub_resource type="AtlasTexture" id="AtlasTexture_glow4"]
 atlas = ExtResource("2_boss_sprite")
 region = Rect2(864, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(0, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk2"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(288, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk3"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(576, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk4"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(864, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk5"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(1152, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_matk1"]
+atlas = ExtResource("5_boss_melee")
+region = Rect2(0, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_matk2"]
+atlas = ExtResource("5_boss_melee")
+region = Rect2(288, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_matk3"]
+atlas = ExtResource("5_boss_melee")
+region = Rect2(576, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_matk4"]
+atlas = ExtResource("5_boss_melee")
+region = Rect2(864, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_matk5"]
+atlas = ExtResource("5_boss_melee")
+region = Rect2(1152, 0, 288, 288)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_boss"]
 animations = [{
@@ -38,6 +80,46 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk5")
+}],
+"loop": false,
+"name": &"attack_ranged",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_matk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_matk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_matk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_matk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_matk5")
+}],
+"loop": false,
+"name": &"attack_melee",
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]

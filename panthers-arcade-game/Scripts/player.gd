@@ -165,9 +165,7 @@ func lose_life(damage := 1) -> void:
 	if not rewinding and not is_invincible:
 		game_node.lives -= damage
 		if game_node.lives <= 0:
-			# game over man, game over
 			player_died.emit()
-			# TODO: play death animation, show game over screen
 			print("player is dead! game over!")
 			game_node.game_over()
 		else:
