@@ -3,72 +3,79 @@
 [ext_resource type="Script" uid="uid://cadbcws2let3c" path="res://Scripts/rewind_attack.gd" id="1_s4sno"]
 [ext_resource type="Texture2D" uid="uid://dplosqqo82k3f" path="res://Assets/rewindbubble_spritesheet.png" id="2_rewind_sprite"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_2e2wj"]
+radius = 99.0202
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2108x"]
 atlas = ExtResource("2_rewind_sprite")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uttt3"]
 atlas = ExtResource("2_rewind_sprite")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk1gm"]
 atlas = ExtResource("2_rewind_sprite")
 region = Rect2(256, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ef6ip"]
 atlas = ExtResource("2_rewind_sprite")
 region = Rect2(384, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_euypr"]
 atlas = ExtResource("2_rewind_sprite")
 region = Rect2(512, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jfls"]
 atlas = ExtResource("2_rewind_sprite")
 region = Rect2(640, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iybj3"]
 atlas = ExtResource("2_rewind_sprite")
 region = Rect2(768, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcie1"]
 atlas = ExtResource("2_rewind_sprite")
 region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wog32"]
+atlas = ExtResource("2_rewind_sprite")
+region = Rect2(1024, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rewind"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rw1")
+"texture": SubResource("AtlasTexture_2108x")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rw2")
+"texture": SubResource("AtlasTexture_uttt3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rw3")
+"texture": SubResource("AtlasTexture_sk1gm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rw4")
+"texture": SubResource("AtlasTexture_ef6ip")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rw5")
+"texture": SubResource("AtlasTexture_euypr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rw6")
+"texture": SubResource("AtlasTexture_5jfls")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rw7")
+"texture": SubResource("AtlasTexture_iybj3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rw8")
+"texture": SubResource("AtlasTexture_pcie1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wog32")
 }],
 "loop": false,
 "name": &"default",
 "speed": 16.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2e2wj"]
-radius = 72.06247
 
 [node name="RewindAttack" type="Area2D" unique_id=1341129594 groups=["player_attacks"]]
 collision_layer = 8
@@ -78,9 +85,11 @@ script = ExtResource("1_s4sno")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=342079411]
 shape = SubResource("CircleShape2D_2e2wj")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1505013446]
 sprite_frames = SubResource("SpriteFrames_rewind")
-animation = &"default"
 autoplay = "default"
+frame = 8
+frame_progress = 1.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

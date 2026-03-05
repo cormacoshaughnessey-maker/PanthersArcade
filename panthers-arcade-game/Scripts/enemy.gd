@@ -56,11 +56,12 @@ func _physics_process(delta: float) -> void:
 	if not paused:
 		move_and_attack(delta)
 		check_if_off_screen()
-		if anim_sprite and anim_sprite.sprite_frames.has_animation("move"):
-			anim_sprite.play("move")
-	else:
-		if anim_sprite and anim_sprite.sprite_frames.has_animation("idle"):
-			anim_sprite.play("idle")
+		#if anim_sprite and anim_sprite.sprite_frames.has_animation("move"):
+			#anim_sprite.play("move")
+	#else:
+		#if anim_sprite and anim_sprite.sprite_frames.has_animation("idle"):
+			#anim_sprite.play("idle")
+	pass
 
 
 func check_if_off_screen() -> void:
@@ -122,3 +123,7 @@ func _on_body_entered(body: Node2D) -> void:
 func pause(pause:=true) -> void:
 	paused = pause
 	attack_timer.paused = pause
+	if pause:
+		anim_sprite.pause()
+	else:
+		anim_sprite.play()

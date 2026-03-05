@@ -15,10 +15,9 @@ func _ready() -> void:
 func _enter_tree() -> void:
 	hitbox = $CollisionShape2D
 	hitbox.disabled = false
-	await get_tree().create_timer(0.3).timeout
-	hitbox.disabled = true
-	await get_tree().create_timer(0.2).timeout
-	self.queue_free()
+	#await get_tree().create_timer(0.3).timeout
+	#hitbox.disabled = true
+	#await get_tree().create_timer(0.2).timeout
 
 
 # INFO: When something enters the area, check if it's an enemy, and if so, damage it
@@ -29,3 +28,7 @@ func _on_area_entered(area: Area2D) -> void:
 
 func hide_sprite(hide := true) -> void:
 	$AnimatedSprite2D.visible = not hide
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	self.queue_free()

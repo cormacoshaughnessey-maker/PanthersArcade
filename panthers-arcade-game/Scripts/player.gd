@@ -108,7 +108,7 @@ func rewind() -> void:
 
  # INFO: Function which spawns all the attacks from rewinding, then clears the attack_positions array
 func rewind_attacks() -> void:
-	for i in range(0, attack_positions.size(),15):
+	for i in range(0, attack_positions.size()):
 		if i % 15 == 0:
 			spawn_attack(attack_positions[i])
 		else:

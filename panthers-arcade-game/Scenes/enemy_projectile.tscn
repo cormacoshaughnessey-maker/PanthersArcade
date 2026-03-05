@@ -3,68 +3,68 @@
 [ext_resource type="Script" uid="uid://cst5ngktc8ki5" path="res://Scripts/enemy_projectile.gd" id="1_projectile"]
 [ext_resource type="Texture2D" uid="uid://dccn3jpm5dyk7" path="res://Assets/energyorb_spritesheet.png" id="2_sprite"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_orb1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibebl"]
 atlas = ExtResource("2_sprite")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 112, 112)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_orb2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjudp"]
 atlas = ExtResource("2_sprite")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(112, 0, 112, 112)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_orb3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_skh11"]
 atlas = ExtResource("2_sprite")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(224, 0, 112, 112)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_orb4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wtt3"]
 atlas = ExtResource("2_sprite")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(336, 0, 112, 112)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_orb5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg26t"]
 atlas = ExtResource("2_sprite")
-region = Rect2(128, 0, 32, 32)
+region = Rect2(448, 0, 112, 112)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_orb6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4dlx"]
 atlas = ExtResource("2_sprite")
-region = Rect2(160, 0, 32, 32)
+region = Rect2(560, 0, 112, 112)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_orb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_orb1")
+"texture": SubResource("AtlasTexture_ibebl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_orb2")
+"texture": SubResource("AtlasTexture_gjudp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_orb3")
+"texture": SubResource("AtlasTexture_skh11")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_orb4")
+"texture": SubResource("AtlasTexture_6wtt3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_orb5")
+"texture": SubResource("AtlasTexture_lg26t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_orb6")
+"texture": SubResource("AtlasTexture_d4dlx")
 }],
 "loop": true,
 "name": &"default",
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectShape2D_projectile"]
-size = Vector2(24, 24)
+[sub_resource type="CircleShape2D" id="CircleShape2D_iut4j"]
+radius = 26.0
 
 [node name="EnemyProjectile" type="Area2D" unique_id=1675078706]
 collision_layer = 16
 collision_mask = 10
 script = ExtResource("1_projectile")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=756522870]
 sprite_frames = SubResource("SpriteFrames_orb")
-animation = &"default"
 autoplay = "default"
+frame_progress = 0.5249741
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=415012167]
-shape = SubResource("RectShape2D_projectile")
+shape = SubResource("CircleShape2D_iut4j")
