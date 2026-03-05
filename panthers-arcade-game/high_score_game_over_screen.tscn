@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cvc32er767kok"]
+
+[ext_resource type="Script" uid="uid://dollvvlo4tmjg" path="res://high_score_game_over_screen.gd" id="1_g6t4p"]
+
+[node name="HighScore" type="Control" unique_id=438450902]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g6t4p")
+
+[node name="Background" type="ColorRect" parent="." unique_id=213445662]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.012, 0.235, 1)
+
+[node name="Subtitle" type="Label" parent="." unique_id=894074343]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 448.0
+offset_right = 872.0
+offset_bottom = 520.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "Save your high score!
+Select your name:"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="." unique_id=1776484894]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 96.0
+offset_right = 988.0
+offset_bottom = 423.0
+theme_override_colors/font_color = Color(1, 0.361, 1, 1)
+theme_override_font_sizes/font_size = 144
+text = "IMPRESSIVE."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Letter1" type="Label" parent="." unique_id=485417441]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 608.0
+offset_right = 376.0
+offset_bottom = 896.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 256
+text = "A"
+
+[node name="Letter2" type="Label" parent="." unique_id=408868881]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 608.0
+offset_right = 624.0
+offset_bottom = 896.0
+theme_override_font_sizes/font_size = 256
+text = "A"
+
+[node name="Letter3" type="Label" parent="." unique_id=197343412]
+layout_mode = 0
+offset_left = 712.0
+offset_top = 608.0
+offset_right = 872.0
+offset_bottom = 912.0
+theme_override_font_sizes/font_size = 256
+text = "A"
+
+[node name="Instructions" type="Label" parent="." unique_id=284094244]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 1000.0
+offset_right = 864.0
+offset_bottom = 1320.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "Left and right to select
+a letter, up and down to
+change letter, rewind
+to confirm."
+horizontal_alignment = 1

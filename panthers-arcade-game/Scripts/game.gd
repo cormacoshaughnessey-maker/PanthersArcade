@@ -3,6 +3,7 @@ extends Node2D
 @onready var health_ui := $UI/HealthUI
 @onready var score_ui := $UI/ScoreUI
 @onready var rewind_ui := $UI/RewindUI
+@onready var high_score_game_over := $UI/HighScore
 @onready var player := $Player
 @onready var rewind_cooldown_timer := $Player/RewindCooldownTimer
 @onready var background := $Background
@@ -27,6 +28,7 @@ var score := 0:
 func _ready():
 	lives = default_lives
 	score = 0
+	high_score_game_over.visible = false
 	# Spawn wave 1
 	Enemy._current_wave = 1
 	var melee_scene = load("res://Scenes/melee_enemy.tscn")
@@ -91,7 +93,7 @@ func _on_enemy_removed() -> void:
 
  # TODO: Add a gameover
 func game_over() -> void:
-	pass
+	high_score_game_over.visible = true
 
 
  # Fill the rewind bar, and set its transparency
