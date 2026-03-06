@@ -24,13 +24,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not paused:
-		# move the projectile
 		if velocity != Vector2.ZERO:
 			position += velocity * delta
 		elif direction != Vector2.ZERO:
 			position += direction * speed * delta
-
-		# rotate to face direction of travel
 		if velocity != Vector2.ZERO:
 			rotation = velocity.angle() + deg_to_rad(-90)
 		elif direction != Vector2.ZERO:
@@ -43,18 +40,13 @@ func _physics_process(delta: float) -> void:
 		if not visible_rect.has_point(global_position):
 			queue_free()
 
-
-# when projectile hits something
 func _on_area_entered(area: Area2D) -> void:
 	pass
 
-
-# when projectile hits the player
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("lose_life") and body is Player:
 		body.lose_life()
-		queue_free()  # destroy projectile after hitting
-
+		queue_free() 
 
 func pause(pause:=true) -> void:
 	paused = pause

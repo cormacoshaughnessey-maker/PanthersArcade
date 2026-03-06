@@ -129,7 +129,7 @@ size = Vector2(240, 256)
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_boss")
-screen_top_offset = 200.0
+screen_top_offset = 300.0
 attack_pattern_cooldown = 4.0
 projectile_scene = ExtResource("3_projectile")
 

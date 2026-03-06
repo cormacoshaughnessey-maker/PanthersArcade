@@ -45,12 +45,10 @@ func _connect_enemy_signals(enemy: Enemy) -> void:
 
 
 func _spawn_wave() -> void:
-	# Spawn y: above the visible screen so enemies walk in from the top
 	var canvas_transform = get_canvas_transform()
 	var screen_top_y = -canvas_transform.origin.y
 	var spawn_y = screen_top_y + Enemy.WAVE_SPAWN_Y_OFFSET
 
-	# Enemy count increases over time, capped at max
 	var enemy_count = mini(Enemy.WAVE_INITIAL_ENEMY_COUNT + Enemy._current_wave - 1, Enemy.WAVE_MAX_ENEMY_COUNT)
 
 	var melee_scene = load("res://Scenes/melee_enemy.tscn")
@@ -58,7 +56,6 @@ func _spawn_wave() -> void:
 
 	for i in enemy_count:
 		var enemy_scene: PackedScene
-		# Early waves: melee only. Later waves: mix in ranged enemies.
 		if Enemy._current_wave <= 2:
 			enemy_scene = melee_scene
 		else:
@@ -70,7 +67,6 @@ func _spawn_wave() -> void:
 		_connect_enemy_signals(enemy)
 		$Enemies.call_deferred("add_child", enemy)
 
-	# Mini boss every X waves
 	if Enemy._current_wave % Enemy.WAVE_MINI_BOSS_EVERY == 0:
 		var boss_scene = load("res://Scenes/mini_boss.tscn")
 		var boss = boss_scene.instantiate()
@@ -93,8 +89,6 @@ func _on_enemy_removed() -> void:
 func game_over() -> void:
 	high_score_game_over.visible = true
 
-
- # Fill the rewind bar, and set its transparency
 func _physics_process(delta: float) -> void:
 	rewind_ui.fill_rewind_bar(player.rewind_data_length()/2)
 	rewind_cooldown_percentage = (1 - rewind_cooldown_timer.time_left/rewind_cooldown_timer.wait_time)
@@ -102,7 +96,6 @@ func _physics_process(delta: float) -> void:
 		rewind_ui.modulate = Color(1.0, 1.0, 1.0, rewind_cooldown_percentage/2)
 	else:
 		rewind_ui.modulate = Color(1.0, 1.0, 1.0, 1.0)
-
 
 func pause_enemies(pause:=true) -> void:
 	for i in get_tree().get_nodes_in_group("pausable"):

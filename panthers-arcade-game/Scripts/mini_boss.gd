@@ -2,7 +2,7 @@ extends Enemy
 
 class_name MiniBoss
 
-@export var screen_top_offset := 100.0
+@export var screen_top_offset := 380.0
 @export var horizontal_speed := 200.0
 @export var attack_pattern_cooldown := 5.0
 @export var projectile_speed := 350.0
@@ -163,11 +163,6 @@ func melee_dive_attack() -> void:
 			t = 1.0 - pow(1.0 - t, 3.0)
 			global_position = start_pos.lerp(target_pos, t)
 		await get_tree().process_frame
-
-	var distance_to_player = global_position.distance_to(player.global_position)
-	if distance_to_player <= melee_range:
-		if player.has_method("lose_life"):
-			player.lose_life()
 
 	# Hold the arm-out frame while paused at player
 	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_melee"):

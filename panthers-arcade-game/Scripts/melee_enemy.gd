@@ -52,10 +52,6 @@ func attack() -> void:
 	play_attack_animation()
 	attacks_done += 1
 
-	var distance_to_player = global_position.distance_to(player.global_position)
-	if distance_to_player <= attack_range and player.has_method("lose_life"):
-		player.lose_life()
-
 	if attacks_done >= attacks_per_cooldown:
 		can_attack = false
 		attacks_done = 0

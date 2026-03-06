@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		clamp_to_screen()
 		check_if_off_screen()
 
-
+#keeping the enemies on screen
 func clamp_to_screen() -> void:
 	var canvas_transform = get_canvas_transform()
 	var screen_size = get_viewport_rect().size
@@ -67,10 +67,17 @@ func clamp_to_screen() -> void:
 	var right = -canvas_transform.origin.x + screen_size.x
 	var top = -canvas_transform.origin.y
 	var bottom = -canvas_transform.origin.y + screen_size.y
-	global_position.x = clampf(global_position.x, left, right)
-	# Only clamp Y if already on screen (let enemies spawn/enter from above)
+
+	var half_size := Vector2.ZERO
+	var col_shape = get_node_or_null("CollisionShape2D")
+	if col_shape and col_shape.shape is RectangleShape2D:
+		half_size = col_shape.shape.size / 2.0
+	elif col_shape and col_shape.shape is CircleShape2D:
+		half_size = Vector2(col_shape.shape.radius, col_shape.shape.radius)
+
+	global_position.x = clampf(global_position.x, left + half_size.x, right - half_size.x)
 	if global_position.y >= top:
-		global_position.y = clampf(global_position.y, top, bottom)
+		global_position.y = clampf(global_position.y, top + half_size.y, bottom - half_size.y)
 
 
 func check_if_off_screen() -> void:
@@ -91,8 +98,6 @@ func take_damage(amount: float) -> void:
 		invulnerable = false
 	if current_health <= 0:
 		die()
-
-
 
 func die() -> void:
 	if is_dead:
@@ -144,8 +149,12 @@ func _on_area_entered(area: Area2D) -> void:
 		take_damage(area.damage if "damage" in area else 10)
 
 
-func _on_body_entered(_body: Node2D) -> void:
-	pass
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and can_deal_contact_damage and body.has_method("lose_life"):
+		body.lose_life()
+		can_deal_contact_damage = false
+		await get_tree().create_timer(contact_damage_cooldown).timeout
+		can_deal_contact_damage = true
 
 
 func pause(pause:=true) -> void:
