@@ -19,7 +19,7 @@ func _ready() -> void:
 	current3 = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if(is_visible()):
 		var count = 0
 		for i in letters:
@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 			if(count == 2):
 				i.text = alph[current3]
 			if(letter_selected == count):
-				letters[letter_selected].add_theme_color_override("font_color", Color(255, 255, 0))
+				letters[letter_selected].add_theme_color_override("font_color", Color(0.039, 1.0, 0.322, 1.0))
 			else:
 				i.add_theme_color_override("font_color", Color(255, 255, 255))
 			count = count + 1

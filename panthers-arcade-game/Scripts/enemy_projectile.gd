@@ -19,8 +19,8 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
 
-	await get_tree().create_timer(lifetime).timeout
-	queue_free()
+	#await get_tree().create_timer(lifetime).timeout
+	#queue_free()
 
 func _physics_process(delta: float) -> void:
 	if not paused:
@@ -45,22 +45,22 @@ func _physics_process(delta: float) -> void:
 
 
 # when projectile hits something
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	pass
 
 
 # when projectile hits the player
 func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("lose_life") and body is Player:
+	if body.has_method("lose_life") and body is Player and not paused:
 		body.lose_life()
 		queue_free()  # destroy projectile after hitting
 
 
-func pause(pause:=true) -> void:
-	paused = pause
+func pause(pausing:=true) -> void:
+	paused = pausing
 	var sprite = get_node_or_null("AnimatedSprite2D")
 	if sprite:
-		if pause:
+		if pausing:
 			sprite.pause()
 		else:
 			sprite.play(sprite.animation)

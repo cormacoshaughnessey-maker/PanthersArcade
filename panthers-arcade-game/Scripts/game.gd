@@ -84,9 +84,11 @@ func _on_enemy_killed(score_value):
 
 
 func _on_enemy_removed() -> void:
-	for e in get_tree().get_nodes_in_group("enemies"):
-		if e is Enemy and e.is_inside_tree():
-			return
+	if get_tree().get_node_count_in_group("enemies") > 0:
+		return
+	#for e in get_tree().get_nodes_in_group("enemies"):
+		#if e is Enemy and e.is_inside_tree():
+			#return
 	Enemy._current_wave += 1
 	_spawn_wave()
 
@@ -95,7 +97,7 @@ func game_over() -> void:
 
 
  # Fill the rewind bar, and set its transparency
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	rewind_ui.fill_rewind_bar(player.rewind_data_length()/2)
 	rewind_cooldown_percentage = (1 - rewind_cooldown_timer.time_left/rewind_cooldown_timer.wait_time)
 	if rewind_cooldown_percentage != 1:

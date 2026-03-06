@@ -148,12 +148,12 @@ func _on_body_entered(_body: Node2D) -> void:
 	pass
 
 
-func pause(pause:=true) -> void:
-	paused = pause
+func pause(pausing:=true) -> void:
+	paused = pausing
 	if attack_timer:
-		attack_timer.paused = pause
+		attack_timer.paused = pausing
 	if anim_sprite:
-		if pause:
+		if pausing:
 			anim_sprite.pause()
 		else:
 			anim_sprite.play(anim_sprite.animation)
