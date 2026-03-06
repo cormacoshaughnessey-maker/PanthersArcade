@@ -109,3 +109,60 @@ func _physics_process(_delta: float) -> void:
 func pause_enemies(pause:=true) -> void:
 	for i in get_tree().get_nodes_in_group("pausable"):
 		i.pause(pause)
+
+# save_score() is called when the player dies and the game is over
+# load_scores() is called in the _ready() function
+#var high_score_list : Dictionary
+#var high_score_player : String
+#These are two missing variables
+#region Save and Load
+#func save_score(_points:=0) -> void:
+	#if score>high_score:
+		#high_score_player = player_name
+		#high_score = score
+	#save_game()
+
+
+#func load_scores() -> void:
+	#load_game()
+
+
+#func save() -> Dictionary:
+	#if high_score_list.get_or_add(player_name,0) <= score:
+		#high_score_list[player_name] = score
+	#var save_dict := high_score_list
+	#return save_dict
+
+
+#func save_game():
+	#var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	#var node_data = self.call("save")
+		## # JSON provides a static method to serialized JSON string.
+	#var json_string = JSON.stringify(node_data)
+		## # Store the save dictionary as a new line in the save file.
+	#save_file.store_line(json_string)
+
+
+#func load_game():
+	#if not FileAccess.file_exists("user://savegame.save"):
+		#return # Error! We don't have a save to load.
+	#var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	#while save_file.get_position() < save_file.get_length():
+		#var json_string = save_file.get_line()
+		#var json = JSON.new()
+		#var parse_result = json.parse(json_string)
+		#if not parse_result == OK:
+			#print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			#continue
+		#var node_data = json.data
+		#high_score = 0
+		#for i in node_data.keys():
+			#high_score_list[i] = node_data[i]
+			#if high_score_list[i]>high_score:
+				#high_score_player = i
+				#high_score = high_score_list[i]
+
+
+#func _exit_tree() -> void:
+	#save_score()
+#endregion

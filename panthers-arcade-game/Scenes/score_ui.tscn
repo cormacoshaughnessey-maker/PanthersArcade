@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://pckc6srjmu4b"]
 
-[ext_resource type="Script" uid="uid://dbk6odbc8xvr7" path="res://score_ui.gd" id="1_iqr5w"]
+[ext_resource type="Script" uid="uid://dbk6odbc8xvr7" path="res://Scripts/score_ui.gd" id="1_iqr5w"]
 
 [node name="ScoreUI" type="Control" unique_id=2045399400]
 layout_mode = 3

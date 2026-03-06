@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cvc32er767kok"]
 
-[ext_resource type="Script" uid="uid://dollvvlo4tmjg" path="res://high_score_game_over_screen.gd" id="1_g6t4p"]
+[ext_resource type="Script" uid="uid://dollvvlo4tmjg" path="res://Scripts/high_score_game_over_screen.gd" id="1_g6t4p"]
 
 [node name="HighScore" type="Control" unique_id=438450902]
 layout_mode = 3
