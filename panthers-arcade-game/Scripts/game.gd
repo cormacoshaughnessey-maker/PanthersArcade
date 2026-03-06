@@ -7,7 +7,13 @@ extends Node2D
 @onready var player := $Player
 @onready var rewind_cooldown_timer := $Player/RewindCooldownTimer
 @onready var background := $Background
+@onready var score_multiplier_timer := $ScoreMultiplierTimer
 var rewind_cooldown_percentage := 1.0
+
+var min_score_multiplier := 1.0
+var score_multiplier_increment := 0.2
+var max_score_multiplier := 2.0
+var score_multiplier := min_score_multiplier
 
  # INFO: Variable for the lives the player has remaining, with an accompanying set function which updates the UI
 var lives := 3:
@@ -25,7 +31,7 @@ var score := 0:
 		score_ui.score = score
 
  # INFO: Function run only once when the game starts running
-func _ready():
+func _ready() -> void:
 	lives = default_lives
 	score = 0
 	high_score_game_over.visible = false
@@ -79,18 +85,29 @@ func _spawn_wave() -> void:
 		$Enemies.call_deferred("add_child", boss)
 
 
-func _on_enemy_killed(score_value):
-	score = score + score_value
+func _on_enemy_killed(score_value) -> void:
+	score = score + score_value*score_multiplier
+	score_multiplier += score_multiplier_increment
+	if score_multiplier >= max_score_multiplier:
+		score_multiplier = max_score_multiplier
+	score_multiplier_timer.start()
+	color_multiplier_bar()
+
+
+func _on_score_multiplier_timer_timeout() -> void:
+	score_multiplier = min_score_multiplier
+	pass # Replace with function body.
 
 
 func _on_enemy_removed() -> void:
-	if get_tree().get_node_count_in_group("enemies") > 0:
+	if (get_tree() != null) and get_tree().get_node_count_in_group("enemies") > 0:
 		return
 	#for e in get_tree().get_nodes_in_group("enemies"):
 		#if e is Enemy and e.is_inside_tree():
 			#return
 	Enemy._current_wave += 1
 	_spawn_wave()
+
 
 func game_over() -> void:
 	high_score_game_over.visible = true
@@ -104,6 +121,16 @@ func _physics_process(_delta: float) -> void:
 		rewind_ui.modulate = Color(1.0, 1.0, 1.0, rewind_cooldown_percentage/2)
 	else:
 		rewind_ui.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	fill_multiplier_bar(score_multiplier_timer.time_left)
+
+
+func fill_multiplier_bar(time_left) -> void:
+	score_ui.fill_cooldown_bar(time_left, score_multiplier)
+	color_multiplier_bar()
+
+
+func color_multiplier_bar() -> void:
+	score_ui.color_multiplier_bar(score_multiplier)
 
 
 func pause_enemies(pause:=true) -> void:

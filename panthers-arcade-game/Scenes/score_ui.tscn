@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://pckc6srjmu4b"]
 
 [ext_resource type="Script" uid="uid://dbk6odbc8xvr7" path="res://Scripts/score_ui.gd" id="1_iqr5w"]
+[ext_resource type="PackedScene" uid="uid://cxwar8boohxcd" path="res://Scenes/cooldown_ui_bar.tscn" id="2_7kmc4"]
 
 [node name="ScoreUI" type="Control" unique_id=2045399400]
 layout_mode = 3
@@ -19,3 +20,79 @@ offset_right = 1060.0
 offset_bottom = 92.0
 theme_override_font_sizes/font_size = 64
 text = "0000000000"
+
+[node name="ScoreMultiplier" type="Label" parent="." unique_id=1002931654]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 20.0
+offset_right = 482.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 64
+
+[node name="MultiplierCooldownBar" type="HBoxContainer" parent="." unique_id=261886153]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 20.0
+offset_right = 720.0
+offset_bottom = 92.0
+alignment = 2
+
+[node name="RewindUIBar" parent="MultiplierCooldownBar" unique_id=928836512 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar2" parent="MultiplierCooldownBar" unique_id=1765016145 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar3" parent="MultiplierCooldownBar" unique_id=1113459328 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar4" parent="MultiplierCooldownBar" unique_id=1404694227 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar5" parent="MultiplierCooldownBar" unique_id=1610097974 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar6" parent="MultiplierCooldownBar" unique_id=973950803 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar7" parent="MultiplierCooldownBar" unique_id=1039554126 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar8" parent="MultiplierCooldownBar" unique_id=347243174 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar9" parent="MultiplierCooldownBar" unique_id=1719743512 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar10" parent="MultiplierCooldownBar" unique_id=163812561 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar11" parent="MultiplierCooldownBar" unique_id=526610589 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar12" parent="MultiplierCooldownBar" unique_id=923414931 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar13" parent="MultiplierCooldownBar" unique_id=1005775633 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar14" parent="MultiplierCooldownBar" unique_id=1355127388 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar15" parent="MultiplierCooldownBar" unique_id=1544700344 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar16" parent="MultiplierCooldownBar" unique_id=2124977164 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar17" parent="MultiplierCooldownBar" unique_id=1039917745 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar18" parent="MultiplierCooldownBar" unique_id=505199395 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar19" parent="MultiplierCooldownBar" unique_id=1434990940 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
+
+[node name="RewindUIBar20" parent="MultiplierCooldownBar" unique_id=1596363713 instance=ExtResource("2_7kmc4")]
+layout_mode = 2
