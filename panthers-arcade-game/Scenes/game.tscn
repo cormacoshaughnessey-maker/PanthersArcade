@@ -4,9 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://ca1svep8rjsyl" path="res://Scenes/player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://clsccskxsea5v" path="res://Scenes/background.tscn" id="2_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://c0482jq0w4hj8" path="res://Scenes/rewind_ui.tscn" id="3_v158k"]
-[ext_resource type="PackedScene" uid="uid://pckc6srjmu4b" path="res://Scenes/score_ui.tscn" id="4_i6g32"]
-[ext_resource type="PackedScene" uid="uid://cvc32er767kok" path="res://Scenes/high_score_game_over_screen.tscn" id="5_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://pckc6srjmu4b" path="res://Scenes/score_ui.tscn" id="4_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://bojuqgkgr8idp" path="res://Scenes/health_ui.tscn" id="5_ui"]
+[ext_resource type="PackedScene" uid="uid://cvc32er767kok" path="res://Scenes/high_score_game_over_screen.tscn" id="5_v158k"]
+[ext_resource type="PackedScene" uid="uid://gfdtqlc0b57g" path="res://Scenes/high_score_display.tscn" id="6_v158k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wowpa"]
 
@@ -41,9 +42,11 @@ offset_bottom = 20.0
 
 [node name="RewindUI" parent="UI" unique_id=1882639345 instance=ExtResource("3_v158k")]
 
-[node name="ScoreUI" parent="UI" unique_id=2045399400 instance=ExtResource("4_i6g32")]
+[node name="ScoreUI" parent="UI" unique_id=2045399400 instance=ExtResource("4_1l0tm")]
 
-[node name="HighScore" parent="UI" unique_id=438450902 instance=ExtResource("5_1l0tm")]
+[node name="HighScore" parent="UI" unique_id=438450902 instance=ExtResource("5_v158k")]
+
+[node name="HighScoreDisplay" parent="UI" unique_id=2068393492 instance=ExtResource("6_v158k")]
 
 [node name="Background" parent="." unique_id=1810696300 instance=ExtResource("2_wrm1d")]
 z_index = -1

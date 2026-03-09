@@ -4,6 +4,7 @@ extends Node2D
 @onready var score_ui := $UI/ScoreUI
 @onready var rewind_ui := $UI/RewindUI
 @onready var high_score_game_over := $UI/HighScore
+@onready var high_score_display := $UI/HighScoreDisplay
 @onready var player := $Player
 @onready var rewind_cooldown_timer := $Player/RewindCooldownTimer
 @onready var background := $Background
@@ -29,6 +30,8 @@ func _ready():
 	lives = default_lives
 	score = 0
 	high_score_game_over.visible = false
+	high_score_display.visible = false
+	load_scores()
 	# Spawn wave 1
 	Enemy._current_wave = 1
 	var melee_scene = load("res://Scenes/melee_enemy.tscn")
@@ -84,6 +87,8 @@ func _on_enemy_killed(score_value):
 
 
 func _on_enemy_removed() -> void:
+	if !is_inside_tree():
+		return
 	if get_tree().get_node_count_in_group("enemies") > 0:
 		return
 	#for e in get_tree().get_nodes_in_group("enemies"):
@@ -93,6 +98,7 @@ func _on_enemy_removed() -> void:
 	_spawn_wave()
 
 func game_over() -> void:
+	player.set_physics_process(false)
 	high_score_game_over.visible = true
 
 
@@ -110,59 +116,59 @@ func pause_enemies(pause:=true) -> void:
 	for i in get_tree().get_nodes_in_group("pausable"):
 		i.pause(pause)
 
-# save_score() is called when the player dies and the game is over
-# load_scores() is called in the _ready() function
-#var high_score_list : Dictionary
-#var high_score_player : String
+#save_score() is called when the player dies and the game is over
+#load_scores() is called in the _ready() function
+var high_score_list : Dictionary
+var high_score_player : String
 #These are two missing variables
 #region Save and Load
-#func save_score(_points:=0) -> void:
+func save_score() -> void:
 	#if score>high_score:
 		#high_score_player = player_name
 		#high_score = score
-	#save_game()
+	save_game()
 
 
-#func load_scores() -> void:
-	#load_game()
+func load_scores() -> void:
+	load_game()
 
 
-#func save() -> Dictionary:
-	#if high_score_list.get_or_add(player_name,0) <= score:
-		#high_score_list[player_name] = score
-	#var save_dict := high_score_list
-	#return save_dict
+func save() -> Dictionary:
+	if high_score_list.get_or_add(high_score_game_over.player_name,0) <= score_ui.score:
+		high_score_list[high_score_game_over.player_name] = score_ui.score
+	var save_dict := high_score_list
+	return save_dict
 
 
-#func save_game():
-	#var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
-	#var node_data = self.call("save")
-		## # JSON provides a static method to serialized JSON string.
-	#var json_string = JSON.stringify(node_data)
-		## # Store the save dictionary as a new line in the save file.
-	#save_file.store_line(json_string)
+func save_game():
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	var node_data = self.call("save")
+		# # JSON provides a static method to serialized JSON string.
+	var json_string = JSON.stringify(node_data)
+		# # Store the save dictionary as a new line in the save file.
+	save_file.store_line(json_string)
 
 
-#func load_game():
-	#if not FileAccess.file_exists("user://savegame.save"):
-		#return # Error! We don't have a save to load.
-	#var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
-	#while save_file.get_position() < save_file.get_length():
-		#var json_string = save_file.get_line()
-		#var json = JSON.new()
-		#var parse_result = json.parse(json_string)
-		#if not parse_result == OK:
-			#print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-			#continue
-		#var node_data = json.data
+func load_game():
+	if not FileAccess.file_exists("user://savegame.save"):
+		return # Error! We don't have a save to load.
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+		var node_data = json.data
 		#high_score = 0
-		#for i in node_data.keys():
-			#high_score_list[i] = node_data[i]
+		for i in node_data.keys():
+			high_score_list[i] = node_data[i]
 			#if high_score_list[i]>high_score:
 				#high_score_player = i
 				#high_score = high_score_list[i]
+		print(high_score_list)
 
 
-#func _exit_tree() -> void:
-	#save_score()
-#endregion
+func _exit_tree() -> void:
+	save_score()

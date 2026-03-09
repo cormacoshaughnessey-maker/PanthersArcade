@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://gfdtqlc0b57g"]
+
+[ext_resource type="Script" uid="uid://625ib74gq746" path="res://Scripts/high_score_display.gd" id="1_nbykh"]
+
+[node name="HighScoreDisplay" type="Control" unique_id=2068393492]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nbykh")
+
+[node name="Background" type="ColorRect" parent="." unique_id=974282306]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.012, 0.235, 1)
+
+[node name="Title" type="Label" parent="." unique_id=668207942]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 104.0
+offset_right = 970.0
+offset_bottom = 431.0
+theme_override_colors/font_color = Color(1, 0.361, 1, 1)
+theme_override_font_sizes/font_size = 144
+text = "High Scores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name1" type="Label" parent="." unique_id=738452427]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 512.0
+offset_right = 492.0
+offset_bottom = 584.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Num1" type="Label" parent="." unique_id=36901439]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 512.0
+offset_right = 820.0
+offset_bottom = 584.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+
+[node name="Name2" type="Label" parent="." unique_id=1300430407]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 672.0
+offset_right = 492.0
+offset_bottom = 744.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Num2" type="Label" parent="." unique_id=554777720]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 672.0
+offset_right = 820.0
+offset_bottom = 744.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+
+[node name="Name3" type="Label" parent="." unique_id=1820744977]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 832.0
+offset_right = 492.0
+offset_bottom = 904.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Num3" type="Label" parent="." unique_id=2139296253]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 832.0
+offset_right = 820.0
+offset_bottom = 904.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+
+[node name="Name4" type="Label" parent="." unique_id=1901344349]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 992.0
+offset_right = 492.0
+offset_bottom = 1064.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Num4" type="Label" parent="." unique_id=332622794]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 992.0
+offset_right = 820.0
+offset_bottom = 1064.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+
+[node name="Name5" type="Label" parent="." unique_id=1775776725]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 1144.0
+offset_right = 492.0
+offset_bottom = 1216.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Num5" type="Label" parent="." unique_id=2052002306]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 1144.0
+offset_right = 820.0
+offset_bottom = 1216.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+
+[node name="Instructions" type="Label" parent="." unique_id=206001415]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 1408.0
+offset_right = 848.0
+offset_bottom = 1688.0
+theme_override_colors/font_color = Color(0, 0.969, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "You will be returned
+to the beginning
+shortly."
+horizontal_alignment = 1

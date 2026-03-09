@@ -3,15 +3,20 @@ extends Control
 @onready var letter1 = $Letter1
 @onready var letter2 = $Letter2
 @onready var letter3 = $Letter3
+@onready var high_score_display
+@onready var score_scene = get_tree().get("Score")
+@onready var game_node := get_tree().get_first_node_in_group("game")
 var alph := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 var letters := []
 var letter_selected := 0
 var current1 := 0
 var current2 := 0
 var current3 := 0
+var player_name := ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	high_score_display = get_node("/root/Game/UI/HighScoreDisplay")
 	letter_selected = 0
 	letters = [letter1, letter2, letter3]
 	current1 = 0
@@ -83,6 +88,7 @@ func _physics_process(_delta: float) -> void:
 					current3 = current3 + 1
 				letters[letter_selected].text = alph[current3]
 		if(Input.is_action_just_pressed("rewind")):
-			var player_name = alph[current1] + alph[current2] + alph[current3]
+			player_name = alph[current1] + alph[current2] + alph[current3]
 			print("High score confirmed: ", player_name)
-			get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")
+			game_node.save_score()
+			high_score_display.visible = true

@@ -1,13 +1,12 @@
 extends Control
 
-@onready var score = $Score:
+@onready var score_label: Label = $Score
+
+var score: int = 0:
 	set(value):
-		var num_digits := str(value).length()
-		var empty := ""
-		if(num_digits < 10):
-			for i in range(10-num_digits):
-				empty = empty + "0"
-		else:
-			empty = str(value)
-		empty = empty + str(value)
-		score.text = empty
+		score = value
+		upd_score()
+
+func upd_score():
+	var text := str(score).pad_zeros(10)
+	score_label.text = text
