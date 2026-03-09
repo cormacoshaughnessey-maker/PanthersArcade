@@ -18,17 +18,6 @@ var max_bars := 20
 var cooldown_bar_scene := preload("res://Scenes/cooldown_ui_bar.tscn")
 
 @onready var multiplier_cooldown_bar := $MultiplierCooldownBar
-@onready var score = $Score:
-	set(value):
-		var num_digits := str(value).length()
-		var empty := ""
-		if(num_digits < 10):
-			for i in range(10-num_digits):
-				empty = empty + "0"
-		else:
-			empty = str(value)
-		empty = empty + str(value)
-		score.text = empty
 @onready var score_multiplier_label = $ScoreMultiplier:
 	set(value):
 		var new_text := str(value)+"x"
