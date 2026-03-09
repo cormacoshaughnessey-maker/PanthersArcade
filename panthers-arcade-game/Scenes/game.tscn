@@ -84,3 +84,9 @@ shape = SubResource("WorldBoundaryShape2D_v158k")
 [node name="BottomCollisionShape2D" type="CollisionShape2D" parent="WorldBorder" unique_id=1764427700]
 position = Vector2(0, 1920)
 shape = SubResource("WorldBoundaryShape2D_wowpa")
+
+[node name="ScoreMultiplierTimer" type="Timer" parent="." unique_id=2114248063]
+wait_time = 6.0
+one_shot = true
+
+[connection signal="timeout" from="ScoreMultiplierTimer" to="." method="_on_score_multiplier_timer_timeout"]

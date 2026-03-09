@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccqxbfc6v34mb"
-path="res://.godot/imported/rewindbubble.png-a4cc927e5d4ab245a8b1de7279860a4b.ctex"
+uid="uid://d5ily06qwbtu"
+path="res://.godot/imported/Cooldown_Bar.png-3dc551f7eae3567904a23a4063a7db9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/rewindbubble.png"
-dest_files=["res://.godot/imported/rewindbubble.png-a4cc927e5d4ab245a8b1de7279860a4b.ctex"]
+source_file="res://Assets/Cooldown_Bar.png"
+dest_files=["res://.godot/imported/Cooldown_Bar.png-3dc551f7eae3567904a23a4063a7db9d.ctex"]
 
 [params]
 
