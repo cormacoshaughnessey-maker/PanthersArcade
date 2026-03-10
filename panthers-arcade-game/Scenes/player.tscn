@@ -68,7 +68,7 @@ autoplay = "idle"
 shape = SubResource("RectangleShape2D_v0iea")
 
 [node name="RewindCooldownTimer" type="Timer" parent="." unique_id=187326897]
-wait_time = 1.5
+wait_time = 1.75
 one_shot = true
 
 [node name="InvincibilityCooldownTimer" type="Timer" parent="." unique_id=979426115]
@@ -80,6 +80,7 @@ max_polyphony = 2
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="." unique_id=1495020957]
 stream = ExtResource("3_6t5aa")
+volume_db = 16.0
 max_polyphony = 2
 
 [node name="RewindStartSound" type="AudioStreamPlayer" parent="." unique_id=180491243]

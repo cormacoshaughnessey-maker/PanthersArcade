@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bao3d0fklv7ly" path="res://Assets/Sprites/range_spritesheet.png" id="2_ranged_sprite"]
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
 [ext_resource type="Texture2D" uid="uid://og0o7d201ohg" path="res://Assets/Sprites/range_attack_spritesheet.png" id="4_ranged_attack"]
-[ext_resource type="AudioStream" uid="uid://3axoudh5gdfo" path="res://Assets/Sounds/Cartoon Sci-Fi Weapon Shot 1.wav" id="5_f5pa5"]
+[ext_resource type="AudioStream" uid="uid://p6dno31dt4tw" path="res://Assets/Sounds/Projectile Sound.tres" id="5_f5pa5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
 atlas = ExtResource("4_ranged_attack")

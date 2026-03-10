@@ -10,9 +10,11 @@ extends Node2D
 @onready var background := $Background
 @onready var score_multiplier_timer := $ScoreMultiplierTimer
 @onready var background_music := $Sounds/BackgroundMusic
+@onready var enemy_death := $Sounds/EnemyDeath
+@onready var rewind_color_rect := $UI/RewindColorRect
 
 var rewind_cooldown_percentage := 1.0
-var max_rewind_bars := 130
+var max_rewind_bars := 131
 
 var min_score_multiplier := 1.0
 var score_multiplier_increment := 0.2
@@ -89,11 +91,11 @@ func _spawn_wave() -> void:
 
 func _on_enemy_killed(score_value) -> void:
 	score = score + score_value*score_multiplier
-
 	score_multiplier = snappedf(score_multiplier + score_multiplier_increment, score_multiplier_increment)
 	score_multiplier = minf(score_multiplier, max_score_multiplier)
 	score_multiplier_timer.start()
 	color_multiplier_bar()
+	enemy_death.play()
 
 
 func _on_score_multiplier_timer_timeout() -> void:
@@ -114,9 +116,9 @@ func _on_enemy_removed() -> void:
 
 
 func game_over() -> void:
-	player.set_physics_process(false)
-	for i in $Enemies.get_children():
+	for i in get_tree().get_nodes_in_group("enemies"):
 		i.queue_free()
+	player.set_physics_process(false)
 	high_score_game_over.visible = true
 
 
@@ -129,6 +131,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		rewind_ui.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	fill_multiplier_bar(score_multiplier_timer.time_left)
+	rewind_color_rect.visible = player.rewinding
 
 
 func fill_multiplier_bar(time_left) -> void:

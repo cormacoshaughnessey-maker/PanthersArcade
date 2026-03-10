@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
 [ext_resource type="Texture2D" uid="uid://br3n840gtwkjl" path="res://Assets/Sprites/boss_attack_ranged_spritesheet.png" id="4_boss_attack"]
 [ext_resource type="Texture2D" uid="uid://b2fuovirvqxog" path="res://Assets/Sprites/boss_attack_melee_spritesheet.png" id="5_boss_melee"]
-[ext_resource type="AudioStream" uid="uid://3axoudh5gdfo" path="res://Assets/Sounds/Cartoon Sci-Fi Weapon Shot 1.wav" id="6_q5ghq"]
+[ext_resource type="AudioStream" uid="uid://p6dno31dt4tw" path="res://Assets/Sounds/Projectile Sound.tres" id="6_sobvp"]
 [ext_resource type="AudioStream" uid="uid://b8c7b6qixf0do" path="res://Assets/Sounds/Cartoon Sci-Fi Large Energy Impact 1.wav" id="7_sobvp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_matk1"]
@@ -148,7 +148,7 @@ shape = SubResource("RectangleShape2D_boss")
 one_shot = true
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="." unique_id=657561595]
-stream = ExtResource("6_q5ghq")
+stream = ExtResource("6_sobvp")
 
 [node name="AttackSound2" type="AudioStreamPlayer" parent="." unique_id=1828713857]
 stream = ExtResource("7_sobvp")

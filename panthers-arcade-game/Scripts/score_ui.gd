@@ -45,16 +45,22 @@ func color_multiplier_bar(score_multiplier) -> void:
 	var m = snappedf(score_multiplier, 0.2)
 	if m >= 2.0:
 		multiplier_cooldown_bar.modulate = Color("ff004e")
+		score_multiplier_label.modulate = Color("ff004e")
 	elif m >= 1.8:
 		multiplier_cooldown_bar.modulate = Color("b10585")
+		score_multiplier_label.modulate = Color("b10585")
 	elif m >= 1.6:
 		multiplier_cooldown_bar.modulate = Color("600088")
+		score_multiplier_label.modulate = Color("600088")
 	elif m >= 1.4:
 		multiplier_cooldown_bar.modulate = Color("ac29ce")
+		score_multiplier_label.modulate = Color("ac29ce")
 	elif m >= 1.2:
 		multiplier_cooldown_bar.modulate = Color("ff5cff")
+		score_multiplier_label.modulate = Color("ff5cff")
 	else:
 		multiplier_cooldown_bar.modulate = Color("ffffff")
+		score_multiplier_label.modulate = Color("ffffff")
 
 func _ready() -> void:
 	fill_cooldown_bar(0,1.0)
