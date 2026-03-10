@@ -5,26 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
 [ext_resource type="Texture2D" uid="uid://og0o7d201ohg" path="res://Assets/range_attack_spritesheet.png" id="4_ranged_attack"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
-atlas = ExtResource("2_ranged_sprite")
-region = Rect2(0, 0, 160, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_move1"]
-atlas = ExtResource("2_ranged_sprite")
-region = Rect2(160, 0, 160, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_move2"]
-atlas = ExtResource("2_ranged_sprite")
-region = Rect2(320, 0, 160, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_move3"]
-atlas = ExtResource("2_ranged_sprite")
-region = Rect2(480, 0, 160, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_move4"]
-atlas = ExtResource("2_ranged_sprite")
-region = Rect2(640, 0, 160, 160)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
 atlas = ExtResource("4_ranged_attack")
 region = Rect2(0, 0, 160, 160)
@@ -45,8 +25,48 @@ region = Rect2(480, 0, 160, 160)
 atlas = ExtResource("4_ranged_attack")
 region = Rect2(640, 0, 160, 160)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
+atlas = ExtResource("2_ranged_sprite")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move1"]
+atlas = ExtResource("2_ranged_sprite")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move2"]
+atlas = ExtResource("2_ranged_sprite")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move3"]
+atlas = ExtResource("2_ranged_sprite")
+region = Rect2(480, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move4"]
+atlas = ExtResource("2_ranged_sprite")
+region = Rect2(640, 0, 160, 160)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ranged"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk5")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_idle")
@@ -71,26 +91,6 @@ animations = [{
 "loop": true,
 "name": &"move",
 "speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk5")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ranged"]
@@ -102,7 +102,7 @@ collision_mask = 6
 script = ExtResource("1_ranged")
 projectile_scene = ExtResource("3_projectile")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1839731559]
 sprite_frames = SubResource("SpriteFrames_ranged")
 animation = &"move"
 autoplay = "move"

@@ -13,6 +13,7 @@ var current1 := 0
 var current2 := 0
 var current3 := 0
 var player_name := ""
+var not_done := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -87,8 +88,9 @@ func _physics_process(_delta: float) -> void:
 				else:
 					current3 = current3 + 1
 				letters[letter_selected].text = alph[current3]
-		if(Input.is_action_just_pressed("rewind")):
+		if(not_done && Input.is_action_just_pressed("rewind")):
 			player_name = alph[current1] + alph[current2] + alph[current3]
 			print("High score confirmed: ", player_name)
 			game_node.save_score()
+			not_done = false
 			high_score_display.visible = true

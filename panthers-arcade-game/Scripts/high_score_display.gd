@@ -1,13 +1,16 @@
 extends Control
 
-@onready var names = [$Name1, $Name2, $Name3, $Name4, $Name5]
-@onready var nums = [$Num1, $Num2, $Num3, $Num4, $Num5]
+@onready var names = [$Names/Name1, $Names/Name2, $Names/Name3, $Names/Name4, $Names/Name5]
+@onready var nums = [$Nums/Num1, $Nums/Num2, $Nums/Num3, $Nums/Num4, $Nums/Num5]
+@onready var box1 = $Nums
+@onready var box2 = $Names
 @onready var game_node
 @onready var list
 @onready var okay := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$PlayButton.grab_focus()
 	game_node = get_tree().get_first_node_in_group("game")
 	visibility_changed.connect(_on_visibility_changed)
 
@@ -31,14 +34,13 @@ func update_high_score():
 			nums[i].text = "0"
 		else:
 			for j in range(list.values().size()):
-				if(list.values()[j] > maxim):
+				if(list.values()[j] >= maxim):
 					maxim = list.values()[j]
 					max_name = list.keys()[j]
 			names[i].text = max_name
 			nums[i].text = str(maxim)
 			list.erase(max_name)
 
-func _physics_process(delta: float) -> void:
-	if(okay):
-		await get_tree().create_timer(5).timeout
-		get_tree().reload_current_scene()
+
+func _on_play_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")

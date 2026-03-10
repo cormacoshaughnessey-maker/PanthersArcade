@@ -196,5 +196,5 @@ func load_game():
 		print(high_score_list)
 
 
-func _exit_tree() -> void:
-	save_score()
+#func _exit_tree() -> void:
+	#save_score()
