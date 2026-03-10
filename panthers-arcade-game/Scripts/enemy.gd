@@ -95,6 +95,15 @@ func check_if_off_screen() -> void:
 	if global_position.y > player.global_position.y + 800:
 		queue_free() 
 
+func snap_to_8dir(direction: Vector2) -> Vector2:
+	if direction.length() < 0.01:
+		return Vector2.ZERO
+	var angle = direction.angle()
+	var index = roundi(angle / (PI / 4.0))
+	var snapped_angle = index * (PI / 4.0)
+	return Vector2.from_angle(snapped_angle)
+
+
 func move_and_attack(_delta: float) -> void:
 	pass
 

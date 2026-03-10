@@ -34,11 +34,12 @@ func move_and_attack(delta: float) -> void:
 
 	random_offset = random_offset.lerp(target_random_offset, delta * 3.0)
 
-	var final_direction = (direction_to_player * 0.7 + random_offset * 0.3).normalized()
+	var raw_direction = (direction_to_player * 0.7 + random_offset * 0.3).normalized()
+	var final_direction = snap_to_8dir(raw_direction)
 	position += final_direction * move_speed * delta
 
-	var target_rotation = final_direction.angle() + deg_to_rad(90)
-	rotation = lerp_angle(rotation, target_rotation, delta * 5.0)
+	if final_direction != Vector2.ZERO:
+		rotation = final_direction.angle() + deg_to_rad(90)
 
 	var distance_to_player = global_position.distance_to(player.global_position)
 	if distance_to_player <= attack_range and can_attack:

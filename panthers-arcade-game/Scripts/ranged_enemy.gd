@@ -51,10 +51,12 @@ func move_and_attack(delta: float) -> void:
 			strafe_direction = -strafe_direction
 		move_direction = (strafe_direction * 0.7 + random_offset * 0.3).normalized()
 
-	position += move_direction * move_speed * delta
+	var cardinal_direction = snap_to_8dir(move_direction)
+	position += cardinal_direction * move_speed * delta
 
-	var target_rotation = direction_to_player.angle() + deg_to_rad(90)
-	rotation = lerp_angle(rotation, target_rotation, delta * 5.0)
+	var face_direction = snap_to_8dir(direction_to_player)
+	if face_direction != Vector2.ZERO:
+		rotation = face_direction.angle() + deg_to_rad(90)
 
 	if distance_to_player <= attack_range and can_shoot:
 		shoot_projectile()
