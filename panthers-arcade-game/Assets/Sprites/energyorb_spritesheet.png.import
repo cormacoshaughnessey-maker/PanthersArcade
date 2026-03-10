@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbbeatb8kms7a"
-path="res://.godot/imported/melee_attack_spritesheet.png-5120d9bf8cbda5dd2fe853bd3a0ab8c2.ctex"
+uid="uid://dccn3jpm5dyk7"
+path="res://.godot/imported/energyorb_spritesheet.png-504a56ec4c4afbbdf2660c8926ba4406.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/melee_attack_spritesheet.png"
-dest_files=["res://.godot/imported/melee_attack_spritesheet.png-5120d9bf8cbda5dd2fe853bd3a0ab8c2.ctex"]
+source_file="res://Assets/Sprites/energyorb_spritesheet.png"
+dest_files=["res://.godot/imported/energyorb_spritesheet.png-504a56ec4c4afbbdf2660c8926ba4406.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl5qjwhha3wyu"
-path="res://.godot/imported/range.png-7f756f036b827d4a515cf799013f13f8.ctex"
+uid="uid://d5ily06qwbtu"
+path="res://.godot/imported/Cooldown_Bar.png-1e2606d8a450e7c645b389c64f92fa5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/range.png"
-dest_files=["res://.godot/imported/range.png-7f756f036b827d4a515cf799013f13f8.ctex"]
+source_file="res://Assets/Sprites/Cooldown_Bar.png"
+dest_files=["res://.godot/imported/Cooldown_Bar.png-1e2606d8a450e7c645b389c64f92fa5f.ctex"]
 
 [params]
 

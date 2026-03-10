@@ -30,6 +30,9 @@ var is_invincible := false  # i-frames after taking damage
 @onready var hitbox := $CollisionShape2D
 @onready var invincibility_cooldown_timer := $InvincibilityCooldownTimer
 @onready var player_sprite := $AnimatedSprite2D
+@onready var rewind_sound := $RewindSound
+@onready var rewind_start_sound := $RewindStartSound
+@onready var hurt_sound := $HurtSound
 
 var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
@@ -56,6 +59,7 @@ func inputs(delta: float) -> void:
 			start_rewind_cooldown()
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		if Input.is_action_just_pressed("rewind"):
+			rewind_start_sound.play()
 			spawn_projection_trail()
 			_on_invincibility_cooldown_timer_timeout()
 			if pause_on_rewind:
@@ -144,6 +148,7 @@ func spawn_projection(rewind_index:int) -> void:
  # INFO: Begin the cooldown on rewinding, and set rewind_on_cooldown to true
 func start_rewind_cooldown() -> void:
 	if not rewind_on_cooldown:
+		rewind_sound.play()
 		rewinding = false
 		rewind_on_cooldown = true
 		rewind_cooldown_timer.start()
@@ -171,6 +176,7 @@ func lose_life(damage := 1) -> void:
 		else:
 			start_invincibility()
 			print("lost a life! lives left: ", game_node.lives)
+			hurt_sound.play()
 
 
  # INFO: Make player invincible for a bit after getting hit

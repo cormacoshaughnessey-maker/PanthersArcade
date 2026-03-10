@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dccn3jpm5dyk7"
-path="res://.godot/imported/energyorb_spritesheet.png-696ef873b4c01b41ee3a488889a73f6b.ctex"
+uid="uid://dl5qjwhha3wyu"
+path="res://.godot/imported/range.png-6bc5f6df48e65337863fbfb4bda79ce2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/energyorb_spritesheet.png"
-dest_files=["res://.godot/imported/energyorb_spritesheet.png-696ef873b4c01b41ee3a488889a73f6b.ctex"]
+source_file="res://Assets/Sprites/range.png"
+dest_files=["res://.godot/imported/range.png-6bc5f6df48e65337863fbfb4bda79ce2.ctex"]
 
 [params]
 

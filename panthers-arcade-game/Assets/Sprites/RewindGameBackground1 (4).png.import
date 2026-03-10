@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6fltgqkukpaa"
-path="res://.godot/imported/Health_UI_Sprite.png-5587606207fd3817f06594b52079f180.ctex"
+uid="uid://b1f03h6doxscr"
+path="res://.godot/imported/RewindGameBackground1 (4).png-d10e71fd87856e43bef2c8b5ab2d5b86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Health_UI_Sprite.png"
-dest_files=["res://.godot/imported/Health_UI_Sprite.png-5587606207fd3817f06594b52079f180.ctex"]
+source_file="res://Assets/Sprites/RewindGameBackground1 (4).png"
+dest_files=["res://.godot/imported/RewindGameBackground1 (4).png-d10e71fd87856e43bef2c8b5ab2d5b86.ctex"]
 
 [params]
 

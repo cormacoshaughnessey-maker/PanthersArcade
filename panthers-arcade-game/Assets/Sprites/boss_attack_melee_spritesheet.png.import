@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0rp0x3ghtw2d"
-path="res://.godot/imported/boss_spritesheet.png-c01bfb6333705b96cffe580b9f8ae843.ctex"
+uid="uid://b2fuovirvqxog"
+path="res://.godot/imported/boss_attack_melee_spritesheet.png-16d65c982bc8159c368b2192182f8e53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/boss_spritesheet.png"
-dest_files=["res://.godot/imported/boss_spritesheet.png-c01bfb6333705b96cffe580b9f8ae843.ctex"]
+source_file="res://Assets/Sprites/boss_attack_melee_spritesheet.png"
+dest_files=["res://.godot/imported/boss_attack_melee_spritesheet.png-16d65c982bc8159c368b2192182f8e53.ctex"]
 
 [params]
 

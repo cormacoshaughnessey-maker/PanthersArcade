@@ -68,7 +68,8 @@ func shoot_projectile() -> void:
 	if not projectile_scene:
 		push_warning("no projectile scene assigned to ranged enemy!")
 		return
-
+	
+	attack_sound.play()
 	play_attack_animation()
 	projectiles_fired += 1
 

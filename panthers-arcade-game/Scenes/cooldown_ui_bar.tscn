@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cxwar8boohxcd"]
 
-[ext_resource type="Texture2D" uid="uid://d5ily06qwbtu" path="res://Assets/Cooldown_Bar.png" id="1_kjaj8"]
+[ext_resource type="Texture2D" uid="uid://d5ily06qwbtu" path="res://Assets/Sprites/Cooldown_Bar.png" id="1_kjaj8"]
 
 [node name="RewindUIBar" type="TextureRect" unique_id=928836512]
 anchors_preset = 15

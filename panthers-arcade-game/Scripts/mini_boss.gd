@@ -91,6 +91,7 @@ func execute_attack_pattern() -> void:
 			await aimed_burst_attack()
 		2:
 			play_attack_animation("attack_melee")
+			attack_sound_2.play()
 			await melee_dive_attack()
 
 	attack_pattern = (attack_pattern + 1) % 3
@@ -110,6 +111,7 @@ func spread_shot_attack() -> void:
 		while paused:
 			await get_tree().process_frame
 		play_attack_animation("attack_ranged")
+		attack_sound.play()
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position
@@ -139,6 +141,7 @@ func aimed_burst_attack() -> void:
 		while paused:
 			await get_tree().process_frame
 		play_attack_animation("attack_ranged")
+		attack_sound.play()
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position

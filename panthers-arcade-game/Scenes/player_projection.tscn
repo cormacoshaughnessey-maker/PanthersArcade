@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://j8uk1lr5rax6"]
 
-[ext_resource type="Texture2D" uid="uid://cgvg42e1klcap" path="res://Assets/player sprites.png" id="1_pg8rq"]
+[ext_resource type="Texture2D" uid="uid://cgvg42e1klcap" path="res://Assets/Sprites/player sprites.png" id="1_pg8rq"]
 [ext_resource type="Script" uid="uid://dxumimcpsyb7x" path="res://Scripts/player_projection.gd" id="2_pg8rq"]
 
 [node name="PlayerProjection" type="Sprite2D" unique_id=2130160567 groups=["player_projections"]]

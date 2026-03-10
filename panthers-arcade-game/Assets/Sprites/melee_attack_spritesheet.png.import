@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgvg42e1klcap"
-path="res://.godot/imported/player sprites.png-e11d0f7063eab4740ffc0548e86ff727.ctex"
+uid="uid://bbbeatb8kms7a"
+path="res://.godot/imported/melee_attack_spritesheet.png-caa28fe72a53d3dc53eea471c25e89ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/player sprites.png"
-dest_files=["res://.godot/imported/player sprites.png-e11d0f7063eab4740ffc0548e86ff727.ctex"]
+source_file="res://Assets/Sprites/melee_attack_spritesheet.png"
+dest_files=["res://.godot/imported/melee_attack_spritesheet.png-caa28fe72a53d3dc53eea471c25e89ab.ctex"]
 
 [params]
 

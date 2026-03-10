@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://og0o7d201ohg"
-path="res://.godot/imported/range_attack_spritesheet.png-72b75e77d30138153be957dbf89f354e.ctex"
+uid="uid://6fltgqkukpaa"
+path="res://.godot/imported/Health_UI_Sprite.png-9c6fbecbc1ec4da70aa8437aa68a4c9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/range_attack_spritesheet.png"
-dest_files=["res://.godot/imported/range_attack_spritesheet.png-72b75e77d30138153be957dbf89f354e.ctex"]
+source_file="res://Assets/Sprites/Health_UI_Sprite.png"
+dest_files=["res://.godot/imported/Health_UI_Sprite.png-9c6fbecbc1ec4da70aa8437aa68a4c9e.ctex"]
 
 [params]
 

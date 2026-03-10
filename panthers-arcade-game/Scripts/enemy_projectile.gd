@@ -45,10 +45,13 @@ func _physics_process(delta: float) -> void:
 func _on_area_entered(_area: Area2D) -> void:
 	pass
 
+
 func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("lose_life") and body is Player and not paused:
-		body.lose_life()
-		queue_free() 
+	if body.has_method("lose_life") and body is Player:
+		if not body.is_invincible and not paused:
+			body.lose_life()
+			queue_free()  # destroy projectile after hitting
+
 
 func pause(pausing:=true) -> void:
 	paused = pausing
