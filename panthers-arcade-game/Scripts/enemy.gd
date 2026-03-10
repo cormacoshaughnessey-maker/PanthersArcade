@@ -22,6 +22,8 @@ var is_dead := false
 
 @onready var attack_timer : Timer = get_node_or_null("AttackCooldownTimer")
 @onready var anim_sprite : AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
+@onready var attack_sound : AudioStreamPlayer = get_node_or_null("AttackSound")
+@onready var attack_sound_2 : AudioStreamPlayer = get_node_or_null("AttackSound2")
 
 
 #region Wave Spawning System

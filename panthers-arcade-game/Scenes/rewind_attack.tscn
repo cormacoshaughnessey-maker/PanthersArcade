@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://danvchce28jln"]
 
 [ext_resource type="Script" uid="uid://cadbcws2let3c" path="res://Scripts/rewind_attack.gd" id="1_s4sno"]
-[ext_resource type="Texture2D" uid="uid://dplosqqo82k3f" path="res://Assets/rewindbubble_spritesheet.png" id="2_rewind_sprite"]
+[ext_resource type="Texture2D" uid="uid://dplosqqo82k3f" path="res://Assets/Sprites/rewindbubble_spritesheet.png" id="2_rewind_sprite"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2e2wj"]
 radius = 82.0

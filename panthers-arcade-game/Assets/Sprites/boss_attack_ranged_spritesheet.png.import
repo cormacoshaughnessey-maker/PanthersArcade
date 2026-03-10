@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb73xxvag8fqd"
-path="res://.godot/imported/Rewind_Bar.png-763bf775ac06a093ad9f2afc3353a68f.ctex"
+uid="uid://br3n840gtwkjl"
+path="res://.godot/imported/boss_attack_ranged_spritesheet.png-e9ca0063cf615a6ce755866dbb54342c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Rewind_Bar.png"
-dest_files=["res://.godot/imported/Rewind_Bar.png-763bf775ac06a093ad9f2afc3353a68f.ctex"]
+source_file="res://Assets/Sprites/boss_attack_ranged_spritesheet.png"
+dest_files=["res://.godot/imported/boss_attack_ranged_spritesheet.png-e9ca0063cf615a6ce755866dbb54342c.ctex"]
 
 [params]
 

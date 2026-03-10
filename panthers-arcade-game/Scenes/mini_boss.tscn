@@ -1,46 +1,12 @@
 [gd_scene format=3 uid="uid://b14fm4l40xmdf"]
 
 [ext_resource type="Script" uid="uid://8juapsflucfb" path="res://Scripts/mini_boss.gd" id="1_boss"]
-[ext_resource type="Texture2D" uid="uid://d0rp0x3ghtw2d" path="res://Assets/boss_spritesheet.png" id="2_boss_sprite"]
+[ext_resource type="Texture2D" uid="uid://d0rp0x3ghtw2d" path="res://Assets/Sprites/boss_spritesheet.png" id="2_boss_sprite"]
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
-[ext_resource type="Texture2D" path="res://Assets/boss_attack_ranged_spritesheet.png" id="4_boss_attack"]
-[ext_resource type="Texture2D" path="res://Assets/boss_attack_melee_spritesheet.png" id="5_boss_melee"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glow1"]
-atlas = ExtResource("2_boss_sprite")
-region = Rect2(0, 0, 288, 288)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glow2"]
-atlas = ExtResource("2_boss_sprite")
-region = Rect2(288, 0, 288, 288)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glow3"]
-atlas = ExtResource("2_boss_sprite")
-region = Rect2(576, 0, 288, 288)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glow4"]
-atlas = ExtResource("2_boss_sprite")
-region = Rect2(864, 0, 288, 288)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
-atlas = ExtResource("4_boss_attack")
-region = Rect2(0, 0, 288, 288)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_atk2"]
-atlas = ExtResource("4_boss_attack")
-region = Rect2(288, 0, 288, 288)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_atk3"]
-atlas = ExtResource("4_boss_attack")
-region = Rect2(576, 0, 288, 288)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_atk4"]
-atlas = ExtResource("4_boss_attack")
-region = Rect2(864, 0, 288, 288)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_atk5"]
-atlas = ExtResource("4_boss_attack")
-region = Rect2(1152, 0, 288, 288)
+[ext_resource type="Texture2D" uid="uid://br3n840gtwkjl" path="res://Assets/Sprites/boss_attack_ranged_spritesheet.png" id="4_boss_attack"]
+[ext_resource type="Texture2D" uid="uid://b2fuovirvqxog" path="res://Assets/Sprites/boss_attack_melee_spritesheet.png" id="5_boss_melee"]
+[ext_resource type="AudioStream" uid="uid://3axoudh5gdfo" path="res://Assets/Sounds/Cartoon Sci-Fi Weapon Shot 1.wav" id="6_q5ghq"]
+[ext_resource type="AudioStream" uid="uid://b8c7b6qixf0do" path="res://Assets/Sounds/Cartoon Sci-Fi Large Energy Impact 1.wav" id="7_sobvp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_matk1"]
 atlas = ExtResource("5_boss_melee")
@@ -62,24 +28,63 @@ region = Rect2(864, 0, 288, 288)
 atlas = ExtResource("5_boss_melee")
 region = Rect2(1152, 0, 288, 288)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(0, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk2"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(288, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk3"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(576, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk4"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(864, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk5"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(1152, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow1"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(0, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow2"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(288, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow3"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(576, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow4"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(864, 0, 288, 288)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_boss"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_glow1")
+"texture": SubResource("AtlasTexture_matk1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_glow2")
+"texture": SubResource("AtlasTexture_matk2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_glow3")
+"texture": SubResource("AtlasTexture_matk3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_glow4")
+"texture": SubResource("AtlasTexture_matk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_matk5")
 }],
-"loop": true,
-"name": &"default",
-"speed": 4.0
+"loop": false,
+"name": &"attack_melee",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -103,23 +108,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_matk1")
+"texture": SubResource("AtlasTexture_glow1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_matk2")
+"texture": SubResource("AtlasTexture_glow2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_matk3")
+"texture": SubResource("AtlasTexture_glow3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_matk4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_matk5")
+"texture": SubResource("AtlasTexture_glow4")
 }],
-"loop": false,
-"name": &"attack_melee",
-"speed": 8.0
+"loop": true,
+"name": &"default",
+"speed": 4.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
@@ -133,9 +135,8 @@ screen_top_offset = 300.0
 attack_pattern_cooldown = 4.0
 projectile_scene = ExtResource("3_projectile")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1823796314]
 sprite_frames = SubResource("SpriteFrames_boss")
-animation = &"default"
 autoplay = "default"
 flip_v = true
 
@@ -145,5 +146,11 @@ shape = SubResource("RectangleShape2D_boss")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=452442178]
 one_shot = true
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="." unique_id=657561595]
+stream = ExtResource("6_q5ghq")
+
+[node name="AttackSound2" type="AudioStreamPlayer" parent="." unique_id=1828713857]
+stream = ExtResource("7_sobvp")
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timeout"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dplosqqo82k3f"
-path="res://.godot/imported/rewindbubble_spritesheet.png-e873c82982bcdaac6640341177e3d326.ctex"
+uid="uid://d0rp0x3ghtw2d"
+path="res://.godot/imported/boss_spritesheet.png-a9d8527429384065e034ac0c78eafe2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/rewindbubble_spritesheet.png"
-dest_files=["res://.godot/imported/rewindbubble_spritesheet.png-e873c82982bcdaac6640341177e3d326.ctex"]
+source_file="res://Assets/Sprites/boss_spritesheet.png"
+dest_files=["res://.godot/imported/boss_spritesheet.png-a9d8527429384065e034ac0c78eafe2c.ctex"]
 
 [params]
 

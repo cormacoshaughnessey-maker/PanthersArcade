@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://bmuww40b78yu0" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cgvg42e1klcap" path="res://Assets/Sprites/player sprites.png" id="2_cvnsp"]
 [ext_resource type="AudioStream" uid="uid://b5533bdaoprgx" path="res://Assets/Sounds/Cartoon Sci-Fi Projectile Impact 1.wav" id="3_6t5aa"]
-[ext_resource type="AudioStream" uid="uid://bhxoivbitv4fj" path="res://Assets/Sounds/Cartoon Sci-Fi Portal Open Sound 1.wav" id="3_vgqql"]
-[ext_resource type="AudioStream" uid="uid://c37bwayymiufj" path="res://Assets/Sounds/Cartoon Sci-Fi Sweep 4.wav" id="5_fkybt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_cvnsp")
@@ -58,6 +56,14 @@ collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_v0iea")
 speed = 400.0
+max_health = null
+max_lives = null
+invincibility_duration = null
+rewind_invincibility_duration = null
+pause_on_rewind = null
+require_movement_to_rewind = null
+max_rewind_length_in_seconds = null
+rewind_speed = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2073562979]
 sprite_frames = SubResource("SpriteFrames_x3wgy")
@@ -75,15 +81,9 @@ one_shot = true
 one_shot = true
 
 [node name="RewindSound" type="AudioStreamPlayer" parent="." unique_id=1101748775]
-stream = ExtResource("3_vgqql")
-max_polyphony = 2
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="." unique_id=1495020957]
 stream = ExtResource("3_6t5aa")
-max_polyphony = 2
-
-[node name="RewindStartSound" type="AudioStreamPlayer" parent="." unique_id=180491243]
-stream = ExtResource("5_fkybt")
 
 [connection signal="timeout" from="RewindCooldownTimer" to="." method="_finish_rewind_cooldown"]
 [connection signal="timeout" from="InvincibilityCooldownTimer" to="." method="_on_invincibility_cooldown_timer_timeout"]

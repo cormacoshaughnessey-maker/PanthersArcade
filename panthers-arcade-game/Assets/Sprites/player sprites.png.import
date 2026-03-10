@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1f03h6doxscr"
-path="res://.godot/imported/RewindGameBackground1 (4).png-cb64513d6fa2a38343cf2e3a17caa3d3.ctex"
+uid="uid://cgvg42e1klcap"
+path="res://.godot/imported/player sprites.png-15734859ac3f584d782027344873d352.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/RewindGameBackground1 (4).png"
-dest_files=["res://.godot/imported/RewindGameBackground1 (4).png-cb64513d6fa2a38343cf2e3a17caa3d3.ctex"]
+source_file="res://Assets/Sprites/player sprites.png"
+dest_files=["res://.godot/imported/player sprites.png-15734859ac3f584d782027344873d352.ctex"]
 
 [params]
 

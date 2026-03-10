@@ -1,28 +1,9 @@
 [gd_scene format=3 uid="uid://d4liq15hqbanc"]
 
 [ext_resource type="Script" uid="uid://i8spamjtirbh" path="res://Scripts/melee_enemy.gd" id="1_melee"]
-[ext_resource type="Texture2D" uid="uid://cuwhxl02oxxky" path="res://Assets/melee_spritesheet.png" id="2_melee_sprite"]
-[ext_resource type="Texture2D" uid="uid://bbbeatb8kms7a" path="res://Assets/melee_attack_spritesheet.png" id="3_melee_attack"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
-atlas = ExtResource("2_melee_sprite")
-region = Rect2(0, 0, 160, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_move1"]
-atlas = ExtResource("2_melee_sprite")
-region = Rect2(160, 0, 160, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_move2"]
-atlas = ExtResource("2_melee_sprite")
-region = Rect2(320, 0, 160, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_move3"]
-atlas = ExtResource("2_melee_sprite")
-region = Rect2(480, 0, 160, 160)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_move4"]
-atlas = ExtResource("2_melee_sprite")
-region = Rect2(640, 0, 160, 160)
+[ext_resource type="Texture2D" uid="uid://cuwhxl02oxxky" path="res://Assets/Sprites/melee_spritesheet.png" id="2_melee_sprite"]
+[ext_resource type="Texture2D" uid="uid://bbbeatb8kms7a" path="res://Assets/Sprites/melee_attack_spritesheet.png" id="3_melee_attack"]
+[ext_resource type="AudioStream" uid="uid://cjwe7ipnmhjbu" path="res://Assets/Sounds/Cartoon Sci-Fi Rattling Impact 1.wav" id="4_3au16"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
 atlas = ExtResource("3_melee_attack")
@@ -44,8 +25,48 @@ region = Rect2(480, 0, 160, 160)
 atlas = ExtResource("3_melee_attack")
 region = Rect2(640, 0, 160, 160)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move1"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move2"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move3"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(480, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_move4"]
+atlas = ExtResource("2_melee_sprite")
+region = Rect2(640, 0, 160, 160)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_melee"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk5")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_idle")
@@ -70,26 +91,6 @@ animations = [{
 "loop": true,
 "name": &"move",
 "speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_atk5")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_melee"]
@@ -111,5 +112,8 @@ shape = SubResource("RectangleShape2D_melee")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1914923527]
 one_shot = true
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="." unique_id=578474320]
+stream = ExtResource("4_3au16")
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timeout"]

@@ -50,6 +50,7 @@ func pick_random_direction() -> void:
 
 func attack() -> void:
 	play_attack_animation()
+	attack_sound.play()
 	attacks_done += 1
 
 	if attacks_done >= attacks_per_cooldown:
