@@ -26,8 +26,8 @@ func _on_area_entered(area: Area2D) -> void:
 		area.take_damage(damage)
 
 
-func hide_sprite(hide := true) -> void:
-	$AnimatedSprite2D.visible = not hide
+func hide_sprite(hiding := true) -> void:
+	$AnimatedSprite2D.visible = not hiding
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

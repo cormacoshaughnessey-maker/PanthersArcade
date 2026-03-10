@@ -77,7 +77,7 @@ func rewind_data_length() -> int:
  # INFO: Function that saves data to the rewind_data array
 func save_rewind_data(_delta: float) -> void:
 	if not rewinding:
-		if (not require_movement_to_rewind) or (not rewind_data["position"].back() == global_position):
+		if (not require_movement_to_rewind) or (rewind_data["position"].is_empty() or not rewind_data["position"].back() == global_position):
 			rewind_data["position"].append(global_position)
 			rewind_data["animation"].append(player_sprite.animation)
 			rewind_data["animation_frame"].append(player_sprite.frame)
@@ -117,10 +117,10 @@ func rewind_attacks() -> void:
 
 
  # INFO: Function which spawns an individual rewind_attack
-func spawn_attack(attack_position:Vector2, hide:=false, _size := 1.0) -> void:
+func spawn_attack(attack_position:Vector2, hiding:=false, _size := 1.0) -> void:
 	var attack_var = attack_scene.instantiate()
 	attack_var.global_position = attack_position
-	attack_var.hide_sprite(hide)
+	attack_var.hide_sprite(hiding)
 	player_attacks.call_deferred("add_child", attack_var)
 
 

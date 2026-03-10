@@ -24,8 +24,8 @@ func reset_scroll_speed() -> void:
 
 
  # INFO: Pause the background if pause is true, unpause it if false
-func pause(pause:=true) -> void:
-	if pause:
+func pause(pausing:=true) -> void:
+	if pausing:
 		scroll_speed = 0
 	else:
 		reset_scroll_speed()
