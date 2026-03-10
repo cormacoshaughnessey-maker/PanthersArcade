@@ -18,6 +18,7 @@ var current_health : float
 var player : CharacterBody2D  
 var attack_cooldown := false
 var can_deal_contact_damage := true
+var _player_in_hitbox: Node2D = null
 var is_dead := false
 
 @onready var attack_timer : Timer = get_node_or_null("AttackCooldownTimer")
@@ -50,6 +51,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 	self.add_to_group("enemies")
 	self.add_to_group("pausable")
 
@@ -60,6 +62,11 @@ func _physics_process(delta: float) -> void:
 		move_and_attack(delta)
 		clamp_to_screen()
 		check_if_off_screen()
+		if _player_in_hitbox and can_deal_contact_damage and is_instance_valid(_player_in_hitbox) and _player_in_hitbox.has_method("lose_life"):
+			_player_in_hitbox.lose_life()
+			can_deal_contact_damage = false
+			await get_tree().create_timer(contact_damage_cooldown).timeout
+			can_deal_contact_damage = true
 
 #keeping the enemies on screen
 func clamp_to_screen() -> void:
@@ -154,11 +161,13 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and can_deal_contact_damage and body.has_method("lose_life"):
-		body.lose_life()
-		can_deal_contact_damage = false
-		await get_tree().create_timer(contact_damage_cooldown).timeout
-		can_deal_contact_damage = true
+	if body.is_in_group("player"):
+		_player_in_hitbox = body
+
+
+func _on_body_exited(body: Node2D) -> void:
+	if body == _player_in_hitbox:
+		_player_in_hitbox = null
 
 
 func pause(pausing:=true) -> void:

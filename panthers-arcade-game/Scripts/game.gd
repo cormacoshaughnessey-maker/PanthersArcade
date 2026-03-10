@@ -20,6 +20,7 @@ var min_score_multiplier := 1.0
 var score_multiplier_increment := 0.2
 var max_score_multiplier := 2.0
 var score_multiplier := min_score_multiplier
+var is_game_over := false
 
  # INFO: Variable for the lives the player has remaining, with an accompanying set function which updates the UI
 var lives := 3:
@@ -104,7 +105,7 @@ func _on_score_multiplier_timer_timeout() -> void:
 
 
 func _on_enemy_removed() -> void:
-	if !is_inside_tree():
+	if is_game_over or !is_inside_tree():
 		return
 	if get_tree().get_node_count_in_group("enemies") > 0:
 		return
@@ -116,7 +117,17 @@ func _on_enemy_removed() -> void:
 
 
 func game_over() -> void:
+	if is_game_over:
+		return
+	is_game_over = true
 	for i in get_tree().get_nodes_in_group("enemies"):
+		i.set_physics_process(false)
+		if i.attack_sound:
+			i.attack_sound.stop()
+		if i.attack_sound_2:
+			i.attack_sound_2.stop()
+		i.queue_free()
+	for i in get_tree().get_nodes_in_group("enemy_attack"):
 		i.queue_free()
 	player.set_physics_process(false)
 	high_score_game_over.visible = true
