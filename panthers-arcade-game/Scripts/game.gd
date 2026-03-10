@@ -9,6 +9,8 @@ extends Node2D
 @onready var rewind_cooldown_timer := $Player/RewindCooldownTimer
 @onready var background := $Background
 @onready var score_multiplier_timer := $ScoreMultiplierTimer
+@onready var background_music := $Sounds/BackgroundMusic
+
 var rewind_cooldown_percentage := 1.0
 
 var min_score_multiplier := 1.0
@@ -86,9 +88,9 @@ func _spawn_wave() -> void:
 
 func _on_enemy_killed(score_value) -> void:
 	score = score + score_value*score_multiplier
+
 	score_multiplier = snappedf(score_multiplier + score_multiplier_increment, score_multiplier_increment)
-	if score_multiplier >= max_score_multiplier:
-		score_multiplier = max_score_multiplier
+	score_multiplier = minf(score_multiplier, max_score_multiplier)
 	score_multiplier_timer.start()
 	color_multiplier_bar()
 
@@ -112,6 +114,8 @@ func _on_enemy_removed() -> void:
 
 func game_over() -> void:
 	player.set_physics_process(false)
+	for i in $Enemies.get_children():
+		i.queue_free()
 	high_score_game_over.visible = true
 
 

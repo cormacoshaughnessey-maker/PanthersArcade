@@ -89,4 +89,9 @@ shape = SubResource("WorldBoundaryShape2D_wowpa")
 wait_time = 6.0
 one_shot = true
 
+[node name="Sounds" type="Node" parent="." unique_id=622818269]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds" unique_id=1648426374]
+autoplay = true
+
 [connection signal="timeout" from="ScoreMultiplierTimer" to="." method="_on_score_multiplier_timer_timeout"]
