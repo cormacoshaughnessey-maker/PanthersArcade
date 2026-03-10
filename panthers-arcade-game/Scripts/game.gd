@@ -12,6 +12,7 @@ extends Node2D
 @onready var background_music := $Sounds/BackgroundMusic
 
 var rewind_cooldown_percentage := 1.0
+var max_rewind_bars := 130
 
 var min_score_multiplier := 1.0
 var score_multiplier_increment := 0.2
@@ -121,7 +122,7 @@ func game_over() -> void:
 
  # Fill the rewind bar, and set its transparency
 func _physics_process(_delta: float) -> void:
-	rewind_ui.fill_rewind_bar(player.rewind_data_length()/2)
+	rewind_ui.fill_rewind_bar(player.rewind_data_length()/player.max_rewind_length * max_rewind_bars)
 	rewind_cooldown_percentage = (1 - rewind_cooldown_timer.time_left/rewind_cooldown_timer.wait_time)
 	if rewind_cooldown_percentage != 1:
 		rewind_ui.modulate = Color(1.0, 1.0, 1.0, rewind_cooldown_percentage/2)

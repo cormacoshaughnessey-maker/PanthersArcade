@@ -5,6 +5,7 @@ class_name RewindAttack
 @export var damage := 100.0
 
 var hitbox : CollisionShape2D
+var sprite : AnimatedSprite2D
 
 
 func _ready() -> void:
@@ -14,6 +15,7 @@ func _ready() -> void:
 # INFO: When the attack is spawned, disable its hitbox after a short delay, then delete it after a longer one
 func _enter_tree() -> void:
 	hitbox = $CollisionShape2D
+	sprite = $AnimatedSprite2D
 	hitbox.disabled = false
 	#await get_tree().create_timer(0.3).timeout
 	#hitbox.disabled = true
@@ -28,6 +30,11 @@ func _on_area_entered(area: Area2D) -> void:
 
 func hide_sprite(hiding := true) -> void:
 	$AnimatedSprite2D.visible = not hiding
+
+
+func _physics_process(delta: float) -> void:
+	if sprite.frame > 6:
+		hitbox.disabled = true
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

@@ -13,7 +13,7 @@ func upd_score():
 
 var max_wait_time := 6.0
 #var wait_time := 1.0
-var max_bars := 20
+var max_bars := 30
 
 var cooldown_bar_scene := preload("res://Scenes/cooldown_ui_bar.tscn")
 
@@ -25,7 +25,7 @@ var cooldown_bar_scene := preload("res://Scenes/cooldown_ui_bar.tscn")
 			score_multiplier_label.text = ""
 		else:
 			score_multiplier_label.text = new_text
-		
+
 
 
 func fill_cooldown_bar(wait_time:float, score_multiplier:=1.0):
@@ -55,4 +55,7 @@ func color_multiplier_bar(score_multiplier) -> void:
 		multiplier_cooldown_bar.modulate = Color("ff5cff")
 	else:
 		multiplier_cooldown_bar.modulate = Color("ffffff")
-	
+
+func _ready() -> void:
+	fill_cooldown_bar(0,1.0)
+	pass

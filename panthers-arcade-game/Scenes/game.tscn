@@ -45,8 +45,10 @@ offset_bottom = 20.0
 [node name="ScoreUI" parent="UI" unique_id=2045399400 instance=ExtResource("4_1l0tm")]
 
 [node name="HighScore" parent="UI" unique_id=438450902 instance=ExtResource("5_v158k")]
+visible = false
 
 [node name="HighScoreDisplay" parent="UI" unique_id=2068393492 instance=ExtResource("6_v158k")]
+visible = false
 
 [node name="Background" parent="." unique_id=1810696300 instance=ExtResource("2_wrm1d")]
 z_index = -1

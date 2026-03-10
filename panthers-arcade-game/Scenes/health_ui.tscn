@@ -17,6 +17,7 @@ metadata/_edit_lock_ = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_constants/separation = 0
 
 [node name="ui_life" parent="Lives" unique_id=928836512 instance=ExtResource("2_mxkyl")]
 layout_mode = 2
