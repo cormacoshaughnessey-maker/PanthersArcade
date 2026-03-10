@@ -162,7 +162,7 @@ func _finish_rewind_cooldown() -> void:
 #region Health/Damage Functions
  # INFO: Player loses a life
 func lose_life(damage := 1) -> void:
-	if not rewinding and not is_invincible:
+	if false and not rewinding and not is_invincible: # TODO: revert infinite lives
 		game_node.lives -= damage
 		if game_node.lives <= 0:
 			player_died.emit()

@@ -91,6 +91,8 @@ func move_and_attack(_delta: float) -> void:
 
 
 func take_damage(amount: float) -> void:
+	if is_dead:
+		return
 	if not invulnerable:
 		current_health -= amount
 		invulnerable = true

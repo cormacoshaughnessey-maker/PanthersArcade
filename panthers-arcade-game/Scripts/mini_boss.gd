@@ -14,8 +14,7 @@ class_name MiniBoss
 
 @export var projectile_scene : PackedScene
 
-var velocity_x := 0.0
-var target_velocity_x := 200.0
+var move_direction := 1.0
 var can_attack := true
 var attack_pattern := 0
 var screen_size : Vector2
@@ -28,18 +27,31 @@ func _ready() -> void:
 	current_health = max_health
 	score_value = 100
 	screen_size = get_viewport_rect().size
-	velocity_x = target_velocity_x
 
 func get_visible_screen_top() -> float:
 	var canvas_transform = get_canvas_transform()
 	var screen_top_world = -canvas_transform.origin.y
 	return screen_top_world + screen_top_offset
 
+func get_half_size_x() -> float:
+	var col_shape = get_node_or_null("CollisionShape2D")
+	if col_shape and col_shape.shape is RectangleShape2D:
+		return col_shape.shape.size.x / 2.0 + abs(col_shape.position.x)
+	elif col_shape and col_shape.shape is CircleShape2D:
+		return col_shape.shape.radius + abs(col_shape.position.x)
+	return 50.0
+
 func get_visible_screen_bounds() -> Vector2:
 	var canvas_transform = get_canvas_transform()
-	var left = -canvas_transform.origin.x + 50
-	var right = -canvas_transform.origin.x + screen_size.x - 50
+	var pad = get_half_size_x()
+	var left = -canvas_transform.origin.x + pad
+	var right = -canvas_transform.origin.x + screen_size.x - pad
 	return Vector2(left, right)
+
+
+func clamp_to_screen() -> void:
+	var bounds = get_visible_screen_bounds()
+	global_position.x = clampf(global_position.x, bounds.x, bounds.y)
 
 
 func move_and_attack(delta: float) -> void:
@@ -54,13 +66,12 @@ func move_and_attack(delta: float) -> void:
 
 	var bounds = get_visible_screen_bounds()
 
-	if global_position.x > bounds.y:
-		target_velocity_x = -horizontal_speed
-	elif global_position.x < bounds.x:
-		target_velocity_x = horizontal_speed
+	if global_position.x >= bounds.y:
+		move_direction = -1.0
+	elif global_position.x <= bounds.x:
+		move_direction = 1.0
 
-	velocity_x = lerp(velocity_x, target_velocity_x, delta * 3.0)
-	global_position.x += velocity_x * delta
+	global_position.x += move_direction * horizontal_speed * delta
 
 	var direction_to_player = (player.global_position - global_position).normalized()
 	var target_rotation = direction_to_player.angle() + deg_to_rad(90)
@@ -150,18 +161,30 @@ func aimed_burst_attack() -> void:
 func melee_dive_attack() -> void:
 	is_diving = true
 
+	if not is_instance_valid(player):
+		is_diving = false
+		return
+
 	var start_pos = global_position
 	var target_pos = player.global_position
+	var has_dealt_damage = false
 
 	var dive_duration = 0.4
 	var elapsed = 0.0
 
 	while elapsed < dive_duration:
+		if not is_instance_valid(player):
+			break
 		if not paused:
 			elapsed += get_physics_process_delta_time()
 			var t = elapsed / dive_duration
 			t = 1.0 - pow(1.0 - t, 3.0)
 			global_position = start_pos.lerp(target_pos, t)
+			# Deal contact damage when close enough to the player
+			if not has_dealt_damage and global_position.distance_to(player.global_position) < melee_range:
+				if player.has_method("lose_life"):
+					player.lose_life()
+					has_dealt_damage = true
 		await get_tree().process_frame
 
 	# Hold the arm-out frame while paused at player

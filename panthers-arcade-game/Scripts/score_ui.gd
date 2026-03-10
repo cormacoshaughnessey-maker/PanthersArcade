@@ -42,17 +42,17 @@ func fill_cooldown_bar(wait_time:float, score_multiplier:=1.0):
 
 
 func color_multiplier_bar(score_multiplier) -> void:
-	match score_multiplier:
-		1.2:
-			multiplier_cooldown_bar.modulate = Color("ff5cff")
-		1.4:
-			multiplier_cooldown_bar.modulate = Color("ac29ce")
-		1.6:
-			multiplier_cooldown_bar.modulate = Color("600088")
-		1.8:
-			multiplier_cooldown_bar.modulate = Color("b10585")
-		2.0:
-			multiplier_cooldown_bar.modulate = Color("ff004e")
-		_:
-			multiplier_cooldown_bar.modulate = Color("ffffff")
+	var m = snappedf(score_multiplier, 0.2)
+	if m >= 2.0:
+		multiplier_cooldown_bar.modulate = Color("ff004e")
+	elif m >= 1.8:
+		multiplier_cooldown_bar.modulate = Color("b10585")
+	elif m >= 1.6:
+		multiplier_cooldown_bar.modulate = Color("600088")
+	elif m >= 1.4:
+		multiplier_cooldown_bar.modulate = Color("ac29ce")
+	elif m >= 1.2:
+		multiplier_cooldown_bar.modulate = Color("ff5cff")
+	else:
+		multiplier_cooldown_bar.modulate = Color("ffffff")
 	
