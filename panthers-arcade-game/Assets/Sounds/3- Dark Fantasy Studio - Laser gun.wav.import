@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ccp32bk5g5vma"
+path="res://.godot/imported/3- Dark Fantasy Studio - Laser gun.wav-59ceee67f621f0fc6747dfeb9c225223.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/3- Dark Fantasy Studio - Laser gun.wav"
+dest_files=["res://.godot/imported/3- Dark Fantasy Studio - Laser gun.wav-59ceee67f621f0fc6747dfeb9c225223.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

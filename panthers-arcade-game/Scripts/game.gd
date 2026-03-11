@@ -12,6 +12,8 @@ extends Node2D
 @onready var background_music := $Sounds/BackgroundMusic
 @onready var enemy_death := $Sounds/EnemyDeath
 @onready var rewind_color_rect := $UI/RewindColorRect
+@onready var player_death_sound := $Sounds/PlayerDeath
+@onready var wave_completion_sound := $Sounds/WaveCompletion
 
 var rewind_cooldown_percentage := 1.0
 var max_rewind_bars := 131
@@ -113,6 +115,7 @@ func _on_enemy_removed() -> void:
 		#if e is Enemy and e.is_inside_tree():
 			#return
 	Enemy._current_wave += 1
+	wave_completion_sound.play()
 	_spawn_wave()
 
 
@@ -130,7 +133,10 @@ func game_over() -> void:
 	for i in get_tree().get_nodes_in_group("enemy_attack"):
 		i.queue_free()
 	player.set_physics_process(false)
+	player_death_sound.play()
+	background_music.stop()
 	high_score_game_over.visible = true
+	
 
 
  # Fill the rewind bar, and set its transparency
@@ -213,3 +219,7 @@ func load_game():
 
 #func _exit_tree() -> void:
 	#save_score()
+
+
+func _on_background_music_finished() -> void:
+	background_music.play()

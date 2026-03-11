@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cvc32er767kok" path="res://Scenes/high_score_game_over_screen.tscn" id="5_v158k"]
 [ext_resource type="PackedScene" uid="uid://gfdtqlc0b57g" path="res://Scenes/high_score_display.tscn" id="6_v158k"]
 [ext_resource type="AudioStream" uid="uid://cjwe7ipnmhjbu" path="res://Assets/Sounds/Cartoon Sci-Fi Rattling Impact 1.wav" id="9_h4fw4"]
+[ext_resource type="AudioStream" uid="uid://ccp32bk5g5vma" path="res://Assets/Sounds/3- Dark Fantasy Studio - Laser gun.wav" id="9_rku1e"]
+[ext_resource type="AudioStream" uid="uid://d3kfwx4tjedbk" path="res://Assets/Sounds/Cartoon Sci-Fi Clunky Impact 1.wav" id="10_ldgsr"]
+[ext_resource type="AudioStream" uid="uid://bsymxibhgig6k" path="res://Assets/Sounds/Cartoon Sci-Fi Interface New Objective Sound 2.wav" id="11_o5yvi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wowpa"]
 
@@ -31,6 +34,7 @@ default_lives = 5
 [node name="UI" type="CanvasLayer" parent="." unique_id=1082573101]
 
 [node name="RewindColorRect" type="ColorRect" parent="UI" unique_id=1674830931]
+visible = false
 offset_right = 1080.0
 offset_bottom = 1920.0
 color = Color(0.3764706, 0, 0.53333336, 0.39215687)
@@ -100,10 +104,20 @@ one_shot = true
 [node name="Sounds" type="Node" parent="." unique_id=622818269]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds" unique_id=1648426374]
+stream = ExtResource("9_rku1e")
+volume_db = -5.0
 autoplay = true
 
 [node name="EnemyDeath" type="AudioStreamPlayer" parent="Sounds" unique_id=756958987]
 stream = ExtResource("9_h4fw4")
 max_polyphony = 20
 
+[node name="PlayerDeath" type="AudioStreamPlayer" parent="Sounds" unique_id=1597599763]
+stream = ExtResource("10_ldgsr")
+
+[node name="WaveCompletion" type="AudioStreamPlayer" parent="Sounds" unique_id=1485627450]
+stream = ExtResource("11_o5yvi")
+max_polyphony = 6
+
 [connection signal="timeout" from="ScoreMultiplierTimer" to="." method="_on_score_multiplier_timer_timeout"]
+[connection signal="finished" from="Sounds/BackgroundMusic" to="." method="_on_background_music_finished"]
