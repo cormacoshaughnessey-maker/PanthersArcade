@@ -42,7 +42,7 @@ color = Color(0.3764706, 0, 0.53333336, 0.39215687)
 [node name="ColorRect" type="ColorRect" parent="UI" unique_id=226352673]
 offset_right = 1080.0
 offset_bottom = 176.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0.011764706, 0.23529412, 1)
 
 [node name="HealthUI" parent="UI" unique_id=143631567 instance=ExtResource("5_ui")]
 offset_left = 16.0

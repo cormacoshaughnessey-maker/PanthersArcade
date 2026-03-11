@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c3xk7dvnrlfqv"]
 
-[ext_resource type="Texture2D" uid="uid://6fltgqkukpaa" path="res://Assets/Sprites/Health_UI_Sprite.png" id="1_kqeco"]
+[ext_resource type="Texture2D" uid="uid://bx7lprck8s4ib" path="res://Assets/Sprites/Health UI - Small.png" id="1_kqeco"]
 
 [node name="ui_life" type="TextureRect" unique_id=928836512]
 anchors_preset = 15
