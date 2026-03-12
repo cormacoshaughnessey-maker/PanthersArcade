@@ -133,8 +133,10 @@ func game_over() -> void:
 	for i in get_tree().get_nodes_in_group("enemy_attack"):
 		i.queue_free()
 	player.set_physics_process(false)
-	player_death_sound.play()
 	background_music.stop()
+	player_death_sound.play()
+	player.get_node("AnimatedSprite2D").play("death")
+	await player.get_node("AnimatedSprite2D").animation_finished
 	high_score_game_over.visible = true
 	
 
