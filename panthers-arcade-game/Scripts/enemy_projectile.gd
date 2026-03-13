@@ -45,16 +45,18 @@ func _physics_process(delta: float) -> void:
 
 # when projectile hits something
 func _on_area_entered(area: Area2D) -> void:
-	if deflected and area is Enemy:
+	if area is RewindAttack and not deflected:
+		deflect()
+	elif deflected and area is Enemy:
 		area.die()
 		queue_free()
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("lose_life") and body is Player:
-		if body.rewinding and not deflected:
-			deflect()
-		elif not body.is_invincible and not paused:
+		#if body.rewinding and not deflected:
+			#deflect()
+		if not body.is_invincible and not paused:
 			body.lose_life()
 			queue_free()  # destroy projectile after hitting
 
