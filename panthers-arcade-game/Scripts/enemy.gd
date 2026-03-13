@@ -115,11 +115,12 @@ func take_damage(amount: float) -> void:
 		return
 	if not invulnerable:
 		current_health -= amount
+		if current_health <= 0:
+			die()
+			return
 		invulnerable = true
 		await get_tree().create_timer(0.5).timeout
 		invulnerable = false
-	if current_health <= 0:
-		die()
 
 func die() -> void:
 	if is_dead:
