@@ -14,6 +14,7 @@ class_name MiniBoss
 
 @export var projectile_scene : PackedScene
 
+var warning_texture = preload("res://Assets/Sprites/boss_melee_warning_spritesheet.png")
 var move_direction := 1.0
 var can_attack := true
 var attack_pattern := 0
@@ -22,6 +23,8 @@ var is_diving := false
 
 
 func _ready() -> void:
+	death_sprite_texture = preload("res://Assets/Sprites/enemy_death_spritesheet.png")
+	death_frame_size = 128
 	super._ready()
 	max_health = 300.0
 	current_health = max_health
@@ -161,8 +164,42 @@ func aimed_burst_attack() -> void:
 			await get_tree().process_frame
 
 
+func _spawn_melee_warning() -> AnimatedSprite2D:
+	var warning = AnimatedSprite2D.new()
+	var frames = SpriteFrames.new()
+	frames.add_animation("flash")
+	frames.set_animation_loop("flash", true)
+	frames.set_animation_speed("flash", 12.0)
+	for i in 2:
+		var atlas_tex = AtlasTexture.new()
+		atlas_tex.atlas = warning_texture
+		atlas_tex.region = Rect2(i * 128, 0, 128, 128)
+		frames.add_frame("flash", atlas_tex)
+	warning.sprite_frames = frames
+	warning.scale = Vector2(2, 2)
+	warning.global_position = global_position + Vector2(0, -100)
+	warning.play("flash")
+	get_parent().add_child(warning)
+	return warning
+
+
 func melee_dive_attack() -> void:
 	is_diving = true
+
+	if not is_instance_valid(player):
+		is_diving = false
+		return
+
+	var warning = _spawn_melee_warning()
+	var warn_elapsed = 0.0
+	while warn_elapsed < 2.5:
+		if not paused:
+			warn_elapsed += get_physics_process_delta_time()
+			if is_instance_valid(warning):
+				warning.global_position = global_position + Vector2(0, -80)
+		await get_tree().process_frame
+	if is_instance_valid(warning):
+		warning.queue_free()
 
 	if not is_instance_valid(player):
 		is_diving = false

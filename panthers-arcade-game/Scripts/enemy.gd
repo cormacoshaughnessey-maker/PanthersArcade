@@ -11,6 +11,8 @@ signal enemy_killed(score_value: int)
 @export var damage := 10.0
 @export var score_value := 10  
 @export var contact_damage_cooldown := 1.0
+@export var death_frame_size := 160
+@export var death_sprite_texture : Texture2D
 
 var paused := false
 var invulnerable := false
@@ -124,7 +126,28 @@ func die() -> void:
 		return
 	is_dead = true
 	enemy_killed.emit(score_value)
+	_spawn_death_explosion()
 	queue_free()
+
+
+func _spawn_death_explosion() -> void:
+	if not death_sprite_texture:
+		return
+	var explosion = AnimatedSprite2D.new()
+	var frames = SpriteFrames.new()
+	frames.add_animation("explode")
+	frames.set_animation_loop("explode", false)
+	frames.set_animation_speed("explode", 10.0)
+	for i in 9:
+		var atlas_tex = AtlasTexture.new()
+		atlas_tex.atlas = death_sprite_texture
+		atlas_tex.region = Rect2(i * death_frame_size, 0, death_frame_size, death_frame_size)
+		frames.add_frame("explode", atlas_tex)
+	explosion.sprite_frames = frames
+	explosion.global_position = global_position
+	explosion.play("explode")
+	explosion.animation_finished.connect(explosion.queue_free)
+	get_parent().add_child(explosion)
 
 var _pre_attack_animation : String = ""
 

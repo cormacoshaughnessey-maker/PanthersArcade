@@ -20,6 +20,8 @@ var random_timer := 0.0
 
 
 func _ready() -> void:
+	death_sprite_texture = preload("res://Assets/Sprites/enemy_death_spritesheet.png")
+	death_frame_size = 128
 	super._ready()
 	score_value = 25
 	pick_random_direction()

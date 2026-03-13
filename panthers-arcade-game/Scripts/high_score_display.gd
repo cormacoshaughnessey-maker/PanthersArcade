@@ -42,5 +42,9 @@ func update_high_score():
 			list.erase(max_name)
 
 
+func _input(event: InputEvent) -> void:
+	if is_visible_in_tree() and event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+		_on_play_button_pressed()
+
 func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")

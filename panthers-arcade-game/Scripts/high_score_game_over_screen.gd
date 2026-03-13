@@ -16,7 +16,6 @@ var current_index := [0,0,0]
 var player_name := ""
 var not_done := true
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	high_score_display = get_node("/root/Game/UI/HighScoreDisplay")
 	letter_selected = 0
