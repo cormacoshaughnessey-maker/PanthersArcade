@@ -6,7 +6,7 @@ class_name Enemy
 
 signal enemy_killed(score_value: int)
 
-@export var max_health := 100.0
+@export var max_health := 50.0
 @export var move_speed := 150.0
 @export var damage := 10.0
 @export var score_value := 10  
