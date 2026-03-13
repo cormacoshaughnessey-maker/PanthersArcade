@@ -9,7 +9,7 @@ extends Control
 var alph := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 var letters := []
 var letter_selected := 0
-var censor_list = [[0, 0, 0],[0, 18, 18], [5, 20, 2], [5, 20, 10], [5, 0, 6], [5, 20, 23], [13, 8, 6], [4, 5, 13], [21, 0, 6], [2, 20, 12], [18, 7, 19], [18, 7, 8]]
+var censor_list = [[0, 0, 0],[0, 18, 18], [5, 20, 2], [5, 20, 10], [5, 0, 6], [5, 20, 23], [13, 8, 6], [4, 5, 13], [21, 0, 6], [2, 20, 12], [18, 7, 19], [18, 7, 8]] # [22, 3, 6]
 var current_index := [0,0,0]
 var player_name := ""
 var not_done := true
@@ -66,6 +66,8 @@ func _physics_process(_delta: float) -> void:
 				censor_check = [false, false, false]
 			if(good):
 				player_name = alph[current_index[0]] + alph[current_index[1]] + alph[current_index[2]]
+				if (current_index[0] == 22 and current_index[1] == 3 and current_index[2] == 6):
+					player_name = "???"
 				print("High score confirmed: ", player_name)
 				game_node.save_score()
 				not_done = false
