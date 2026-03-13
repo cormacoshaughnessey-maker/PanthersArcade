@@ -48,7 +48,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is RewindAttack and not deflected:
 		deflect()
 	elif deflected and area is Enemy:
-		area.die()
+		area.take_damage(100.0)
 		queue_free()
 
 
