@@ -86,7 +86,7 @@ func deflect() -> void:
 			atlas_tex.region = Rect2(i * 128, 0, 128, 128)
 			new_frames.add_frame("default", atlas_tex)
 		sprite.sprite_frames = new_frames
-		sprite.pause()
+		sprite.play("default")
 
 	remove_from_group("enemy_attack")
 	add_to_group("player_attack")
