@@ -49,6 +49,9 @@ static func reset_wave_state() -> void:
 
 
 func _ready() -> void:
+	#1st plus 2nd number is max speed of enemies
+	#change the number in exp() if you want it to grow faster or slower
+	move_speed = 150 + 250 / (1 + exp(-(_current_wave-10)))
 	current_health = max_health
 	player = get_tree().get_first_node_in_group("player")
 	area_entered.connect(_on_area_entered)
