@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://x6tlw22g161d" path="res://Assets/Sprites/player_death_anim.png" id="2_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://b5533bdaoprgx" path="res://Assets/Sounds/Cartoon Sci-Fi Projectile Impact 1.wav" id="3_6t5aa"]
 [ext_resource type="AudioStream" uid="uid://bhxoivbitv4fj" path="res://Assets/Sounds/Cartoon Sci-Fi Portal Open Sound 1.wav" id="3_vgqql"]
+[ext_resource type="Texture2D" uid="uid://xposmtsavc6g" path="res://Assets/Sprites/player hurt sprites.png" id="4_3smsa"]
 [ext_resource type="AudioStream" uid="uid://c37bwayymiufj" path="res://Assets/Sounds/Cartoon Sci-Fi Sweep 4.wav" id="5_fkybt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
@@ -168,6 +169,50 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi64h"]
+atlas = ExtResource("4_3smsa")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ijsl"]
+atlas = ExtResource("4_3smsa")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1odr"]
+atlas = ExtResource("4_3smsa")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gysh"]
+atlas = ExtResource("4_3smsa")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vfarp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi64h")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ijsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1odr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ijsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gysh")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
 size = Vector2(128, 112)
 
@@ -179,7 +224,13 @@ speed = 400.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2073562979]
 sprite_frames = SubResource("SpriteFrames_x3wgy")
-animation = &"death"
+animation = &"idle"
+autoplay = "idle"
+
+[node name="HurtSprites" type="AnimatedSprite2D" parent="." unique_id=1455076755]
+visible = false
+sprite_frames = SubResource("SpriteFrames_vfarp")
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=642745912]
@@ -190,6 +241,10 @@ wait_time = 1.75
 one_shot = true
 
 [node name="InvincibilityCooldownTimer" type="Timer" parent="." unique_id=979426115]
+one_shot = true
+
+[node name="HurtSpriteTimer" type="Timer" parent="." unique_id=2046859939]
+wait_time = 0.1
 one_shot = true
 
 [node name="RewindSound" type="AudioStreamPlayer" parent="." unique_id=1101748775]
@@ -206,3 +261,4 @@ stream = ExtResource("5_fkybt")
 
 [connection signal="timeout" from="RewindCooldownTimer" to="." method="_finish_rewind_cooldown"]
 [connection signal="timeout" from="InvincibilityCooldownTimer" to="." method="_on_invincibility_cooldown_timer_timeout"]
+[connection signal="timeout" from="HurtSpriteTimer" to="." method="_on_hurt_sprite_timer_timeout"]

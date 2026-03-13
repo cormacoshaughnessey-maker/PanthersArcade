@@ -14,6 +14,8 @@ var paused := false
 var deflected := false
 var deflected_sprite_texture = preload("res://Assets/Sprites/player_energyorb_spritesheet.png")
 
+@onready var deflect_sound := $DeflectSound
+
 func _ready() -> void:
 	self.add_to_group("enemy_attack")
 	self.add_to_group("pausable")
@@ -48,7 +50,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is RewindAttack and not deflected:
 		deflect()
 	elif deflected and area is Enemy:
-		area.die()
+		area.take_damage(50.0)
 		queue_free()
 
 
@@ -65,6 +67,7 @@ func deflect() -> void:
 	if deflected:
 		return
 	deflected = true
+	deflect_sound.play()
 
 	velocity = -velocity
 	direction = -direction
@@ -83,7 +86,7 @@ func deflect() -> void:
 			atlas_tex.region = Rect2(i * 128, 0, 128, 128)
 			new_frames.add_frame("default", atlas_tex)
 		sprite.sprite_frames = new_frames
-		sprite.pause()
+		sprite.play("default")
 
 	remove_from_group("enemy_attack")
 	add_to_group("player_attack")

@@ -6,7 +6,7 @@ class_name Enemy
 
 signal enemy_killed(score_value: int)
 
-@export var max_health := 100.0
+@export var max_health := 50.0
 @export var move_speed := 150.0
 @export var damage := 10.0
 @export var score_value := 10  
@@ -118,11 +118,12 @@ func take_damage(amount: float) -> void:
 		return
 	if not invulnerable:
 		current_health -= amount
+		if current_health <= 0:
+			die()
+			return
 		invulnerable = true
 		await get_tree().create_timer(0.5).timeout
 		invulnerable = false
-	if current_health <= 0:
-		die()
 
 func die() -> void:
 	if is_dead:

@@ -21,7 +21,6 @@ var attack_pattern := 0
 var screen_size : Vector2
 var is_diving := false
 
-
 func _ready() -> void:
 	death_sprite_texture = preload("res://Assets/Sprites/enemy_death_spritesheet.png")
 	death_frame_size = 128
@@ -192,11 +191,14 @@ func melee_dive_attack() -> void:
 
 	var warning = _spawn_melee_warning()
 	var warn_elapsed = 0.0
-	while warn_elapsed < 2.5:
+	while warn_elapsed < 0.5:
 		if not paused:
+			warning.play()
 			warn_elapsed += get_physics_process_delta_time()
 			if is_instance_valid(warning):
 				warning.global_position = global_position + Vector2(0, -80)
+		else:
+			warning.pause()
 		await get_tree().process_frame
 	if is_instance_valid(warning):
 		warning.queue_free()
