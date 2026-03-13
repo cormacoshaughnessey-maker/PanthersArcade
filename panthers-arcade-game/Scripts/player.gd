@@ -33,6 +33,8 @@ var is_invincible := false  # i-frames after taking damage
 @onready var rewind_sound := $RewindSound
 @onready var rewind_start_sound := $RewindStartSound
 @onready var hurt_sound := $HurtSound
+@onready var hurt_sprite := $HurtSprites
+@onready var hurt_sprite_timer := $HurtSpriteTimer
 
 var attack_scene := preload("res://Scenes/rewind_attack.tscn")
 var projection_scene := preload("res://Scenes/player_projection.tscn")
@@ -70,6 +72,9 @@ func inputs(delta: float) -> void:
 				rewind()
 	if not rewinding:
 		movement_inputs(delta)
+	hurt_sprite.animation = player_sprite.animation
+	hurt_sprite.frame = player_sprite.frame
+	hurt_sprite.frame_progress = player_sprite.frame_progress
 
 
 #region Rewind Functions
@@ -177,6 +182,8 @@ func lose_life(damage := 1) -> void:
 			game_node.game_over()
 		else:
 			start_invincibility()
+			hurt_sprite.show()
+			hurt_sprite_timer.start()
 			print("lost a life! lives left: ", game_node.lives)
 			hurt_sound.play()
 
@@ -185,17 +192,29 @@ func lose_life(damage := 1) -> void:
 func start_invincibility(rewind_iframes := false) -> void:
 	is_invincible = true
 	# TODO: make sprite flash or something to show i-frames
-	modulate = Color(1.0, 1.0, 1.0, 0.5)
 	if not rewind_iframes:
 		invincibility_cooldown_timer.start(invincibility_duration)
 	else:
 		invincibility_cooldown_timer.start(rewind_invincibility_duration)
+		modulate = Color(1.0, 1.0, 1.0, 0.5)
 
 
  # INFO: Ending of invincibility timers
 func _on_invincibility_cooldown_timer_timeout() -> void:
 	is_invincible = false
 	modulate = Color(1.0, 1.0, 1.0, 1)
+
+
+func _on_hurt_sprite_timer_timeout() -> void:
+	hurt_sprite.hide()
+	await get_tree().create_timer(0.1).timeout
+	hurt_sprite.show()
+	await get_tree().create_timer(0.1).timeout
+	hurt_sprite.hide()
+	await get_tree().create_timer(0.1).timeout
+	hurt_sprite.show()
+	await get_tree().create_timer(0.1).timeout
+	hurt_sprite.hide()
 #endregion
 
 
