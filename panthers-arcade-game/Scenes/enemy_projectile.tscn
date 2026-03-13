@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cst5ngktc8ki5" path="res://Scripts/enemy_projectile.gd" id="1_projectile"]
 [ext_resource type="Texture2D" uid="uid://dccn3jpm5dyk7" path="res://Assets/Sprites/energyorb_spritesheet.png" id="2_sprite"]
+[ext_resource type="AudioStream" uid="uid://p6dno31dt4tw" path="res://Assets/Sounds/Projectile Sound.tres" id="3_gjudp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibebl"]
 atlas = ExtResource("2_sprite")
@@ -69,3 +70,6 @@ frame_progress = 0.3994784
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=415012167]
 shape = SubResource("CircleShape2D_iut4j")
+
+[node name="DeflectSound" type="AudioStreamPlayer" parent="." unique_id=656219015]
+stream = ExtResource("3_gjudp")

@@ -14,6 +14,8 @@ var paused := false
 var deflected := false
 var deflected_sprite_texture = preload("res://Assets/Sprites/player_energyorb_spritesheet.png")
 
+@onready var deflect_sound := $DeflectSound
+
 func _ready() -> void:
 	self.add_to_group("enemy_attack")
 	self.add_to_group("pausable")
@@ -65,6 +67,7 @@ func deflect() -> void:
 	if deflected:
 		return
 	deflected = true
+	deflect_sound.play()
 
 	velocity = -velocity
 	direction = -direction
