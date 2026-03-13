@@ -9,6 +9,7 @@ extends Control
 var alph := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 var letters := []
 var letter_selected := 0
+var censor_list = [[0, 18, 18], [5, 20, 2], [5, 20, 10], [5, 0, 6], [13, 8, 6], [4, 5, 13], [21, 0, 6]]
 #var current1 := 0
 #var current2 := 0
 #var current3 := 0
@@ -101,8 +102,19 @@ func _physics_process(_delta: float) -> void:
 				current_index[letter_selected] = current_index[letter_selected] + 1
 			letters[letter_selected].text = alph[current_index[letter_selected]]
 		if(not_done && Input.is_action_just_pressed("rewind")):
-			player_name = alph[current_index[0]] + alph[current_index[1]] + alph[current_index[2]]
-			print("High score confirmed: ", player_name)
-			game_node.save_score()
-			not_done = false
-			high_score_display.visible = true
+			var censor_check = [false, false, false]
+			var good := true
+			for word in censor_list:
+				for i in range(3):
+					if(word[i] == current_index[i]):
+						censor_check[i] = true
+				if(censor_check[0] && censor_check[1] && censor_check[2]):
+					good = false
+					break
+				censor_check = [false, false, false]
+			if(good):
+				player_name = alph[current_index[0]] + alph[current_index[1]] + alph[current_index[2]]
+				print("High score confirmed: ", player_name)
+				game_node.save_score()
+				not_done = false
+				high_score_display.visible = true
