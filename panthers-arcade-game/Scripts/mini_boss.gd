@@ -7,7 +7,7 @@ class_name MiniBoss
 @export var attack_pattern_cooldown := 5.0
 @export var projectile_speed := 350.0
 @export var melee_range := 120.0
-@export var base_warning_duration := 2.5
+@export var base_warning_duration := 1.5
 @export var base_dive_duration := 1.0
 @export var min_dive_duration := 0.3
 @export var dive_speedup_per_wave := 0.02
