@@ -60,7 +60,7 @@ func move_and_attack(delta: float) -> void:
 	if face_direction != Vector2.ZERO:
 		rotation = face_direction.angle() + deg_to_rad(90)
 
-	if distance_to_player <= attack_range and can_shoot:
+	if can_shoot:
 		shoot_projectile()
 
 
