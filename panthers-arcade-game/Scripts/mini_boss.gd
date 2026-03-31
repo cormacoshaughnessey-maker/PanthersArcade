@@ -33,6 +33,8 @@ func _ready() -> void:
 	current_health = max_health
 	score_value = 100
 	screen_size = get_viewport_rect().size
+	can_attack = false
+	start_attack_cooldown(1.0)
 
 func get_visible_screen_top() -> float:
 	var canvas_transform = get_canvas_transform()
