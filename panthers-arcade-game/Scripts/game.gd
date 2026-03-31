@@ -164,6 +164,7 @@ func color_multiplier_bar() -> void:
 func pause_enemies(pause:=true) -> void:
 	for i in get_tree().get_nodes_in_group("pausable"):
 		i.pause(pause)
+	score_multiplier_timer.paused = pause
 
 #save_score() is called when the player dies and the game is over
 #load_scores() is called in the _ready() function
