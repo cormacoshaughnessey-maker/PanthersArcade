@@ -7,6 +7,10 @@ class_name MiniBoss
 @export var attack_pattern_cooldown := 5.0
 @export var projectile_speed := 350.0
 @export var melee_range := 120.0
+@export var base_warning_duration := 2.5
+@export var base_dive_duration := 1.0
+@export var min_dive_duration := 0.3
+@export var dive_speedup_per_wave := 0.05
 
 @export var spread_shot_count := 5
 @export var spread_angle := 60.0
@@ -189,9 +193,11 @@ func melee_dive_attack() -> void:
 		is_diving = false
 		return
 
+	var target_pos = player.global_position
+
 	var warning = _spawn_melee_warning()
 	var warn_elapsed = 0.0
-	while warn_elapsed < 1.5:
+	while warn_elapsed < base_warning_duration:
 		if not paused:
 			warning.play()
 			warn_elapsed += get_physics_process_delta_time()
@@ -208,10 +214,9 @@ func melee_dive_attack() -> void:
 		return
 
 	var start_pos = global_position
-	var target_pos = player.global_position
 	var has_dealt_damage = false
 
-	var dive_duration = 0.4
+	var dive_duration = maxf(base_dive_duration - dive_speedup_per_wave * Enemy._current_wave, min_dive_duration)
 	var elapsed = 0.0
 
 	while elapsed < dive_duration:
