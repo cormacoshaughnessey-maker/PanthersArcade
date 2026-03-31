@@ -10,7 +10,7 @@ class_name MiniBoss
 @export var base_warning_duration := 2.5
 @export var base_dive_duration := 1.0
 @export var min_dive_duration := 0.3
-@export var dive_speedup_per_wave := 0.05
+@export var dive_speedup_per_wave := 0.02
 
 @export var spread_shot_count := 5
 @export var spread_angle := 60.0
