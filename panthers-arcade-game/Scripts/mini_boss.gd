@@ -191,7 +191,7 @@ func melee_dive_attack() -> void:
 
 	var warning = _spawn_melee_warning()
 	var warn_elapsed = 0.0
-	while warn_elapsed < 0.5:
+	while warn_elapsed < 1.5:
 		if not paused:
 			warning.play()
 			warn_elapsed += get_physics_process_delta_time()

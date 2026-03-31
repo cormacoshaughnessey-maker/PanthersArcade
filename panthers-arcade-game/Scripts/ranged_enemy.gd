@@ -26,6 +26,8 @@ func _ready() -> void:
 	score_value = 25
 	pick_random_direction()
 	random_offset = target_random_offset
+	can_shoot = false
+	start_attack_cooldown(projectile_cooldown_duration+randf_range(-1.0,1.0))
 
 
 func move_and_attack(delta: float) -> void:
