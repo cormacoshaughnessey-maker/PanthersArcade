@@ -68,7 +68,7 @@ func _physics_process(_delta: float) -> void:
 				player_name = alph[current_index[0]] + alph[current_index[1]] + alph[current_index[2]]
 				if (current_index[0] == 22 and current_index[1] == 3 and current_index[2] == 6):
 					player_name = "???"
-				print("High score confirmed: ", player_name)
+				#print("High score confirmed: ", player_name)
 				game_node.save_score()
 				not_done = false
 				high_score_display.visible = true

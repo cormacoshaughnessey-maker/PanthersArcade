@@ -1,4 +1,4 @@
-extends Node2D
+class_name Game extends Node2D
 
 @onready var health_ui := $UI/HealthUI
 @onready var score_ui := $UI/ScoreUI
@@ -208,7 +208,7 @@ func load_game():
 		var json = JSON.new()
 		var parse_result = json.parse(json_string)
 		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			#print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
 		var node_data = json.data
 		#high_score = 0
@@ -217,7 +217,7 @@ func load_game():
 			#if high_score_list[i]>high_score:
 				#high_score_player = i
 				#high_score = high_score_list[i]
-		print(high_score_list)
+		#print(high_score_list)
 
 
 #func _exit_tree() -> void:

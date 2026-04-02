@@ -178,13 +178,13 @@ func lose_life(damage := 1) -> void:
 		game_node.lives -= damage
 		if game_node.lives <= 0:
 			player_died.emit()
-			print("player is dead! game over!")
+			#print("player is dead! game over!")
 			game_node.game_over()
 		else:
 			start_invincibility()
 			hurt_sprite.show()
 			hurt_sprite_timer.start()
-			print("lost a life! lives left: ", game_node.lives)
+			#print("lost a life! lives left: ", game_node.lives)
 			hurt_sound.play()
 			game_node.score_multiplier_timer.stop()
 			game_node.score_multiplier_timer.timeout.emit()
