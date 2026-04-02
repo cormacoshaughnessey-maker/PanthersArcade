@@ -186,6 +186,8 @@ func lose_life(damage := 1) -> void:
 			hurt_sprite_timer.start()
 			print("lost a life! lives left: ", game_node.lives)
 			hurt_sound.play()
+			game_node.score_multiplier_timer.stop()
+			game_node.score_multiplier_timer.timeout.emit()
 
 
  # INFO: Make player invincible for a bit after getting hit
