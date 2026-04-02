@@ -13,6 +13,8 @@ var can_attack := true
 var random_offset : Vector2
 var target_random_offset : Vector2
 var random_timer := 0.0
+var _in_attack_range := false
+var _last_snapped_direction := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -28,6 +30,7 @@ func move_and_attack(delta: float) -> void:
 		return
 
 	var direction_to_player = (player.global_position - global_position).normalized()
+	var distance_to_player = global_position.distance_to(player.global_position)
 
 	random_timer -= delta
 	if random_timer <= 0:
@@ -36,15 +39,26 @@ func move_and_attack(delta: float) -> void:
 
 	random_offset = random_offset.lerp(target_random_offset, delta * 3.0)
 
-	var raw_direction = (direction_to_player * 0.7 + random_offset * 0.3).normalized()
-	var final_direction = snap_to_8dir(raw_direction)
-	position += final_direction * move_speed * delta
+	if distance_to_player <= attack_range:
+		_in_attack_range = true
+	elif distance_to_player > attack_range + 30.0:
+		_in_attack_range = false
 
-	if final_direction != Vector2.ZERO:
-		rotation = final_direction.angle() + deg_to_rad(90)
+	if not _in_attack_range:
+		var raw_direction = (direction_to_player * 0.7 + random_offset * 0.3).normalized()
+		var new_snap = snap_to_8dir(raw_direction)
+		if _last_snapped_direction == Vector2.ZERO or abs(raw_direction.angle() - _last_snapped_direction.angle()) > deg_to_rad(30):
+			_last_snapped_direction = new_snap
+		position += _last_snapped_direction * move_speed * delta
 
-	var distance_to_player = global_position.distance_to(player.global_position)
-	if distance_to_player <= attack_range and can_attack:
+		if _last_snapped_direction != Vector2.ZERO:
+			var target_rot = _last_snapped_direction.angle() + deg_to_rad(90)
+			rotation = lerp_angle(rotation, target_rot, delta * 12.0)
+	else:
+		var target_rot = direction_to_player.angle() + deg_to_rad(90)
+		rotation = lerp_angle(rotation, target_rot, delta * 8.0)
+
+	if _in_attack_range and can_attack:
 		attack()
 
 func pick_random_direction() -> void:

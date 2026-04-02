@@ -15,6 +15,8 @@ var can_shoot := true
 var random_offset : Vector2
 var target_random_offset : Vector2
 var random_timer := 0.0
+var _last_snapped_direction := Vector2.ZERO
+var _last_snapped_facing := Vector2.ZERO
 
 @export var projectile_scene : PackedScene
 
@@ -55,12 +57,17 @@ func move_and_attack(delta: float) -> void:
 			strafe_direction = -strafe_direction
 		move_direction = (strafe_direction * 0.7 + random_offset * 0.3).normalized()
 
-	var cardinal_direction = snap_to_8dir(move_direction)
-	position += cardinal_direction * move_speed * delta
+	var new_snap = snap_to_8dir(move_direction)
+	if _last_snapped_direction == Vector2.ZERO or abs(move_direction.angle() - _last_snapped_direction.angle()) > deg_to_rad(30):
+		_last_snapped_direction = new_snap
+	position += _last_snapped_direction * move_speed * delta
 
-	var face_direction = snap_to_8dir(direction_to_player)
-	if face_direction != Vector2.ZERO:
-		rotation = face_direction.angle() + deg_to_rad(90)
+	var new_facing = snap_to_8dir(direction_to_player)
+	if _last_snapped_facing == Vector2.ZERO or abs(direction_to_player.angle() - _last_snapped_facing.angle()) > deg_to_rad(30):
+		_last_snapped_facing = new_facing
+	if _last_snapped_facing != Vector2.ZERO:
+		var target_rot = _last_snapped_facing.angle() + deg_to_rad(90)
+		rotation = lerp_angle(rotation, target_rot, delta * 12.0)
 
 	if can_shoot:
 		shoot_projectile()
