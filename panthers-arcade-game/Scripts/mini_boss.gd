@@ -198,6 +198,7 @@ func melee_dive_attack() -> void:
 	var target_pos = player.global_position
 
 	var warning = _spawn_melee_warning()
+	warning.add_to_group("bosswarning")
 	var warn_elapsed = 0.0
 	while warn_elapsed < base_warning_duration:
 		if not paused:
@@ -272,3 +273,9 @@ func melee_dive_attack() -> void:
 func _on_attack_cooldown_timeout() -> void:
 	super._on_attack_cooldown_timeout()
 	can_attack = true
+
+
+func die() -> void:
+	for i in get_tree().get_nodes_in_group("bosswarning"):
+		i.queue_free()
+	super.die()
