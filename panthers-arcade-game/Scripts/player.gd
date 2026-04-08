@@ -61,7 +61,7 @@ func inputs(delta: float) -> void:
 			start_rewind_cooldown()
 	elif not rewind_on_cooldown and Input.is_action_pressed("rewind"):
 		if Input.is_action_just_pressed("rewind"):
-			rewind_start_sound.play()
+			rewind_start_sound.play(0.1)
 			spawn_projection_trail()
 			_on_invincibility_cooldown_timer_timeout()
 			if pause_on_rewind:
@@ -153,7 +153,7 @@ func spawn_projection(rewind_index:int) -> void:
  # INFO: Begin the cooldown on rewinding, and set rewind_on_cooldown to true
 func start_rewind_cooldown() -> void:
 	if not rewind_on_cooldown:
-		rewind_sound.play()
+		rewind_sound.play(0.5)
 		rewinding = false
 		rewind_on_cooldown = true
 		rewind_cooldown_timer.start()
