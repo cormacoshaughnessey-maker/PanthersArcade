@@ -32,7 +32,7 @@ func hide_sprite(hiding := true) -> void:
 	$AnimatedSprite2D.visible = not hiding
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if sprite.frame > 6:
 		hitbox.disabled = true
 

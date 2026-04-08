@@ -198,7 +198,7 @@ func start_invincibility(rewind_iframes := false) -> void:
 		invincibility_cooldown_timer.start(invincibility_duration)
 	else:
 		invincibility_cooldown_timer.start(rewind_invincibility_duration)
-		modulate = Color(1.0, 1.0, 1.0, 0.5)
+		#modulate = Color(1.0, 1.0, 1.0, 0.5)
 
 
  # INFO: Ending of invincibility timers
