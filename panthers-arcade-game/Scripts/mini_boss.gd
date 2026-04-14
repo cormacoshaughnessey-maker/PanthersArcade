@@ -102,9 +102,13 @@ func execute_attack_pattern() -> void:
 			attack_sound_2.play()
 			await melee_dive_attack()
 
-	attack_pattern = (attack_pattern + 1) % 3
+	var next_pattern = randi() % 3
+	if next_pattern == attack_pattern:
+		next_pattern = (next_pattern + 1) % 3
+	attack_pattern = next_pattern
 
-	start_attack_cooldown(attack_pattern_cooldown)
+	var cooldown_variance = randf_range(-1.5, 1.5)
+	start_attack_cooldown(attack_pattern_cooldown + cooldown_variance)
 
 
 func spread_shot_attack() -> void:
@@ -113,7 +117,7 @@ func spread_shot_attack() -> void:
 		return
 
 	var direction_to_player = (player.global_position - global_position).normalized()
-	var base_angle = direction_to_player.angle()
+	var base_angle = direction_to_player.angle() + randf_range(deg_to_rad(-10.0), deg_to_rad(10.0))
 
 	for i in range(spread_shot_count):
 		while paused:
@@ -200,12 +204,18 @@ func melee_dive_attack() -> void:
 	var warning = _spawn_melee_warning()
 	warning.add_to_group("bosswarning")
 	var warn_elapsed = 0.0
+	var target_locked := false
 	while warn_elapsed < base_warning_duration:
 		if not paused:
 			warning.play()
 			warn_elapsed += get_physics_process_delta_time()
 			if is_instance_valid(warning):
 				warning.global_position = global_position + Vector2(0, -80)
+			if not target_locked and warn_elapsed >= base_warning_duration * 0.6:
+				if is_instance_valid(player):
+					var offset = Vector2(randf_range(-40.0, 40.0), randf_range(-20.0, 20.0))
+					target_pos = player.global_position + offset
+				target_locked = true
 		else:
 			warning.pause()
 		await get_tree().process_frame
