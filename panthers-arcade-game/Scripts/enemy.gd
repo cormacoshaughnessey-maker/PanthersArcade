@@ -147,6 +147,7 @@ func _spawn_death_explosion() -> void:
 		frames.add_frame("explode", atlas_tex)
 	explosion.sprite_frames = frames
 	explosion.global_position = global_position
+	explosion.global_rotation_degrees = 90*randi_range(0,3)
 	explosion.play("explode")
 	explosion.animation_finished.connect(explosion.queue_free)
 	get_parent().add_child(explosion)
