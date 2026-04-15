@@ -95,7 +95,7 @@ autowrap_mode = 2
 
 [node name="Rewind Label" type="Label" parent="." unique_id=2014499991]
 layout_mode = 0
-offset_left = 622.0
+offset_left = 632.0
 offset_top = 256.0
 offset_right = 1023.0
 offset_bottom = 512.0
@@ -107,7 +107,7 @@ autowrap_mode = 2
 
 [node name="Attack Label" type="Label" parent="." unique_id=1463956737]
 layout_mode = 0
-offset_left = 659.0
+offset_left = 528.0
 offset_top = 512.0
 offset_right = 1020.0
 offset_bottom = 832.0
@@ -117,24 +117,24 @@ horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Attack Label" type="Label" parent="Attack Label" unique_id=1446391347]
+[node name="Reflect Label" type="Label" parent="." unique_id=1446391347]
 layout_mode = 0
-offset_left = -83.0
-offset_top = 320.0
-offset_right = 366.0
-offset_bottom = 576.0
+offset_left = 528.0
+offset_top = 832.0
+offset_right = 1025.0
+offset_bottom = 1088.0
 theme_override_font_sizes/font_size = 48
 text = "Projectiles caught along this path will be deflected and can damage enemies."
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Attack Label" type="Label" parent="Attack Label/Attack Label" unique_id=2013621356]
+[node name="End Label" type="Label" parent="." unique_id=2013621356]
 layout_mode = 0
-offset_left = -448.0
-offset_top = 320.0
-offset_right = 384.0
-offset_bottom = 640.0
+offset_left = 128.0
+offset_top = 1216.0
+offset_right = 960.0
+offset_bottom = 1512.0
 theme_override_font_sizes/font_size = 48
 text = "Survive for as long as you can; defeating enemies will increase your score.
 Good luck!"
