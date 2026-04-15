@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://clsccskxsea5v"]
 
-[ext_resource type="Script" path="res://Scripts/background.gd" id="1_pojwb"]
-[ext_resource type="TileSet" uid="uid://d15kt6i61fdpa" path="res://Assets/background_tileset.tres" id="2_pojwb"]
+[ext_resource type="Script" uid="uid://b4qfove8niryo" path="res://Scripts/background.gd" id="1_pojwb"]
+[ext_resource type="TileSet" uid="uid://d15kt6i61fdpa" path="res://Z - Other files/background_tileset.tres" id="2_pojwb"]
 
 [node name="Background" type="Node2D" unique_id=1810696300]
 script = ExtResource("1_pojwb")
