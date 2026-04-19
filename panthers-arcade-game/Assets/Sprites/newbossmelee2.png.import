@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuwhxl02oxxky"
-path="res://.godot/imported/melee_spritesheet.png-0b23e1185f97f36a0b4e9270b9ba8754.ctex"
+uid="uid://ci3yh0auby34k"
+path="res://.godot/imported/newbossmelee2.png-9c4ef4e772a1a02808817a4f044e0547.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/melee_spritesheet.png"
-dest_files=["res://.godot/imported/melee_spritesheet.png-0b23e1185f97f36a0b4e9270b9ba8754.ctex"]
+source_file="res://Assets/Sprites/newbossmelee2.png"
+dest_files=["res://.godot/imported/newbossmelee2.png-9c4ef4e772a1a02808817a4f044e0547.ctex"]
 
 [params]
 

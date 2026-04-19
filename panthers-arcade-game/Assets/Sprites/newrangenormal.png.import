@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bao3d0fklv7ly"
-path="res://.godot/imported/range_spritesheet.png-5d6073a94e2f12485a52d6c07837ac01.ctex"
+uid="uid://djcsvif1w21lw"
+path="res://.godot/imported/newrangenormal.png-df0c609b8028c573beb00f1507fd6c57.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/range_spritesheet.png"
-dest_files=["res://.godot/imported/range_spritesheet.png-5d6073a94e2f12485a52d6c07837ac01.ctex"]
+source_file="res://Assets/Sprites/newrangenormal.png"
+dest_files=["res://.godot/imported/newrangenormal.png-df0c609b8028c573beb00f1507fd6c57.ctex"]
 
 [params]
 

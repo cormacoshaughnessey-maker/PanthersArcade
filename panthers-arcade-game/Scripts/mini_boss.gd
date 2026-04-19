@@ -119,10 +119,15 @@ func spread_shot_attack() -> void:
 	var direction_to_player = (player.global_position - global_position).normalized()
 	var base_angle = direction_to_player.angle() + randf_range(deg_to_rad(-10.0), deg_to_rad(10.0))
 
+	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_ranged"):
+		anim_sprite.play("attack_ranged")
+		while anim_sprite.frame < 3:
+			await get_tree().process_frame
+		anim_sprite.pause()
+
 	for i in range(spread_shot_count):
 		while paused:
 			await get_tree().process_frame
-		play_attack_animation("attack_ranged")
 		attack_sound.play()
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
@@ -144,15 +149,29 @@ func spread_shot_attack() -> void:
 				wait += get_physics_process_delta_time()
 			await get_tree().process_frame
 
+	var hold = 0.0
+	while hold < 2.0:
+		if not paused:
+			hold += get_physics_process_delta_time()
+		await get_tree().process_frame
+
+	if anim_sprite:
+		anim_sprite.play("default")
+
 
 func aimed_burst_attack() -> void:
 	if not projectile_scene:
 		return
 
+	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_ranged"):
+		anim_sprite.play("attack_ranged")
+		while anim_sprite.frame < 3:
+			await get_tree().process_frame
+		anim_sprite.pause()
+
 	for i in range(aimed_shot_count):
 		while paused:
 			await get_tree().process_frame
-		play_attack_animation("attack_ranged")
 		attack_sound.play()
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
@@ -171,6 +190,15 @@ func aimed_burst_attack() -> void:
 			if not paused:
 				wait += get_physics_process_delta_time()
 			await get_tree().process_frame
+
+	var hold = 0.0
+	while hold < 2.0:
+		if not paused:
+			hold += get_physics_process_delta_time()
+		await get_tree().process_frame
+
+	if anim_sprite:
+		anim_sprite.play("default")
 
 
 func _spawn_melee_warning() -> AnimatedSprite2D:

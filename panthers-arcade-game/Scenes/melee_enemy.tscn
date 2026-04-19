@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d4liq15hqbanc"]
 
 [ext_resource type="Script" uid="uid://i8spamjtirbh" path="res://Scripts/melee_enemy.gd" id="1_melee"]
-[ext_resource type="Texture2D" uid="uid://cuwhxl02oxxky" path="res://Assets/Sprites/melee_spritesheet.png" id="2_melee_sprite"]
 [ext_resource type="Texture2D" uid="uid://bbbeatb8kms7a" path="res://Assets/Sprites/melee_attack_spritesheet.png" id="3_melee_attack"]
+[ext_resource type="Texture2D" uid="uid://c8uggfkxolyvn" path="res://Assets/Sprites/newmeleenormal.png" id="5_newmelee_idle"]
 [ext_resource type="AudioStream" uid="uid://cjwe7ipnmhjbu" path="res://Assets/Sounds/Cartoon Sci-Fi Rattling Impact 1.wav" id="4_3au16"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
@@ -15,35 +15,35 @@ region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk3"]
 atlas = ExtResource("3_melee_attack")
-region = Rect2(320, 0, 160, 160)
+region = Rect2(0, 160, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk4"]
 atlas = ExtResource("3_melee_attack")
-region = Rect2(480, 0, 160, 160)
+region = Rect2(160, 160, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk5"]
 atlas = ExtResource("3_melee_attack")
-region = Rect2(640, 0, 160, 160)
+region = Rect2(0, 320, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
-atlas = ExtResource("2_melee_sprite")
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle1"]
+atlas = ExtResource("5_newmelee_idle")
 region = Rect2(0, 0, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_move1"]
-atlas = ExtResource("2_melee_sprite")
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle2"]
+atlas = ExtResource("5_newmelee_idle")
 region = Rect2(160, 0, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_move2"]
-atlas = ExtResource("2_melee_sprite")
-region = Rect2(320, 0, 160, 160)
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle3"]
+atlas = ExtResource("5_newmelee_idle")
+region = Rect2(0, 160, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_move3"]
-atlas = ExtResource("2_melee_sprite")
-region = Rect2(480, 0, 160, 160)
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle4"]
+atlas = ExtResource("5_newmelee_idle")
+region = Rect2(160, 160, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_move4"]
-atlas = ExtResource("2_melee_sprite")
-region = Rect2(640, 0, 160, 160)
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle5"]
+atlas = ExtResource("5_newmelee_idle")
+region = Rect2(0, 320, 160, 160)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_melee"]
 animations = [{
@@ -69,28 +69,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_idle")
+"texture": SubResource("AtlasTexture_idle2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle5")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_move1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_move2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_move3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_move4")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_melee"]
@@ -103,8 +95,8 @@ script = ExtResource("1_melee")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=66197110]
 sprite_frames = SubResource("SpriteFrames_melee")
-animation = &"move"
-autoplay = "move"
+animation = &"idle"
+autoplay = "idle"
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1242031307]

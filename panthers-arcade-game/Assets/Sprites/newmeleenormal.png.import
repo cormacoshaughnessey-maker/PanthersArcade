@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6xbb6gvvipdx"
-path="res://.godot/imported/boss_death_spritesheet.png-cfdbfa0e6307cf30aef0b85e09b35768.ctex"
+uid="uid://c8uggfkxolyvn"
+path="res://.godot/imported/newmeleenormal.png-5d3bd266c61a82be33b9b67a644a4952.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/boss_death_spritesheet.png"
-dest_files=["res://.godot/imported/boss_death_spritesheet.png-cfdbfa0e6307cf30aef0b85e09b35768.ctex"]
+source_file="res://Assets/Sprites/newmeleenormal.png"
+dest_files=["res://.godot/imported/newmeleenormal.png-5d3bd266c61a82be33b9b67a644a4952.ctex"]
 
 [params]
 

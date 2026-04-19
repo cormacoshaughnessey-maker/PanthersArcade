@@ -1,50 +1,50 @@
 [gd_scene format=3 uid="uid://xcg3ukav2yrf"]
 
 [ext_resource type="Script" uid="uid://dtqpywbgic72b" path="res://Scripts/ranged_enemy.gd" id="1_ranged"]
-[ext_resource type="Texture2D" uid="uid://bao3d0fklv7ly" path="res://Assets/Sprites/range_spritesheet.png" id="2_ranged_sprite"]
+[ext_resource type="Texture2D" uid="uid://djcsvif1w21lw" path="res://Assets/Sprites/newrangenormal.png" id="6_newrange_idle"]
+[ext_resource type="Texture2D" uid="uid://bk1h7p84yjyfr" path="res://Assets/Sprites/newrangedattack.png" id="7_newrange_attack"]
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
-[ext_resource type="Texture2D" uid="uid://og0o7d201ohg" path="res://Assets/Sprites/range_attack_spritesheet.png" id="4_ranged_attack"]
 [ext_resource type="AudioStream" uid="uid://p6dno31dt4tw" path="res://Assets/Sounds/Projectile Sound.tres" id="5_f5pa5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
-atlas = ExtResource("4_ranged_attack")
+atlas = ExtResource("7_newrange_attack")
 region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk2"]
-atlas = ExtResource("4_ranged_attack")
+atlas = ExtResource("7_newrange_attack")
 region = Rect2(160, 0, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk3"]
-atlas = ExtResource("4_ranged_attack")
-region = Rect2(320, 0, 160, 160)
+atlas = ExtResource("7_newrange_attack")
+region = Rect2(0, 160, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk4"]
-atlas = ExtResource("4_ranged_attack")
-region = Rect2(480, 0, 160, 160)
+atlas = ExtResource("7_newrange_attack")
+region = Rect2(160, 160, 160, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk5"]
-atlas = ExtResource("4_ranged_attack")
-region = Rect2(640, 0, 160, 160)
+atlas = ExtResource("7_newrange_attack")
+region = Rect2(0, 320, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
-atlas = ExtResource("2_ranged_sprite")
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle1"]
+atlas = ExtResource("6_newrange_idle")
 region = Rect2(0, 0, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_move1"]
-atlas = ExtResource("2_ranged_sprite")
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle2"]
+atlas = ExtResource("6_newrange_idle")
 region = Rect2(160, 0, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_move2"]
-atlas = ExtResource("2_ranged_sprite")
-region = Rect2(320, 0, 160, 160)
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle3"]
+atlas = ExtResource("6_newrange_idle")
+region = Rect2(0, 160, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_move3"]
-atlas = ExtResource("2_ranged_sprite")
-region = Rect2(480, 0, 160, 160)
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle4"]
+atlas = ExtResource("6_newrange_idle")
+region = Rect2(160, 160, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_move4"]
-atlas = ExtResource("2_ranged_sprite")
-region = Rect2(640, 0, 160, 160)
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle5"]
+atlas = ExtResource("6_newrange_idle")
+region = Rect2(0, 320, 160, 160)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ranged"]
 animations = [{
@@ -70,28 +70,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_idle")
+"texture": SubResource("AtlasTexture_idle2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle5")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_move1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_move2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_move3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_move4")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ranged"]
@@ -105,8 +97,8 @@ projectile_scene = ExtResource("3_projectile")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=475206909]
 sprite_frames = SubResource("SpriteFrames_ranged")
-animation = &"move"
-autoplay = "move"
+animation = &"idle"
+autoplay = "idle"
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1031176663]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://og0o7d201ohg"
-path="res://.godot/imported/range_attack_spritesheet.png-0784f53ca6c3634b279d7f4cfb635153.ctex"
+uid="uid://cc4ckl84s7hvd"
+path="res://.godot/imported/newbossidle2.png-6938cdd8d86f92356c7f81d7e133111a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/range_attack_spritesheet.png"
-dest_files=["res://.godot/imported/range_attack_spritesheet.png-0784f53ca6c3634b279d7f4cfb635153.ctex"]
+source_file="res://Assets/Sprites/newbossidle2.png"
+dest_files=["res://.godot/imported/newbossidle2.png-6938cdd8d86f92356c7f81d7e133111a.ctex"]
 
 [params]
 
