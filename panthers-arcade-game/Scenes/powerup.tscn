@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://irgxlmpv82xf"]
+
+[ext_resource type="Texture2D" uid="uid://cjbilyhacsvqv" path="res://Assets/Sprites/TemporalHourglass.png" id="1_85oov"]
+[ext_resource type="Script" uid="uid://euvr60tmiic8" path="res://Scripts/powerup.gd" id="1_dkaad"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkaad"]
+atlas = ExtResource("1_85oov")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1g1t"]
+atlas = ExtResource("1_85oov")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og0gp"]
+atlas = ExtResource("1_85oov")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_381t4"]
+atlas = ExtResource("1_85oov")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ydwi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkaad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1g1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og0gp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_381t4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yee3s"]
+size = Vector2(80, 128)
+
+[node name="PowerUp" type="Area2D" unique_id=531037110 groups=["pausable"]]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_dkaad")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=661708107]
+sprite_frames = SubResource("SpriteFrames_5ydwi")
+autoplay = "default"
+frame_progress = 0.13192357
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1325724396]
+shape = SubResource("RectangleShape2D_yee3s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

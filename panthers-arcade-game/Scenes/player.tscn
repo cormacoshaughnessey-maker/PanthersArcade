@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bhxoivbitv4fj" path="res://Assets/Sounds/Cartoon Sci-Fi Portal Open Sound 1.wav" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://xposmtsavc6g" path="res://Assets/Sprites/player hurt sprites.png" id="4_3smsa"]
 [ext_resource type="AudioStream" uid="uid://c37bwayymiufj" path="res://Assets/Sounds/Cartoon Sci-Fi Sweep 4.wav" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://bsymxibhgig6k" path="res://Assets/Sounds/Cartoon Sci-Fi Interface New Objective Sound 2.wav" id="8_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
 atlas = ExtResource("2_x3wgy")
@@ -258,6 +259,9 @@ max_polyphony = 2
 
 [node name="RewindStartSound" type="AudioStreamPlayer" parent="." unique_id=180491243]
 stream = ExtResource("5_fkybt")
+
+[node name="PowerupGetSound" type="AudioStreamPlayer" parent="." unique_id=1167858697]
+stream = ExtResource("8_8erm5")
 
 [connection signal="timeout" from="RewindCooldownTimer" to="." method="_finish_rewind_cooldown"]
 [connection signal="timeout" from="InvincibilityCooldownTimer" to="." method="_on_invincibility_cooldown_timer_timeout"]
