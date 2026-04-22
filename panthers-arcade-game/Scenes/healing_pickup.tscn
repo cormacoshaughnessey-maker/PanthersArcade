@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dpcfm1miof0gx"]
+
+[ext_resource type="Script" uid="uid://bec3biyh60n3i" path="res://Scripts/healing_pickup.gd" id="1_ubqbk"]
+[ext_resource type="Texture2D" uid="uid://c1edkt6cxoctu" path="res://Assets/Sprites/Healing Pickup.png" id="2_4jb2d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yee3s"]
+size = Vector2(128, 112)
+
+[node name="PowerUp" type="Area2D" unique_id=531037110 groups=["pausable"]]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ubqbk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=272022535]
+texture = ExtResource("2_4jb2d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1325724396]
+shape = SubResource("RectangleShape2D_yee3s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

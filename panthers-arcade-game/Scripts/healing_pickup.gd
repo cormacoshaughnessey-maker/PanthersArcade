@@ -1,4 +1,4 @@
-class_name PowerUp extends Area2D
+class_name HealingPickup extends Area2D
 
 var paused := false
 var pause_time_accumulated := 0
@@ -6,7 +6,7 @@ var time_at_start := 0
 
 func _on_body_entered(body: Node2D) -> void:
 	if not paused and body is Player:
-		body.get_powerup()
+		body.heal()
 		body.powerup_get_sound.play()
 		queue_free()
 	pass # Replace with function body.
@@ -15,10 +15,8 @@ func _on_body_entered(body: Node2D) -> void:
 func pause(pausing:=true) -> void:
 	paused = pausing
 	if pausing:
-		$AnimatedSprite2D.pause()
 		time_at_start = Time.get_ticks_msec()
 	if not pausing:
-		$AnimatedSprite2D.play()
 		pause_time_accumulated += Time.get_ticks_msec() - time_at_start
 		if has_overlapping_bodies():
 			for i in get_overlapping_bodies():

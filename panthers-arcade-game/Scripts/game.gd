@@ -24,6 +24,8 @@ var max_score_multiplier := 2.0
 var score_multiplier := min_score_multiplier
 var is_game_over := false
 
+var boss_number := 0
+
  # INFO: Variable for the lives the player has remaining, with an accompanying set function which updates the UI
 var lives := 3:
 	set(value):

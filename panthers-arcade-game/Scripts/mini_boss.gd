@@ -20,6 +20,7 @@ class_name MiniBoss
 
 var warning_texture = preload("res://Assets/Sprites/boss_melee_warning_spritesheet.png")
 var powerup_scene = preload("res://Scenes/powerup.tscn")
+var healing_pickup_scene = preload("res://Scenes/healing_pickup.tscn")
 var move_direction := 1.0
 var can_attack := true
 var attack_pattern := 0
@@ -27,6 +28,7 @@ var screen_size : Vector2
 var is_diving := false
 
 func _ready() -> void:
+	get_tree().get_first_node_in_group("game").boss_number+=1
 	death_sprite_texture = preload("res://Assets/Sprites/enemy_death_spritesheet.png")
 	death_frame_size = 128
 	super._ready()
@@ -327,7 +329,11 @@ func _on_attack_cooldown_timeout() -> void:
 func die() -> void:
 	for i in get_tree().get_nodes_in_group("bosswarning"):
 		i.queue_free()
-	var powerup_var = powerup_scene.instantiate()
+	var powerup_var
+	if get_tree().get_first_node_in_group("game").boss_number % 3 == 0:
+		powerup_var = healing_pickup_scene.instantiate()
+	else:
+		powerup_var = powerup_scene.instantiate()
 	powerup_var.global_position = self.global_position
-	get_tree().get_first_node_in_group("game").add_child(powerup_var)
+	get_tree().get_first_node_in_group("game").call_deferred("add_child", powerup_var)
 	super.die()

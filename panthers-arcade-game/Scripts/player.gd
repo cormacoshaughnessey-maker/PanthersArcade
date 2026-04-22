@@ -24,7 +24,7 @@ var attack_positions : Array[Vector2]
 
 var is_invincible := false  # i-frames after taking damage
 
-@onready var game_node := self.get_parent()
+@onready var game_node : Game =  self.get_parent()
 @onready var player_attacks := game_node.get_node("PlayerAttacks")
 @onready var player_projections := game_node.get_node("PlayerProjections")
 @onready var rewind_cooldown_timer := $RewindCooldownTimer
@@ -174,6 +174,7 @@ func _finish_rewind_cooldown() -> void:
 
 func get_powerup() -> void:
 	max_rewind_length += rewind_length_increment
+	start_invincibility(true)
 	pass
 #endregion
 
@@ -197,6 +198,12 @@ func lose_life(damage := 1) -> void:
 			hurt_sound.play()
 			game_node.score_multiplier_timer.stop()
 			game_node.score_multiplier_timer.timeout.emit()
+
+
+func heal(healing := 1) -> void:
+	if game_node.lives < game_node.default_lives:
+		game_node.lives += healing
+	start_invincibility(true)
 
 
  # INFO: Make player invincible for a bit after getting hit
