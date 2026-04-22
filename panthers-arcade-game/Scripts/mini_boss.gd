@@ -300,5 +300,5 @@ func die() -> void:
 		i.queue_free()
 	var powerup_var = powerup_scene.instantiate()
 	powerup_var.global_position = self.global_position
-	get_tree().get_first_node_in_group("game").add_child(powerup_var)
+	get_tree().get_first_node_in_group("game").call_deferred("add_child", powerup_var)
 	super.die()
