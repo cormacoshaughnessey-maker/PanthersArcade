@@ -56,6 +56,14 @@ region = Rect2(0, 0, 288, 288)
 atlas = ExtResource("2_boss_sprite")
 region = Rect2(288, 0, 288, 288)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow3"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(0, 288, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glow4"]
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(288, 288, 288, 288)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_boss"]
 animations = [{
 "frames": [{
@@ -104,6 +112,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_glow2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glow3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glow4")
 }],
 "loop": true,
 "name": &"default",

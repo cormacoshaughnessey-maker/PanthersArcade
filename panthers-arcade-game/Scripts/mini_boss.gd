@@ -111,10 +111,29 @@ func execute_attack_pattern() -> void:
 	start_attack_cooldown(attack_pattern_cooldown + cooldown_variance)
 
 
+func _begin_ranged_pose() -> void:
+	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_ranged"):
+		anim_sprite.sprite_frames.set_animation_loop("attack_ranged", true)
+		anim_sprite.play("attack_ranged")
+		if paused:
+			anim_sprite.pause()
+
+
+func _end_ranged_pose() -> void:
+	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_ranged"):
+		anim_sprite.sprite_frames.set_animation_loop("attack_ranged", false)
+	if anim_sprite:
+		anim_sprite.play("default")
+		if paused:
+			anim_sprite.pause()
+
+
 func spread_shot_attack() -> void:
 	if not projectile_scene:
 		push_warning("no projectile scene assigned to mini boss!")
 		return
+
+	_begin_ranged_pose()
 
 	var direction_to_player = (player.global_position - global_position).normalized()
 	var base_angle = direction_to_player.angle() + randf_range(deg_to_rad(-10.0), deg_to_rad(10.0))
@@ -122,7 +141,6 @@ func spread_shot_attack() -> void:
 	for i in range(spread_shot_count):
 		while paused:
 			await get_tree().process_frame
-		play_attack_animation("attack_ranged")
 		attack_sound.play()
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
@@ -144,15 +162,18 @@ func spread_shot_attack() -> void:
 				wait += get_physics_process_delta_time()
 			await get_tree().process_frame
 
+	_end_ranged_pose()
+
 
 func aimed_burst_attack() -> void:
 	if not projectile_scene:
 		return
 
+	_begin_ranged_pose()
+
 	for i in range(aimed_shot_count):
 		while paused:
 			await get_tree().process_frame
-		play_attack_animation("attack_ranged")
 		attack_sound.play()
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
@@ -171,6 +192,8 @@ func aimed_burst_attack() -> void:
 			if not paused:
 				wait += get_physics_process_delta_time()
 			await get_tree().process_frame
+
+	_end_ranged_pose()
 
 
 func _spawn_melee_warning() -> AnimatedSprite2D:
@@ -198,6 +221,12 @@ func melee_dive_attack() -> void:
 	if not is_instance_valid(player):
 		is_diving = false
 		return
+
+	# Hold attack_melee frame 0 during warning/early dive so idle doesn't show
+	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_melee"):
+		anim_sprite.play("attack_melee")
+		anim_sprite.frame = 0
+		anim_sprite.pause()
 
 	var target_pos = player.global_position
 
