@@ -1,65 +1,60 @@
 [gd_scene format=3 uid="uid://b14fm4l40xmdf"]
 
 [ext_resource type="Script" uid="uid://8juapsflucfb" path="res://Scripts/mini_boss.gd" id="1_boss"]
+[ext_resource type="Texture2D" uid="uid://d0rp0x3ghtw2d" path="res://Assets/Sprites/boss_spritesheet.png" id="2_boss_sprite"]
 [ext_resource type="PackedScene" uid="uid://drpircda8rv5b" path="res://Scenes/enemy_projectile.tscn" id="3_projectile"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/newbossidle2.png" id="9_newboss_idle"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/newbossmelee2.png" id="8_newboss_melee"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/newbossranged.png" id="10_newboss_ranged"]
+[ext_resource type="Texture2D" uid="uid://br3n840gtwkjl" path="res://Assets/Sprites/boss_attack_ranged_spritesheet.png" id="4_boss_attack"]
+[ext_resource type="Texture2D" uid="uid://b2fuovirvqxog" path="res://Assets/Sprites/boss_attack_melee_spritesheet.png" id="5_boss_melee"]
 [ext_resource type="AudioStream" uid="uid://p6dno31dt4tw" path="res://Assets/Sounds/Projectile Sound.tres" id="6_sobvp"]
 [ext_resource type="AudioStream" uid="uid://b8c7b6qixf0do" path="res://Assets/Sounds/Cartoon Sci-Fi Large Energy Impact 1.wav" id="7_sobvp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_matk1"]
-atlas = ExtResource("8_newboss_melee")
-region = Rect2(0, 0, 280, 280)
+atlas = ExtResource("5_boss_melee")
+region = Rect2(0, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_matk2"]
-atlas = ExtResource("8_newboss_melee")
-region = Rect2(280, 0, 280, 280)
+atlas = ExtResource("5_boss_melee")
+region = Rect2(288, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_matk3"]
-atlas = ExtResource("8_newboss_melee")
-region = Rect2(0, 280, 280, 280)
+atlas = ExtResource("5_boss_melee")
+region = Rect2(576, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_matk4"]
-atlas = ExtResource("8_newboss_melee")
-region = Rect2(280, 280, 280, 280)
+atlas = ExtResource("5_boss_melee")
+region = Rect2(864, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_matk5"]
-atlas = ExtResource("8_newboss_melee")
-region = Rect2(0, 560, 280, 280)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_matk6"]
-atlas = ExtResource("8_newboss_melee")
-region = Rect2(280, 560, 280, 280)
+atlas = ExtResource("5_boss_melee")
+region = Rect2(1152, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
-atlas = ExtResource("10_newboss_ranged")
-region = Rect2(0, 0, 280, 280)
+atlas = ExtResource("4_boss_attack")
+region = Rect2(0, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk2"]
-atlas = ExtResource("10_newboss_ranged")
-region = Rect2(280, 0, 280, 280)
+atlas = ExtResource("4_boss_attack")
+region = Rect2(288, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk3"]
-atlas = ExtResource("10_newboss_ranged")
-region = Rect2(0, 280, 280, 280)
+atlas = ExtResource("4_boss_attack")
+region = Rect2(576, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atk4"]
-atlas = ExtResource("10_newboss_ranged")
-region = Rect2(280, 280, 280, 280)
+atlas = ExtResource("4_boss_attack")
+region = Rect2(864, 0, 288, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk5"]
+atlas = ExtResource("4_boss_attack")
+region = Rect2(1152, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glow1"]
-atlas = ExtResource("9_newboss_idle")
-region = Rect2(0, 0, 280, 280)
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(0, 0, 288, 288)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glow2"]
-atlas = ExtResource("9_newboss_idle")
-region = Rect2(280, 0, 280, 280)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glow3"]
-atlas = ExtResource("9_newboss_idle")
-region = Rect2(0, 280, 280, 280)
-
+atlas = ExtResource("2_boss_sprite")
+region = Rect2(288, 0, 288, 288)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_boss"]
 animations = [{
@@ -67,24 +62,21 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_matk1")
 }, {
-"duration": 2.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_matk2")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_matk3")
 }, {
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_matk4")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_matk5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_matk6")
 }],
 "loop": false,
 "name": &"attack_melee",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -98,17 +90,20 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_atk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk5")
 }],
 "loop": false,
 "name": &"attack_ranged",
-"speed": 6.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_glow2")
+"texture": SubResource("AtlasTexture_glow1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_glow3")
+"texture": SubResource("AtlasTexture_glow2")
 }],
 "loop": true,
 "name": &"default",

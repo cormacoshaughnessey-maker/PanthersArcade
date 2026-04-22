@@ -98,7 +98,6 @@ func execute_attack_pattern() -> void:
 		1:
 			await aimed_burst_attack()
 		2:
-			play_attack_animation("attack_melee")
 			attack_sound_2.play()
 			await melee_dive_attack()
 
@@ -119,15 +118,10 @@ func spread_shot_attack() -> void:
 	var direction_to_player = (player.global_position - global_position).normalized()
 	var base_angle = direction_to_player.angle() + randf_range(deg_to_rad(-10.0), deg_to_rad(10.0))
 
-	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_ranged"):
-		anim_sprite.play("attack_ranged")
-		while anim_sprite.frame < 3:
-			await get_tree().process_frame
-		anim_sprite.pause()
-
 	for i in range(spread_shot_count):
 		while paused:
 			await get_tree().process_frame
+		play_attack_animation("attack_ranged")
 		attack_sound.play()
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
@@ -149,29 +143,15 @@ func spread_shot_attack() -> void:
 				wait += get_physics_process_delta_time()
 			await get_tree().process_frame
 
-	var hold = 0.0
-	while hold < 2.0:
-		if not paused:
-			hold += get_physics_process_delta_time()
-		await get_tree().process_frame
-
-	if anim_sprite:
-		anim_sprite.play("default")
-
 
 func aimed_burst_attack() -> void:
 	if not projectile_scene:
 		return
 
-	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_ranged"):
-		anim_sprite.play("attack_ranged")
-		while anim_sprite.frame < 3:
-			await get_tree().process_frame
-		anim_sprite.pause()
-
 	for i in range(aimed_shot_count):
 		while paused:
 			await get_tree().process_frame
+		play_attack_animation("attack_ranged")
 		attack_sound.play()
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
@@ -190,15 +170,6 @@ func aimed_burst_attack() -> void:
 			if not paused:
 				wait += get_physics_process_delta_time()
 			await get_tree().process_frame
-
-	var hold = 0.0
-	while hold < 2.0:
-		if not paused:
-			hold += get_physics_process_delta_time()
-		await get_tree().process_frame
-
-	if anim_sprite:
-		anim_sprite.play("default")
 
 
 func _spawn_melee_warning() -> AnimatedSprite2D:
@@ -260,11 +231,21 @@ func melee_dive_attack() -> void:
 	var dive_duration = maxf(base_dive_duration - dive_speedup_per_wave * Enemy._current_wave, min_dive_duration)
 	var elapsed = 0.0
 
+	# Time for frames 0..2 to play (max-extend frame = 2)
+	var melee_anim_speed := 8.0
+	if anim_sprite and anim_sprite.sprite_frames.has_animation("attack_melee"):
+		melee_anim_speed = anim_sprite.sprite_frames.get_animation_speed("attack_melee")
+	var extend_lead_time := 2.0 / maxf(melee_anim_speed, 0.001)
+	var anim_started := false
+
 	while elapsed < dive_duration:
 		if not is_instance_valid(player):
 			break
 		if not paused:
 			elapsed += get_physics_process_delta_time()
+			if not anim_started and elapsed >= dive_duration - extend_lead_time:
+				play_attack_animation("attack_melee")
+				anim_started = true
 			var t = elapsed / dive_duration
 			t = 1.0 - pow(1.0 - t, 3.0)
 			global_position = start_pos.lerp(target_pos, t)
