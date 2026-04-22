@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d2ssahg2lygtx"]
+
+[ext_resource type="Texture2D" uid="uid://4ox4aplcglgl" path="res://Assets/Sprites/Health UI - Purple.png" id="1_035hd"]
+
+[node name="ui_life" type="TextureRect" unique_id=928836512]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1016.0
+offset_bottom = -1856.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_035hd")

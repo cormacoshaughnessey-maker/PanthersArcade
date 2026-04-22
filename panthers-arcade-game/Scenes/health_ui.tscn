@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bb3vg7g3erix0" path="res://Scripts/health_ui.gd" id="1_fyqef"]
 [ext_resource type="PackedScene" uid="uid://c3xk7dvnrlfqv" path="res://Scenes/ui_life.tscn" id="2_mxkyl"]
+[ext_resource type="Texture2D" uid="uid://b4aijg36gsvnt" path="res://Assets/Sprites/Health UI - Blue.png" id="2_ph7ae"]
+[ext_resource type="Texture2D" uid="uid://bx7lprck8s4ib" path="res://Assets/Sprites/Health UI - Small.png" id="2_toh3q"]
+[ext_resource type="Texture2D" uid="uid://cb0enlr0gmf26" path="res://Assets/Sprites/Health UI - Blue2.png" id="2_yegwi"]
+[ext_resource type="Texture2D" uid="uid://4ox4aplcglgl" path="res://Assets/Sprites/Health UI - Purple.png" id="3_ph7ae"]
 
 [node name="HealthUI" type="Control" unique_id=143631567]
 layout_mode = 3
@@ -11,6 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fyqef")
+life_textures = Array[CompressedTexture2D]([ExtResource("2_toh3q"), ExtResource("2_ph7ae"), ExtResource("2_yegwi"), ExtResource("3_ph7ae")])
 metadata/_edit_lock_ = true
 
 [node name="Lives" type="HBoxContainer" parent="." unique_id=1382136593]

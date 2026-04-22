@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dcjvh2u88n6iu"]
+
+[ext_resource type="Texture2D" uid="uid://b4aijg36gsvnt" path="res://Assets/Sprites/Health UI - Blue.png" id="1_6u74a"]
+
+[node name="ui_life" type="TextureRect" unique_id=928836512]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1016.0
+offset_bottom = -1856.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6u74a")

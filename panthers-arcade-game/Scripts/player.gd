@@ -201,8 +201,8 @@ func lose_life(damage := 1) -> void:
 
 
 func heal(healing := 1) -> void:
-	if game_node.lives < game_node.default_lives:
-		game_node.lives += healing
+	#if game_node.lives < game_node.default_lives:
+	game_node.lives += healing
 	start_invincibility(true)
 
 
