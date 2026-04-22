@@ -19,6 +19,7 @@ class_name MiniBoss
 @export var projectile_scene : PackedScene
 
 var warning_texture = preload("res://Assets/Sprites/boss_melee_warning_spritesheet.png")
+var powerup_scene = preload("res://Scenes/powerup.tscn")
 var move_direction := 1.0
 var can_attack := true
 var attack_pattern := 0
@@ -297,4 +298,7 @@ func _on_attack_cooldown_timeout() -> void:
 func die() -> void:
 	for i in get_tree().get_nodes_in_group("bosswarning"):
 		i.queue_free()
+	var powerup_var = powerup_scene.instantiate()
+	powerup_var.global_position = self.global_position
+	get_tree().get_first_node_in_group("game").add_child(powerup_var)
 	super.die()

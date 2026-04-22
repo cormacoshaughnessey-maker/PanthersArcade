@@ -15,6 +15,8 @@ signal player_died
 @export var max_rewind_length_in_seconds := 1.5
 @export var rewind_speed := 2
 var max_rewind_length : float
+var max_max_rewind_length : float
+var rewind_length_increment : float
 var rewind_data : Dictionary[String, Array] = {"position":[],"animation":[],"animation_frame":[],"animation_frame_progress":[],"rotation":[]}
 var rewind_on_cooldown := false
 var rewinding := false
@@ -32,6 +34,7 @@ var is_invincible := false  # i-frames after taking damage
 @onready var player_sprite := $AnimatedSprite2D
 @onready var rewind_sound := $RewindSound
 @onready var rewind_start_sound := $RewindStartSound
+@onready var powerup_get_sound := $PowerupGetSound
 @onready var hurt_sound := $HurtSound
 @onready var hurt_sprite := $HurtSprites
 @onready var hurt_sprite_timer := $HurtSpriteTimer
@@ -44,7 +47,9 @@ var projection_scene := preload("res://Scenes/player_projection.tscn")
 func _ready() -> void:
 	add_to_group("player")
 	# calculate max rewind length based on physics ticks
-	max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second * rewind_speed
+	max_max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second * rewind_speed
+	max_rewind_length = max_max_rewind_length/2
+	rewind_length_increment = max_max_rewind_length/8
 
 
  # INFO: Function run every frame/tick
@@ -165,6 +170,11 @@ func start_rewind_cooldown() -> void:
  # INFO: End of the cooldown on rewinding, sets rewind_on_cooldown to false
 func _finish_rewind_cooldown() -> void:
 	rewind_on_cooldown = false
+
+
+func get_powerup() -> void:
+	max_rewind_length += rewind_length_increment
+	pass
 #endregion
 
 
