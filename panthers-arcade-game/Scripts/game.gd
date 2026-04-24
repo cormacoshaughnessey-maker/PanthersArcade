@@ -5,7 +5,7 @@ class_name Game extends Node2D
 @onready var rewind_ui := $UI/RewindUI
 @onready var high_score_game_over := $UI/HighScore
 @onready var high_score_display := $UI/HighScoreDisplay
-@onready var player := $Player
+@onready var player : Player = $Player
 @onready var rewind_cooldown_timer := $Player/RewindCooldownTimer
 @onready var background := $Background
 @onready var score_multiplier_timer := $ScoreMultiplierTimer
@@ -92,6 +92,8 @@ func _spawn_wave() -> void:
 		boss.position = Vector2((Enemy.WAVE_SPAWN_X_MIN + Enemy.WAVE_SPAWN_X_MAX) / 2.0, spawn_y - 50.0)
 		_connect_enemy_signals(boss)
 		$Enemies.call_deferred("add_child", boss)
+	
+	player.start_invincibility(true)
 
 
 func _on_enemy_killed(score_value) -> void:
