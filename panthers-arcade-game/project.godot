@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Panthers Arcade Game"
 run/main_scene="res://Scenes/title_screen.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://Z - Other files/icon.svg"
+config/icon="uid://8q8un1lun4y3"
 
 [audio]
 
