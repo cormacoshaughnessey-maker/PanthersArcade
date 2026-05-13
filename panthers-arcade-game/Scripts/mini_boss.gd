@@ -89,10 +89,10 @@ func move_and_attack(delta: float) -> void:
 	rotation = lerp_angle(rotation, target_rotation, delta * 5.0)
 
 	if can_attack:
-		execute_attack_pattern()
+		execute_attack_pattern(delta)
 
 
-func execute_attack_pattern() -> void:
+func execute_attack_pattern(delta := 0.1) -> void:
 	can_attack = false
 
 	match attack_pattern:
@@ -102,7 +102,7 @@ func execute_attack_pattern() -> void:
 			await aimed_burst_attack()
 		2:
 			attack_sound_2.play()
-			await melee_dive_attack()
+			await melee_dive_attack(delta)
 
 	var next_pattern = randi() % 3
 	if next_pattern == attack_pattern:
@@ -217,7 +217,7 @@ func _spawn_melee_warning() -> AnimatedSprite2D:
 	return warning
 
 
-func melee_dive_attack() -> void:
+func melee_dive_attack(delta := 0.1) -> void:
 	is_diving = true
 
 	if not is_instance_valid(player):
@@ -246,7 +246,13 @@ func melee_dive_attack() -> void:
 				if is_instance_valid(player):
 					var offset = Vector2(randf_range(-40.0, 40.0), randf_range(-20.0, 20.0))
 					target_pos = player.global_position + offset
+					global_rotation = (player.global_position - global_position).angle()+(PI/2)
 				target_locked = true
+			else:
+				#var direction_to_player = (player.global_position - global_position).normalized()
+				#var target_rotation = direction_to_player.angle() + deg_to_rad(90)
+				#rotation = lerp_angle(rotation, target_rotation, delta * 5.0)
+				pass
 		else:
 			warning.pause()
 		await get_tree().process_frame

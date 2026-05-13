@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://625ib74gq746" path="res://Scripts/high_score_display.gd" id="1_nbykh"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_nbykh"]
+action = &"rewind"
+
+[sub_resource type="Shortcut" id="Shortcut_tk5bc"]
+events = [SubResource("InputEventAction_nbykh")]
+
 [node name="HighScoreDisplay" type="Control" unique_id=2068393492]
 layout_mode = 3
 anchors_preset = 15
@@ -30,6 +36,7 @@ offset_bottom = 1544.0
 theme_override_colors/font_color = Color(0.04, 1, 0.322, 1)
 theme_override_colors/font_hover_color = Color(0, 0.969, 1, 1)
 theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_tk5bc")
 text = "RETURN"
 
 [node name="Title" type="Label" parent="." unique_id=668207942]
