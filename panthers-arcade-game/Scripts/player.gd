@@ -48,7 +48,7 @@ func _ready() -> void:
 	add_to_group("player")
 	# calculate max rewind length based on physics ticks
 	max_max_rewind_length = max_rewind_length_in_seconds * Engine.physics_ticks_per_second * rewind_speed
-	max_rewind_length = max_max_rewind_length/2
+	max_rewind_length = max_max_rewind_length/8 * 5
 	rewind_length_increment = max_max_rewind_length/8
 
 

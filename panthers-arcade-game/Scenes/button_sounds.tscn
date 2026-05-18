@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c8e8578vcotm"]
+
+[ext_resource type="AudioStream" uid="uid://bdh5gsiamj2f0" path="res://Assets/Sounds/Cartoon Sci-Fi Interface Button 1.wav" id="1_cp820"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=1489210787]
+stream = ExtResource("1_cp820")

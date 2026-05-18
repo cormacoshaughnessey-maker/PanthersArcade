@@ -246,7 +246,7 @@ func melee_dive_attack(delta := 0.1) -> void:
 				if is_instance_valid(player):
 					var offset = Vector2(randf_range(-40.0, 40.0), randf_range(-20.0, 20.0))
 					target_pos = player.global_position + offset
-					global_rotation = (player.global_position - global_position).angle()+(PI/2)
+					#global_rotation = (player.global_position - global_position).angle()+(PI/2)
 				target_locked = true
 			else:
 				#var direction_to_player = (player.global_position - global_position).normalized()
