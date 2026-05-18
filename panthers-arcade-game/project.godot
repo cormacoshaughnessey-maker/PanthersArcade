@@ -117,3 +117,7 @@ down={
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="player attacks"
 2d_physics/layer_5="enemy attacks"
+
+[rendering]
+
+renderer/rendering_method="mobile"
