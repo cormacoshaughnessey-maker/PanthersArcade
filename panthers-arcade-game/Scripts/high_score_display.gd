@@ -10,13 +10,13 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$PlayButton.grab_focus()
 	game_node = get_tree().get_first_node_in_group("game")
 	visibility_changed.connect(_on_visibility_changed)
 
 func _on_visibility_changed():
 	if(is_visible_in_tree()):
 		update_high_score()
+		$PlayButton.grab_focus()
 
 func update_high_score():
 	okay = true
