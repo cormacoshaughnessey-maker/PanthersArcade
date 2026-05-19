@@ -141,6 +141,7 @@ func game_over() -> void:
 	player_death_sound.play()
 	player.get_node("AnimatedSprite2D").play("death")
 	await player.get_node("AnimatedSprite2D").animation_finished
+	$UI/ColorRect.hide()
 	high_score_game_over.visible = true
 	
 
