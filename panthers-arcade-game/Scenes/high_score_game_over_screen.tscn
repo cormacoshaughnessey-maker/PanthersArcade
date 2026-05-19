@@ -11,6 +11,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g6t4p")
 
+[node name="Background" type="ColorRect" parent="." unique_id=2121372017]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.012, 0.235, 1)
+
 [node name="Subtitle" type="Label" parent="." unique_id=894074343]
 layout_mode = 0
 offset_left = 216.0
