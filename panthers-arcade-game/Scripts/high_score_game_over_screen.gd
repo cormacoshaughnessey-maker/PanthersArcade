@@ -1,10 +1,10 @@
 extends Control
 
-@onready var letter1 = $Letter1
-@onready var letter2 = $Letter2
-@onready var letter3 = $Letter3
+@onready var letter1 = $VBoxContainer/Letters/Letter1
+@onready var letter2 = $VBoxContainer/Letters/Letter2
+@onready var letter3 = $VBoxContainer/Letters/Letter3
 @onready var high_score_display
-@onready var score_scene = get_tree().get("Score")
+#@onready var score_scene = get_tree().get("Score")
 @onready var game_node := get_tree().get_first_node_in_group("game")
 var alph := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 var letters := []
@@ -19,6 +19,7 @@ func _ready() -> void:
 	letter_selected = 0
 	letters = [letter1, letter2, letter3]
 	current_index = [0,0,0]
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:

@@ -142,6 +142,7 @@ func game_over() -> void:
 	player.get_node("AnimatedSprite2D").play("death")
 	await player.get_node("AnimatedSprite2D").animation_finished
 	$UI/ColorRect.hide()
+	high_score_game_over.get_node("VBoxContainer/Score").text = str(score)
 	high_score_game_over.visible = true
 	
 
